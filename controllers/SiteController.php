@@ -19,14 +19,21 @@ class SiteController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
+                /* 'denyCallback' => function ($rule, $action) {
+                           //throw new \Exception('Você não está autorizado a acessar esta página');
+                            throw new \yii\web\ForbiddenHttpException('Você não está autorizado a realizar essa ação.');
+                 },*/
+                
                 'only' => ['logout'],
                 'rules' => [
                     [
                         'actions' => ['logout'],
                         'allow' => true,
                         'roles' => ['@'],
-                    ],
+                    ],                    
+                    
                 ],
+                
             ],
             'verbs' => [
                 'class' => VerbFilter::className(),
@@ -40,6 +47,10 @@ class SiteController extends Controller
     /**
      * @inheritdoc
      */
+
+  
+
+   
     public function actions()
     {
         return [
