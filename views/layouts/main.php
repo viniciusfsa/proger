@@ -27,7 +27,8 @@ AppAsset::register($this);
 <div class="wrap">
     <?php
     NavBar::begin([
-        'brandLabel' => 'My Company',
+        //'brandLabel' => 'PROGER',
+        'brandLabel' => '<img src ="' . Yii::$app->request->baseUrl . '/images/logo.png" />',
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
             'class' => 'navbar-inverse navbar-fixed-top',
