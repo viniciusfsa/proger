@@ -7,18 +7,28 @@ $config = [
     'language'=>'pt-BR',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
-    //'defaultRoute' => 'site/login',
+    'defaultRoute' => 'site/login',
     'components' => [
+       
+       'authManager' => [
+            'class' => 'yii\rbac\DbManager',
+            //'defaultRoles' => ['admin', 'gerente','secretario'],
+           // 'defaultRoles' => ['guest'],
+        ],
+    
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
-            'cookieValidationKey' => '9dd12e154a107aef92b41acc2e7869b0',
+            'enableCookieValidation' => false,
+            'cookieValidationKey' => '',
         ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
         'user' => [
-            'identityClass' => 'app\models\User',
-            'enableAutoLogin' => true,
+            'identityClass' => 'app\models\Usuario',
+            //'enableAutoLogin' => true,
+            'enableSession' => true,
+            'authTimeout' => 1800, //meia hora em segundos
         ],
         'errorHandler' => [
             'errorAction' => 'site/error',
@@ -41,10 +51,7 @@ $config = [
         ],
         'db' => require(__DIR__ . '/db.php'),
 
-
-        'authManager' => [
-            'class' => 'yii\rbac\DbManager',
-        ],
+        
         /*
         'urlManager' => [
             'enablePrettyUrl' => true,

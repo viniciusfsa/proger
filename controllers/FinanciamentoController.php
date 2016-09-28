@@ -4,10 +4,11 @@ namespace app\controllers;
 
 use Yii;
 use app\models\Financiamento;
-use yii\data\ActiveDataProvider;
+use app\models\FinanciamentoSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
 
 /**
  * FinanciamentoController implements the CRUD actions for Financiamento model.
@@ -20,14 +21,18 @@ class FinanciamentoController extends Controller
     public function behaviors()
     {
         return [
-            'acess' => [
-                'class' =>\yii\filters\AccessControl::className(),
-                'only' => ['create','delete','update'],
+            'access' => [
+                'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'allow' =>true,
-                        'roles' =>['@']
+                        'actions' => ['index', 'view', 'update', 'create','delete'],
+                        'allow' => true,
+                        'roles' => ['@'],
                     ],
+                    /*[
+                    'allow' => false, // Do not have access
+                    'roles'=>['?'], // Guests '?'
+                     ],*/
                 ],
             ],
             'verbs' => [
@@ -45,13 +50,22 @@ class FinanciamentoController extends Controller
      */
     public function actionIndex()
     {
-        $dataProvider = new ActiveDataProvider([
-            'query' => Financiamento::find(),
-        ]);
+        if(\Yii::$app->user->can('gerenciar-financiamento')){
+           $searchModel = new FinanciamentoSearch();
+            $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        return $this->render('index', [
-            'dataProvider' => $dataProvider,
-        ]);
+            return $this->render('index', [
+                'searchModel' => $searchModel,
+                'dataProvider' => $dataProvider,
+            ]);
+        }
+        else{
+
+            throw new \yii\web\ForbiddenHttpException('Você não está autorizado a realizar essa ação.');
+        }
+
+
+        
     }
 
     /**
@@ -61,9 +75,15 @@ class FinanciamentoController extends Controller
      */
     public function actionView($id)
     {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
+        if(\Yii::$app->user->can('gerenciar-financiamento')){
+            return $this->render('view', [
+                'model' => $this->findModel($id),
+            ]);
+        }
+        else{
+
+            throw new \yii\web\ForbiddenHttpException('Você não está autorizado a realizar essa ação.');
+        }
     }
 
     /**

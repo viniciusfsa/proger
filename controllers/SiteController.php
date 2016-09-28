@@ -8,6 +8,7 @@ use yii\web\Controller;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
+use yii\rbac\DbManeger;
 
 class SiteController extends Controller
 {
@@ -18,12 +19,7 @@ class SiteController extends Controller
     {
         return [
             'access' => [
-                'class' => AccessControl::className(),
-                /* 'denyCallback' => function ($rule, $action) {
-                           //throw new \Exception('Você não está autorizado a acessar esta página');
-                            throw new \yii\web\ForbiddenHttpException('Você não está autorizado a realizar essa ação.');
-                 },*/
-                
+                'class' => AccessControl::className(),                
                 'only' => ['logout'],
                 'rules' => [
                     [
@@ -71,7 +67,18 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
+        //return $this->render('index');
+
         return $this->render('index');
+
+        if(!Yii::$app->user->isGuest){
+            return $this->render('index');
+        }
+        else{
+            return $this->goBack();
+        }
+
+
 
 
     }
@@ -83,7 +90,7 @@ class SiteController extends Controller
      */
     public function actionLogin()
     {
-        if (!Yii::$app->user->isGuest) {
+        /*if (!Yii::$app->user->isGuest) {
             return $this->goHome();
         }
 
@@ -94,8 +101,11 @@ class SiteController extends Controller
         return $this->render('login', [
             'model' => $model,
         ]);
+
+    */
+
         
-        /*
+      
         if (!\Yii::$app->user->isGuest) {
             //return $this->goHome();
             return $this->render('index');
@@ -111,7 +121,7 @@ class SiteController extends Controller
                 'model' => $model,
             ]);
         }
-        */
+        
     
 
 
