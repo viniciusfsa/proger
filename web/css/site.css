@@ -3,6 +3,11 @@ body {
     height: 100%;
 }
 
+.menu_sistema{
+
+    color: #ffffff
+}
+
 .wrap {
     min-height: 100%;
     height: auto;

@@ -27,20 +27,35 @@ AppAsset::register($this);
 <div class="wrap">
     <?php
     NavBar::begin([
-        'brandLabel' => 'My Company',
+        'brandLabel' => 'PROGER',
         'brandUrl' => Yii::$app->homeUrl,
+        'brandLogo' =>  
         'options' => [
             'class' => 'navbar-inverse navbar-fixed-top',
+            'src' => 'nome2.png',
         ],
     ]);
+    ?>
+
+    <div class="menu_sistema"> teste <br><br><br><br><br><br></div>
+    <?php
     echo Nav::widget([
-        'options' => ['class' => 'navbar-nav navbar-right'],
-        'items' => [
-            ['label' => 'Home', 'url' => ['/site/index']],
-            ['label' => 'About', 'url' => ['/site/about']],
-            ['label' => 'Contact', 'url' => ['/site/contact']],
+        'options' => ['class' => 'navbar-nav navbar-left'],
+        'items' => ["<br><br>",
+            ['label' => 'Relatórios',
+                 'items' => [
+                      ['label' => 'Catálogo de materiais', 'url' => '#'],
+                      ['label' => 'Localização de materiais', 'url' => '#'],
+                      '<li class="divider"></li>',
+                      '<li class="dropdown-header">Financeiro</li>',
+                      ['label' => 'Balancete contábil', 'url' => '#'],
+                      ['label' => 'Demonstrativo físico-financeiro', 'url' => '#'],
+                            ]
+            ],
+            ['label' => 'Sobre', 'url' => ['/site/about']],
+            ['label' => 'Contato', 'url' => ['/site/contact']],
             Yii::$app->user->isGuest ? (
-                ['label' => 'Login', 'url' => ['/site/login']]
+                ['label' => 'Acesso', 'url' => ['/site/login']]
             ) : (
                 '<li>'
                 . Html::beginForm(['/site/logout'], 'post', ['class' => 'navbar-form'])
@@ -63,6 +78,8 @@ AppAsset::register($this);
         <?= $content ?>
     </div>
 </div>
+
+<div class="menu_sistema"> teste </div>
 
 <footer class="footer">
     <div class="container">
