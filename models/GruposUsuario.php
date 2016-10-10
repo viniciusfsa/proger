@@ -171,12 +171,14 @@ class GruposUsuario extends Model
 
            }
 
+            /*
             $log = new \app\models\TabelaLog;
             $log->idTabela =  $this->idTabela;
             $log->detalhes = 'Grupo: '.$this->descricao;
             $log->idAcao = 2;
             $log->save();
-
+            */
+            
             return true;
 
         }

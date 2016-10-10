@@ -76,7 +76,9 @@ AppAsset::register($this);
                 Yii::$app->user->isGuest ? (
                     ['label' => 'Login', 'url' => ['/site/login']]
                 ) : 
-                     ['label' => Yii::$app->user->identity->nome.' ('.$auth->getRole(Yii::$app->user->identity->nameGrupo)->description.')',
+                     [
+                     //'label' => Yii::$app->user->identity->nome.' ('.$auth->getRole(Yii::$app->user->identity->nameGrupo)->description.')',
+                     'label' => Yii::$app->user->identity->login,//.' ('.$auth->getRole(Yii::$app->user->identity->login)->description.')',
                             'items' => [
                                 [
                                     'label' => 'Minha Conta',
