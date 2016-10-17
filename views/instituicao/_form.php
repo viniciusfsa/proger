@@ -14,17 +14,14 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'instituicao')->textInput() ?>
 
-    <?= $form->field($model, 'pais')->textInput() ?>
+    <?= $form->field($model, 'idPais')->textInput() ?>
 
-    
+    <?= $form->field($model, 'ativo')->textInput() ?>
 
-    <?= //$form->field($model, 'ativo')->textInput() 
-    $form->field($model, 'ativo')->radioList(array('1'=>'Sim',0=>'Não'));
-
-    ?>
+    <?= $form->field($model, 'sigla')->textInput() ?>
 
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Novo' : 'Atualizar', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::submitButton($model->isNewRecord ? 'Salvar' : 'Atualizar', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

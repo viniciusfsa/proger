@@ -9,9 +9,11 @@ use Yii;
  *
  * @property integer $id
  * @property string $instituicao
- * @property string $pais
+ * @property integer $idPais
  * @property integer $ativo
+ * @property string $sigla
  *
+ * @property Pais $idPais
  * @property Integrante[] $integrantes
  */
 class Instituicao extends \yii\db\ActiveRecord
@@ -30,9 +32,10 @@ class Instituicao extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['instituicao', 'pais', 'ativo'], 'required'],
-            [['instituicao', 'pais'], 'string'],
-            [['ativo'], 'integer'],
+            [['instituicao', 'idPais', 'ativo'], 'required'],
+            [['instituicao', 'sigla'], 'string'],
+            [['idPais', 'ativo'], 'integer'],
+            [['idPais'], 'exist', 'skipOnError' => true, 'targetClass' => Pais::className(), 'targetAttribute' => ['idPais' => 'id']],
         ];
     }
 
@@ -44,10 +47,21 @@ class Instituicao extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'instituicao' => 'Instituição',
-            'pais' => 'País',
+            'idPais' => 'País',
             'ativo' => 'Ativo',
+            'sigla' => 'Sigla',
         ];
     }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getIdPais()
+    { 
+        return $this->hasOne(pais::className(), ['id' => 'idPais']);
+    }
+
+
 
     /**
      * @return \yii\db\ActiveQuery
@@ -57,17 +71,20 @@ class Instituicao extends \yii\db\ActiveRecord
         return $this->hasMany(Integrante::className(), ['idInstituicao' => 'id']);
     }
 
-    public function getSituacao(){
+    public function getSituacao(){  
+ 
+      switch ($this->ativo) {  
+          case 1:  
+              return 'Ativo';  
+              break;  
+ 
+          case 0:  
+              return 'Inativo';  
+              break;  
+      }  
+ 
+  }  
 
-        switch ($this->ativo) {
-            case 1:
-                return 'Ativo';
-                break;
+  
 
-            case 0:
-                return 'Inativo';
-                break;
-        }
-
-    }
 }

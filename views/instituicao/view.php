@@ -6,7 +6,7 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\models\Instituicao */
 
-$this->title = $model->instituicao;
+$this->title = $model->sigla;
 $this->params['breadcrumbs'][] = ['label' => 'Instituição', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p>
         <?= Html::a('Atualizar', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Deletar', ['delete', 'id' => $model->id], [
+        <?= Html::a('Excluir', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
                 'confirm' => 'Você tem certeza que deseja excluir este item?',
@@ -30,13 +30,20 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'id',
             'instituicao',
-            'pais',
+            //'idPais',
+            [
+                //'attribute' => 'idPais',
+                'attribute' => 'idPais.nome',
+                'label' => 'País',
+            ],
             //'ativo',
              [
                 'attribute' => 'situacao',
                 'value' => $model->getSituacao(),
                 'label' => 'Situação',
             ], 
+            'sigla',
+
         ],
     ]) ?>
 

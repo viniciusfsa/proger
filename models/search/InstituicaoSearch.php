@@ -18,8 +18,8 @@ class InstituicaoSearch extends Instituicao
     public function rules()
     {
         return [
-            [['id', 'ativo'], 'integer'],
-            [['instituicao', 'pais'], 'safe'],
+            [['id', 'idPais', 'ativo'], 'integer'],
+            [['instituicao', 'sigla'], 'safe'],
         ];
     }
 
@@ -60,11 +60,12 @@ class InstituicaoSearch extends Instituicao
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
+            'idPais' => $this->idPais,
             'ativo' => $this->ativo,
         ]);
 
         $query->andFilterWhere(['like', 'instituicao', $this->instituicao])
-            ->andFilterWhere(['like', 'pais', $this->pais]);
+            ->andFilterWhere(['like', 'sigla', $this->sigla]);
 
         return $dataProvider;
     }

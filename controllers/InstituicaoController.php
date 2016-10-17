@@ -8,7 +8,6 @@ use app\models\search\InstituicaoSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use yii\filters\AccessControl;
 
 /**
  * InstituicaoController implements the CRUD actions for Instituicao model.
@@ -21,20 +20,6 @@ class InstituicaoController extends Controller
     public function behaviors()
     {
         return [
-            'access' => [
-                'class' => AccessControl::className(),
-                'rules' => [
-                    [
-                        'actions' => ['index', 'view', 'update', 'create','delete'],
-                        'allow' => true,
-                        'roles' => ['@'],
-                    ],
-                    /*[
-                    'allow' => false, // Do not have access
-                    'roles'=>['?'], // Guests '?'
-                     ],*/
-                ],
-            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
@@ -50,18 +35,13 @@ class InstituicaoController extends Controller
      */
     public function actionIndex()
     {
-        if(\Yii::$app->user->can('gerenciar-instituicao')){
-            $searchModel = new InstituicaoSearch();
-            $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $searchModel = new InstituicaoSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-            return $this->render('index', [
-                'searchModel' => $searchModel,
-                'dataProvider' => $dataProvider,
-            ]);
-        }
-        else{
-            throw new \yii\web\ForbiddenHttpException('Você não está autorizado a realizar essa ação.');
-        }
+        return $this->render('index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
     }
 
     /**
@@ -71,15 +51,9 @@ class InstituicaoController extends Controller
      */
     public function actionView($id)
     {
-        if(\Yii::$app->user->can('gerenciar-instituicao')){
-            return $this->render('view', [
-                'model' => $this->findModel($id),
-            ]);
-        }   
-
-         else{
-            throw new \yii\web\ForbiddenHttpException('Você não está autorizado a realizar essa ação.');
-        }
+        return $this->render('view', [
+            'model' => $this->findModel($id),
+        ]);
     }
 
     /**
@@ -89,23 +63,15 @@ class InstituicaoController extends Controller
      */
     public function actionCreate()
     {
-        if(\Yii::$app->user->can('gerenciar-instituicao')){
-            $model = new Instituicao();
+        $model = new Instituicao();
 
-            if ($model->load(Yii::$app->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
-            } else {
-                return $this->render('create', [
-                    'model' => $model,
-                ]);
-            }
-          
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->id]);
+        } else {
+            return $this->render('create', [
+                'model' => $model,
+            ]);
         }
-        else{
-            throw new \yii\web\ForbiddenHttpException('Você não está autorizado a realizar essa ação.');
-        }
-
-        
     }
 
     /**
@@ -116,22 +82,15 @@ class InstituicaoController extends Controller
      */
     public function actionUpdate($id)
     {
-        if(\Yii::$app->user->can('gerenciar-instituicao')){
-            $model = $this->findModel($id);
-            if ($model->load(Yii::$app->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
-            } else {
-                return $this->render('update', [
-                    'model' => $model,
-                ]);
-            }
-          
-        }
-        else{
-            throw new \yii\web\ForbiddenHttpException('Você não está autorizado a realizar essa ação.');
-        }
+        $model = $this->findModel($id);
 
-        
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->id]);
+        } else {
+            return $this->render('update', [
+                'model' => $model,
+            ]);
+        }
     }
 
     /**
@@ -142,16 +101,9 @@ class InstituicaoController extends Controller
      */
     public function actionDelete($id)
     {
-        if(\Yii::$app->user->can('gerenciar-instituicao')){
-             $this->findModel($id)->delete();
-            return $this->redirect(['index']);
-          
-        }
-        else{
-            throw new \yii\web\ForbiddenHttpException('Você não está autorizado a realizar essa ação.');
-        }
+        $this->findModel($id)->delete();
 
-       
+        return $this->redirect(['index']);
     }
 
     /**

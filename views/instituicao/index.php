@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use app\models\pais;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\search\InstituicaoSearch */
@@ -26,8 +27,20 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'id',
             'instituicao',
-            'pais',
-            //'ativo',
+            //'idPais',
+
+            [
+                'attribute' => 'idPais',
+                'label' => 'País',
+                'filter' => pais::dropdown(),
+                'value' => function($model, $index, $dataColumn) {
+                    $dropdown = pais::dropdown();
+                    return $dropdown[$model->id];
+                },
+                'headerOptions' => ['style'=>'text-align:center; width: 130px;'],
+                'contentOptions'=>['align' => 'center', 'style'=>'width: 130px;'],
+            ],
+
             [
                 'attribute' => 'ativo',
                 'format' => 'raw',
@@ -42,6 +55,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 'headerOptions' => ['style'=>'text-align:center; width: 120px;'],
                 'contentOptions'=>['align' => 'center']
             ],
+            'sigla',
+
+
+
 
             ['class' => 'yii\grid\ActionColumn'],
         ],
