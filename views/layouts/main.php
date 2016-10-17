@@ -60,6 +60,17 @@ AppAsset::register($this);
                 ],
 
                  [
+                    'label' => 'Cadastros Básicos',
+                    'items' => [
+                         ['label' => 'Setor', 'url' => ['setor/index'], 'visible' => Yii::$app->user->can('gerenciar-setor')],
+                         ['label' => 'Instituicao', 'url' => ['instituicao/index'],'visible' => Yii::$app->user->can('gerenciar-instituicao')],
+                         ['label' => 'Financiadora', 'url' => ['financiadora/index'], 'visible' => Yii::$app->user->can('gerenciar-financiadora')],           
+                    ], 
+                    'visible' => Yii::$app->user->can('ver-cadastros-basicos')
+                ],
+
+
+                 [
                     'label' => 'Segurança',
                     'items' => [
                          ['label' => 'Usuários', 'url' => ['usuario/index']],

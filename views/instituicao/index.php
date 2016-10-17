@@ -4,19 +4,19 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $searchModel app\models\search\FinanciadoraSearch */
+/* @var $searchModel app\models\search\InstituicaoSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Financiadoras';
+$this->title = 'Instituições';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="financiadora-index">
+<div class="instituicao-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Novo', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Nova Instituicao', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -25,8 +25,9 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             'id',
-            'nome',
-            'sigla',
+            'instituicao',
+            'pais',
+            'ativo',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

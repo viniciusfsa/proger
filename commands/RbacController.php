@@ -15,33 +15,54 @@ class RbacController extends Controller
        //removeAll();
 
        
-       // adciona a permissão "gerencia financiamento"
-       $gerenciaFinanciamento = $auth->createPermission('gerenciar-financiamento');
-       $gerenciaFinanciamento->description = 'Gerenciar Financiamento';
-       $auth->add($gerenciaFinanciamento);
+       // adciona a permissão "Gerenciar Financiadora"
+       $gerenciaFinanciadora = $auth->createPermission('gerenciar-financiadora');
+       $gerenciaFinanciadora->description = 'Gerenciar Financiadora';
+       $auth->add($gerenciaFinanciadora);
 
-       // adciona a permissão "gerencia financiamento"
+        // adciona a permissão "Gerenciar Instituicao"
+       $gerenciaInstituicao = $auth->createPermission('gerenciar-instituicao');
+       $gerenciaInstituicao->description = 'Gerenciar Instituicao';
+       $auth->add($gerenciaInstituicao);
+
+        // adciona a permissão "Gerenciar Setor"
+       $gerenciaSetor = $auth->createPermission('gerenciar-setor');
+       $gerenciaSetor->description = 'Gerenciar Setor';
+       $auth->add($gerenciaSetor);
+
+       // adciona a permissão "Gerenciar Usuario"
        $gerenciaUsuario = $auth->createPermission('gerenciar-usuario');
        $gerenciaUsuario->description = 'Gerenciar Usuario';
        $auth->add($gerenciaUsuario);
 
+       // adciona a permissão "Gerenciar Usuario"
+       $verCadastrosBasicos = $auth->createPermission('ver-cadastros-basicos');
+       $verCadastrosBasicos->description = 'Ver Cadastros Básicos';
+       $auth->add($verCadastrosBasicos);
+
 
 
       
 
-       // adciona a role "gerente" e da a esta role a permissão "gerenciaFinanciamento"
+       // adciona a role "gerente" e da a esta role as permissões criadas acima
        $gerente = $auth->createRole('gerente');
+       $gerente->description = 'Gerente';
        $auth->add($gerente);      
-       $auth->addChild($gerente, $gerenciaFinanciamento);
+       $auth->addChild($gerente, $gerenciaFinanciadora);
+       $auth->addChild($gerente, $gerenciaInstituicao);
+       $auth->addChild($gerente, $gerenciaSetor);
+       $auth->addChild($gerente, $verCadastrosBasicos);
 
        // adciona a role "secretario"
        $secretario = $auth->createRole('secretario');
+       $secretario->description = 'Secretario';
        $auth->add($secretario);
       
 
-       // adciona a role "admin" e da a esta role a permissão "gerenciaUsuario" e tudo que gerente faz
+       // adciona a role "admin" e da a esta role a permissão "gerenciaUsuario" e tudo que gerente faz e que secretario faz
              
        $admin = $auth->createRole('admin');
+       $admin->description = 'Administrador do Sistema';
        $auth->add($admin);     
        $auth->addChild($admin, $gerenciaUsuario); 
        $auth->addChild($admin, $gerente);
