@@ -45,21 +45,8 @@ AppAsset::register($this);
             'options' => ['class' => 'navbar-nav navbar-right'],
             'items' => [
 
+                
                 [
-                    'label' => 'Home',
-                    'url' => ['site/index'],
-                    //'linkOptions' => [...],
-                    'visible' => Yii::$app->user->isGuest
-                ],
-               
-               
-                [
-                    'label' => 'Financiamento',
-                    'url' => ['financiamento/index'],
-                    'visible' => !Yii::$app->user->isGuest && Yii::$app->user->can('gerenciar-financiamento') 
-                ],
-
-                 [
                     'label' => 'Cadastros Básicos',
                     'items' => [
                          ['label' => 'Setor', 'url' => ['setor/index'], 'visible' => Yii::$app->user->can('gerenciar-setor')],
@@ -107,6 +94,15 @@ AppAsset::register($this);
                                 ],
                             ],
                         ],
+
+                [
+                    'label' => 'Sobre',
+                    'url' => ['site/index'],
+                    //'linkOptions' => [...],
+                    'visible' => Yii::$app->user->isGuest
+                ],
+
+
             ],
         ]);
         NavBar::end();

@@ -7,7 +7,7 @@ use yii\helpers\Html;
 /* @var $model app\models\Instituicao */
 
 $this->title = 'Nova Instituição';
-$this->params['breadcrumbs'][] = ['label' => 'Instituições', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Instituição', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="instituicao-create">

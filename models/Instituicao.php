@@ -44,7 +44,7 @@ class Instituicao extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'instituicao' => 'Instituição',
-            'pais' => 'Pais',
+            'pais' => 'País',
             'ativo' => 'Ativo',
         ];
     }
@@ -55,5 +55,19 @@ class Instituicao extends \yii\db\ActiveRecord
     public function getIntegrantes()
     {
         return $this->hasMany(Integrante::className(), ['idInstituicao' => 'id']);
+    }
+
+    public function getSituacao(){
+
+        switch ($this->ativo) {
+            case 1:
+                return 'Ativo';
+                break;
+
+            case 0:
+                return 'Inativo';
+                break;
+        }
+
     }
 }

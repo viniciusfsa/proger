@@ -83,4 +83,18 @@ class Setor extends \yii\db\ActiveRecord
     {
         return $this->hasMany(ProjetoProger::className(), ['idSetor' => 'id']);
     }
+
+    public function getSituacao(){
+
+        switch ($this->ativo) {
+            case 1:
+                return 'Ativo';
+                break;
+
+            case 0:
+                return 'Inativo';
+                break;
+        }
+
+    }
 }

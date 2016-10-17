@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\search\SetorSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Setors';
+$this->title = 'Setor';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="setor-index">
@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Setor', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Novo', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -27,7 +27,21 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'nome',
             'sigla',
-            'ativo',
+            //'ativo',
+            [
+                'attribute' => 'ativo',
+                'format' => 'raw',
+                'label' => 'Situção',
+                'filter' => [1 => 'Ativo', 0 => 'Inativo'],
+                'value' => function($model, $index, $dataColumn) {
+                    switch($model->ativo){
+                        case 1: return  '<p class="label label-success">Ativo</p>';
+                        case 0: return '<p class="label label-danger">Inativo</p>';
+                    }
+                },
+                'headerOptions' => ['style'=>'text-align:center; width: 120px;'],
+                'contentOptions'=>['align' => 'center']
+            ],
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

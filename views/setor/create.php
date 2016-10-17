@@ -6,8 +6,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Setor */
 
-$this->title = 'Create Setor';
-$this->params['breadcrumbs'][] = ['label' => 'Setors', 'url' => ['index']];
+$this->title = 'Novo Setor';
+$this->params['breadcrumbs'][] = ['label' => 'Setor', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="setor-create">

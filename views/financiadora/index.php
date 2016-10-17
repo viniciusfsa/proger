@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\search\FinanciadoraSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Financiadoras';
+$this->title = 'Financiadora';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="financiadora-index">
