@@ -33,7 +33,7 @@ $this->params['breadcrumbs'][] = $this->title;
             //'idPais',
             [
                 //'attribute' => 'idPais',
-                'attribute' => 'idPais.nome',
+                'attribute' => 'pais.nome',
                 'label' => 'País',
             ],
             //'ativo',

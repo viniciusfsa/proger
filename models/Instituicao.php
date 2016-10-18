@@ -13,7 +13,7 @@ use Yii;
  * @property integer $ativo
  * @property string $sigla
  *
- * @property Pais $idPais
+ * @property pais $idPais
  * @property Integrante[] $integrantes
  */
 class Instituicao extends \yii\db\ActiveRecord
@@ -53,10 +53,8 @@ class Instituicao extends \yii\db\ActiveRecord
         ];
     }
 
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getIdPais()
+    
+    public function getPais()
     { 
         return $this->hasOne(pais::className(), ['id' => 'idPais']);
     }
