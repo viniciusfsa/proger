@@ -22,6 +22,16 @@ class ResolucaoController extends Controller
         return [
             'verbs' => [
                 'class' => VerbFilter::className(),
+                'rules' => [
+                    [
+                        'actions' => ['index', 'view', 'update', 'create','delete'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
+            'verbs' => [
+                'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['POST'],
                 ],
@@ -35,13 +45,18 @@ class ResolucaoController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new ResolucaoSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        if(\Yii::$app->user->can('gerenciar-resolucao')){
+            $searchModel = new ResolucaoSearch();
+            $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
+            return $this->render('index', [
+                'searchModel' => $searchModel,
+                'dataProvider' => $dataProvider,
+            ]);
+        }
+        else{
+            throw new \yii\web\ForbiddenHttpException('Você não está autorizado a realizar essa ação.');
+        }
     }
 
     /**
@@ -51,9 +66,14 @@ class ResolucaoController extends Controller
      */
     public function actionView($id)
     {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
+        if(\Yii::$app->user->can('gerenciar-resolucao')){
+            return $this->render('view', [
+                'model' => $this->findModel($id),
+            ]);
+        }
+        else{
+            throw new \yii\web\ForbiddenHttpException('Você não está autorizado a realizar essa ação.');
+        }
     }
 
     /**
@@ -63,14 +83,20 @@ class ResolucaoController extends Controller
      */
     public function actionCreate()
     {
-        $model = new Resolucao();
+        if(\Yii::$app->user->can('gerenciar-resolucao')){
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('create', [
-                'model' => $model,
-            ]);
+            $model = new Resolucao();
+
+            if ($model->load(Yii::$app->request->post()) && $model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            } else {
+                return $this->render('create', [
+                    'model' => $model,
+                ]);
+            }
+        }
+        else{
+            throw new \yii\web\ForbiddenHttpException('Você não está autorizado a realizar essa ação.');
         }
     }
 
@@ -82,14 +108,20 @@ class ResolucaoController extends Controller
      */
     public function actionUpdate($id)
     {
-        $model = $this->findModel($id);
+        if(\Yii::$app->user->can('gerenciar-resolucao')){
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('update', [
-                'model' => $model,
-            ]);
+            $model = $this->findModel($id);
+
+            if ($model->load(Yii::$app->request->post()) && $model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            } else {
+                return $this->render('update', [
+                    'model' => $model,
+                ]);
+            }
+        }
+        else{
+            throw new \yii\web\ForbiddenHttpException('Você não está autorizado a realizar essa ação.');
         }
     }
 
@@ -101,9 +133,14 @@ class ResolucaoController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        if(\Yii::$app->user->can('gerenciar-resolucao')){
+            $this->findModel($id)->delete();
 
-        return $this->redirect(['index']);
+            return $this->redirect(['index']);
+        }
+        else{
+            throw new \yii\web\ForbiddenHttpException('Você não está autorizado a realizar essa ação.');
+        }
     }
 
     /**
