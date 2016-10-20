@@ -3,16 +3,16 @@
 namespace app\controllers;
 
 use Yii;
-use app\models\Setor;
-use app\models\search\SetorSearch;
+use app\models\Situacao;
+use app\models\SituacaoSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * FinanciamentoController implements the CRUD actions for Setor model.
+ * SituacaoController implements the CRUD actions for Situacao model.
  */
-class FinanciamentoController extends Controller
+class SituacaoController extends Controller
 {
     /**
      * @inheritdoc
@@ -30,12 +30,12 @@ class FinanciamentoController extends Controller
     }
 
     /**
-     * Lists all Setor models.
+     * Lists all Situacao models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new SetorSearch();
+        $searchModel = new SituacaoSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -45,7 +45,7 @@ class FinanciamentoController extends Controller
     }
 
     /**
-     * Displays a single Setor model.
+     * Displays a single Situacao model.
      * @param integer $id
      * @return mixed
      */
@@ -57,13 +57,13 @@ class FinanciamentoController extends Controller
     }
 
     /**
-     * Creates a new Setor model.
+     * Creates a new Situacao model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Setor();
+        $model = new Situacao();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -75,7 +75,7 @@ class FinanciamentoController extends Controller
     }
 
     /**
-     * Updates an existing Setor model.
+     * Updates an existing Situacao model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -94,7 +94,7 @@ class FinanciamentoController extends Controller
     }
 
     /**
-     * Deletes an existing Setor model.
+     * Deletes an existing Situacao model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -107,15 +107,15 @@ class FinanciamentoController extends Controller
     }
 
     /**
-     * Finds the Setor model based on its primary key value.
+     * Finds the Situacao model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Setor the loaded model
+     * @return Situacao the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Setor::findOne($id)) !== null) {
+        if (($model = Situacao::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

@@ -47,31 +47,23 @@ AppAsset::register($this);
        echo Nav::widget([
             'options' => ['class' => 'navbar-nav navbar-right'],
             'items' => [
+                [
 //                        "<br><br>",
-                        ['label' => 'Relatórios',
-                        'items' => [
-                             ['label' => 'Catálogo de materiais', 'url' => '#'],
-                             ['label' => 'Localização de materiais', 'url' => '#'],
-                              '<li class="divider"></li>',
-                              '<li class="dropdown-header">Financeiro</li>',
-                             ['label' => 'Balancete contábil', 'url' => '#'],
-                             ['label' => 'Demonstrativo físico-financeiro', 'url' => '#'],
-                            ]
-            ],
-                
-                [
-                    'label' => 'Home',
-                    'url' => ['site/index'],
-                    //'linkOptions' => [...],
-                    'visible' => Yii::$app->user->isGuest
+
+                    'label' => 'Cadastros Básicos',
+                    'items' => [
+                         ['label' => 'Setor', 'url' => ['setor/index'], 'visible' => Yii::$app->user->can('gerenciar-setor')],
+                         ['label' => 'Instituicao', 'url' => ['instituicao/index'],'visible' => Yii::$app->user->can('gerenciar-instituicao')],
+                         ['label' => 'Financiadora', 'url' => ['financiadora/index'], 'visible' => Yii::$app->user->can('gerenciar-financiadora')],
+                         ['label' => 'Situação', 'url' => ['situacao/index']],           
+                         ['label' => 'Financiadora', 'url' => ['financiadora/index'], 'visible' => Yii::$app->user->can('gerenciar-financiadora')],   
+                         ['label' => 'Vínculos', 'url' => ['tipo-vinculo/index'], 'visible' => Yii::$app->user->can('gerenciar-tipo-vinculo')],
+                         ['label' => 'Resolução', 'url' => ['resolucao/index'], 'visible' => Yii::$app->user->can('gerenciar-resolucao')], 
+
+                    ], 
+                    'visible' => Yii::$app->user->can('ver-cadastros-basicos')
                 ],
-               
-               
-                [
-                    'label' => 'Financiamento',
-                    'url' => ['financiamento/index'],
-                    'visible' => !Yii::$app->user->isGuest && Yii::$app->user->can('gerenciar-financiamento') 
-                ],
+
 
                  [
                     'label' => 'Segurança',
@@ -90,7 +82,9 @@ AppAsset::register($this);
                 Yii::$app->user->isGuest ? (
                     ['label' => 'Login', 'url' => ['/site/login']]
                 ) : 
-                     ['label' => Yii::$app->user->identity->nome.' ('.$auth->getRole(Yii::$app->user->identity->nameGrupo)->description.')',
+                     [
+                     //'label' => Yii::$app->user->identity->nome.' ('.$auth->getRole(Yii::$app->user->identity->nameGrupo)->description.')',
+                     'label' => Yii::$app->user->identity->login,//.' ('.$auth->getRole(Yii::$app->user->identity->login)->description.')',
                             'items' => [
                                 [
                                     'label' => 'Minha Conta',
@@ -108,6 +102,15 @@ AppAsset::register($this);
                                 ],
                             ],
                         ],
+
+                [
+                    'label' => 'Sobre',
+                    'url' => ['site/index'],
+                    //'linkOptions' => [...],
+                    'visible' => Yii::$app->user->isGuest
+                ],
+
+
             ],
         ]);
         NavBar::end();
