@@ -8,7 +8,10 @@ use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
+use yii\rbac\DbManager;
 
+
+raoul2000\bootswatch\BootswatchAsset::$theme = 'cerulean'; //aqui você vai escolher o tema a ser usado, as opções disponiveis podem ser vista no site bootswatch.com
 AppAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
@@ -17,6 +20,10 @@ AppAsset::register($this);
 <head>
     <meta charset="<?= Yii::$app->charset ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+
+
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
@@ -28,48 +35,85 @@ AppAsset::register($this);
     <?php
     NavBar::begin([
         'brandLabel' => 'PROGER',
-        'brandUrl' => Yii::$app->homeUrl,
-        'brandLogo' =>  
+    //    'brandLabel' => '<img src ="' . Yii::$app->request->baseUrl . '/images/logo.png" />',
+        'brandUrl' => Yii::$app->homeUrl, 
         'options' => [
-            'class' => 'navbar-inverse navbar-fixed-top',
-            'src' => 'nome2.png',
+            'class' => 'navbar navbar-inverse', //aqui você alterna entre as duas sub-opções do tema para isso use 'navbar navbar-default' ou 'navbar navbar-inverse'
         ],
     ]);
-    ?>
 
-    <div class="menu_sistema"> teste <br><br><br><br><br><br></div>
-    <?php
-    echo Nav::widget([
-        'options' => ['class' => 'navbar-nav navbar-left'],
-        'items' => ["<br><br>",
-            ['label' => 'Relatórios',
-                 'items' => [
-                      ['label' => 'Catálogo de materiais', 'url' => '#'],
-                      ['label' => 'Localização de materiais', 'url' => '#'],
-                      '<li class="divider"></li>',
-                      '<li class="dropdown-header">Financeiro</li>',
-                      ['label' => 'Balancete contábil', 'url' => '#'],
-                      ['label' => 'Demonstrativo físico-financeiro', 'url' => '#'],
+
+    $auth = new DbManager;
+       echo Nav::widget([
+            'options' => ['class' => 'navbar-nav navbar-right'],
+            'items' => [
+//                        "<br><br>",
+                        ['label' => 'Relatórios',
+                        'items' => [
+                             ['label' => 'Catálogo de materiais', 'url' => '#'],
+                             ['label' => 'Localização de materiais', 'url' => '#'],
+                              '<li class="divider"></li>',
+                              '<li class="dropdown-header">Financeiro</li>',
+                             ['label' => 'Balancete contábil', 'url' => '#'],
+                             ['label' => 'Demonstrativo físico-financeiro', 'url' => '#'],
                             ]
             ],
-            ['label' => 'Sobre', 'url' => ['/site/about']],
-            ['label' => 'Contato', 'url' => ['/site/contact']],
-            Yii::$app->user->isGuest ? (
-                ['label' => 'Acesso', 'url' => ['/site/login']]
-            ) : (
-                '<li>'
-                . Html::beginForm(['/site/logout'], 'post', ['class' => 'navbar-form'])
-                . Html::submitButton(
-                    'Logout (' . Yii::$app->user->identity->username . ')',
-                    ['class' => 'btn btn-link']
-                )
-                . Html::endForm()
-                . '</li>'
-            )
-        ],
-    ]);
-    NavBar::end();
+                
+                [
+                    'label' => 'Home',
+                    'url' => ['site/index'],
+                    //'linkOptions' => [...],
+                    'visible' => Yii::$app->user->isGuest
+                ],
+               
+               
+                [
+                    'label' => 'Financiamento',
+                    'url' => ['financiamento/index'],
+                    'visible' => !Yii::$app->user->isGuest && Yii::$app->user->can('gerenciar-financiamento') 
+                ],
+
+                 [
+                    'label' => 'Segurança',
+                    'items' => [
+                         ['label' => 'Usuários', 'url' => ['usuario/index']],
+                       //  '<li class="divider"></li>',
+                         //'<li class="dropdown-header">Dropdown Header</li>',
+                         ['label' => 'Grupos de Usuário', 'url' => ['grupos-usuario/index']],
+
+                    ],
+                    'visible' => Yii::$app->user->can('gerenciar-usuario')
+                ],
+
+
+                
+                Yii::$app->user->isGuest ? (
+                    ['label' => 'Login', 'url' => ['/site/login']]
+                ) : 
+                     ['label' => Yii::$app->user->identity->nome.' ('.$auth->getRole(Yii::$app->user->identity->nameGrupo)->description.')',
+                            'items' => [
+                                [
+                                    'label' => 'Minha Conta',
+                                    'url' => ['/usuario/minha-conta', 'id' => Yii::$app->user->identity->idUsuario],
+                                    //'icon'=> '<i class="icon-arrow-up"></i>',
+                                    //'options' => ['class' => 'icon-user', 'icon' => '<img src ="' . Yii::$app->request->baseUrl . '/images/sair.png" />'],
+                                    'linkOptions' => ['data-method' => 'post'],
+                                ],
+                                [
+                                    'label' => 'Sair',
+                                    'url' => ['/site/logout'],
+                                    //'icon'=> '<i class="icon-arrow-up"></i>',
+                                    //'options' => ['class' => 'icon-user', 'icon' => '<img src ="' . Yii::$app->request->baseUrl . '/images/sair.png" />'],
+                                    'linkOptions' => ['data-method' => 'post'],
+                                ],
+                            ],
+                        ],
+            ],
+        ]);
+        NavBar::end();
+
     ?>
+
 
     <div class="container">
         <?= Breadcrumbs::widget([
@@ -83,9 +127,9 @@ AppAsset::register($this);
 
 <footer class="footer">
     <div class="container">
-        <p class="pull-left">&copy; My Company <?= date('Y') ?></p>
+        <p class="pull-left">&copy; <b>Universidade Estadual de Feira de Santana  </b> <?= date('Y') ?></p>
 
-        <p class="pull-right"><?= Yii::powered() ?></p>
+        <p class="pull-right">Desenvolvido por: <b>Assessoria Especial de Informática - Gerência de Desenvolvimento</b></p>
     </div>
 </footer>
 

@@ -5,12 +5,16 @@ Yii::setAlias('@tests', dirname(__DIR__) . '/tests/codeception');
 $params = require(__DIR__ . '/params.php');
 $db = require(__DIR__ . '/db.php');
 
-$config = [
+return [
     'id' => 'basic-console',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'controllerNamespace' => 'app\commands',
     'components' => [
+        'authManager' => [
+            'class' => 'yii\rbac\DbManager',
+            
+        ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
@@ -23,6 +27,9 @@ $config = [
             ],
         ],
         'db' => $db,
+        
+        
+        
     ],
     'params' => $params,
     /*
