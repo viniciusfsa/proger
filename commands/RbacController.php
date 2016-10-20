@@ -35,10 +35,20 @@ class RbacController extends Controller
        $gerenciaUsuario->description = 'Gerenciar Usuario';
        $auth->add($gerenciaUsuario);
 
-       // adciona a permissão "Gerenciar Usuario"
+       // adciona a permissão "Ver cadastros basicos"
        $verCadastrosBasicos = $auth->createPermission('ver-cadastros-basicos');
        $verCadastrosBasicos->description = 'Ver Cadastros Básicos';
        $auth->add($verCadastrosBasicos);
+
+       // adciona a permissão "Gerenciar Resolucao"
+       $gerenciarResolucao = $auth->createPermission('gerenciar-resolucao');
+       $gerenciarResolucao->description = 'Gerenciar Resolução';
+       $auth->add($gerenciarResolucao);
+
+       // adciona a permissão "Gerenciar Vinculos"
+       $gerenciarTipoVinculo = $auth->createPermission('gerenciar-tipo-vinculo');
+       $gerenciarTipoVinculo->description = 'Gerenciar Vínculos';
+       $auth->add($gerenciarTipoVinculo);
 
 
 
@@ -52,6 +62,8 @@ class RbacController extends Controller
        $auth->addChild($gerente, $gerenciaInstituicao);
        $auth->addChild($gerente, $gerenciaSetor);
        $auth->addChild($gerente, $verCadastrosBasicos);
+       $auth->addChild($gerente, $gerenciarResolucao);
+       $auth->addChild($gerente, $gerenciarTipoVinculo);
 
        // adciona a role "secretario"
        $secretario = $auth->createRole('secretario');
@@ -62,6 +74,7 @@ class RbacController extends Controller
        // adciona a role "admin" e da a esta role a permissão "gerenciaUsuario" e tudo que gerente faz e que secretario faz
              
        $admin = $auth->createRole('admin');
+
        $admin->description = 'Administrador do Sistema';
        $auth->add($admin);     
        $auth->addChild($admin, $gerenciaUsuario); 
