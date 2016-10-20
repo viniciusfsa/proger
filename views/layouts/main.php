@@ -54,6 +54,9 @@ AppAsset::register($this);
                          ['label' => 'Financiadora', 'url' => ['financiadora/index'], 'visible' => Yii::$app->user->can('gerenciar-financiadora')],   
                          ['label' => 'Vínculos', 'url' => ['tipo-vinculo/index'], 'visible' => Yii::$app->user->can('gerenciar-tipo-vinculo')],
                          ['label' => 'Resolução', 'url' => ['resolucao/index'], 'visible' => Yii::$app->user->can('gerenciar-resolucao')], 
+                         ['label' => 'Gestor', 'url' => ['gestor/index'], 'visible' => Yii::$app->user->can('gerenciar-gestor')],
+                         ['label' => 'Edital', 'url' => ['edital/index'], /*'visible' => Yii::$app->user->can('gerenciar-gestor')*/],// Dei a permissão de uma existente sómpara aparecer no menu
+                         ['label' => 'Tipo Proger', 'url' => ['tipo-proger/index'],],
                     ], 
                     'visible' => Yii::$app->user->can('ver-cadastros-basicos')
                 ],

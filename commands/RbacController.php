@@ -50,6 +50,11 @@ class RbacController extends Controller
        $gerenciarTipoVinculo->description = 'Gerenciar Vínculos';
        $auth->add($gerenciarTipoVinculo);
 
+       // adciona a permissão "Gerenciar Gestores"
+       $gerenciarGestor = $auth->createPermission('gerenciar-gestor');
+       $gerenciarGestor->description = 'Gerenciar Gestor';
+       $auth->add($gerenciarGestor);
+
 
 
       
@@ -64,6 +69,7 @@ class RbacController extends Controller
        $auth->addChild($gerente, $verCadastrosBasicos);
        $auth->addChild($gerente, $gerenciarResolucao);
        $auth->addChild($gerente, $gerenciarTipoVinculo);
+       $auth->addChild($gerente, $gerenciarGestor);
 
        // adciona a role "secretario"
        $secretario = $auth->createRole('secretario');
