@@ -51,7 +51,8 @@ AppAsset::register($this);
                     'items' => [
                          ['label' => 'Setor', 'url' => ['setor/index'], 'visible' => Yii::$app->user->can('gerenciar-setor')],
                          ['label' => 'Instituicao', 'url' => ['instituicao/index'],'visible' => Yii::$app->user->can('gerenciar-instituicao')],
-                         ['label' => 'Financiadora', 'url' => ['financiadora/index'], 'visible' => Yii::$app->user->can('gerenciar-financiadora')],           
+                         ['label' => 'Financiadora', 'url' => ['financiadora/index'], 'visible' => Yii::$app->user->can('gerenciar-financiadora')],
+                         ['label' => 'Situação', 'url' => ['situacao/index']],           
                     ], 
                     'visible' => Yii::$app->user->can('ver-cadastros-basicos')
                 ],
