@@ -53,11 +53,11 @@ AppAsset::register($this);
                     'label' => 'Cadastros Básicos',
                     'items' => [
                          ['label' => 'Setor', 'url' => ['setor/index'], 'visible' => Yii::$app->user->can('gerenciar-setor')],
-                         ['label' => 'Instituicao', 'url' => ['instituicao/index'],'visible' => Yii::$app->user->can('gerenciar-instituicao')],
+                         ['label' => 'Instituição', 'url' => ['instituicao/index'],'visible' => Yii::$app->user->can('gerenciar-instituicao')],
                          ['label' => 'Financiadora', 'url' => ['financiadora/index'], 'visible' => Yii::$app->user->can('gerenciar-financiadora')],
                          ['label' => 'Situação', 'url' => ['situacao/index']],           
-                         ['label' => 'Financiadora', 'url' => ['financiadora/index'], 'visible' => Yii::$app->user->can('gerenciar-financiadora')],   
-                         ['label' => 'Vínculos', 'url' => ['tipo-vinculo/index'], 'visible' => Yii::$app->user->can('gerenciar-tipo-vinculo')],
+                         ['label' => 'Tipo de Evento', 'url' => ['tipo-evento/index']],   
+                         ['label' => 'Vínculo', 'url' => ['tipo-vinculo/index'], 'visible' => Yii::$app->user->can('gerenciar-tipo-vinculo')],
                          ['label' => 'Resolução', 'url' => ['resolucao/index'], 'visible' => Yii::$app->user->can('gerenciar-resolucao')], 
 
                     ], 
