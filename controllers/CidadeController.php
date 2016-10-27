@@ -1,18 +1,23 @@
 <?php
+/**
+AVISOS
+usando a permissão de resolucao por enquanto, quando criar a permissao
+dar um ctrl h de resolucao pra cidade (com case sensitive)
 
+**/
 namespace app\controllers;
 
 use Yii;
-use app\models\Resolucao;
-use app\models\ResolucaoSearch;
+use app\models\Cidade;
+use app\models\CidadeSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * ResolucaoController implements the CRUD actions for Resolucao model.
+ * CidadeController implements the CRUD actions for Cidade model.
  */
-class ResolucaoController extends Controller
+class CidadeController extends Controller
 {
     /**
      * @inheritdoc
@@ -40,13 +45,13 @@ class ResolucaoController extends Controller
     }
 
     /**
-     * Lists all Resolucao models.
+     * Lists all Cidade models.
      * @return mixed
      */
     public function actionIndex()
     {
         if(\Yii::$app->user->can('gerenciar-resolucao')){
-            $searchModel = new ResolucaoSearch();
+            $searchModel = new CidadeSearch();
             $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
             return $this->render('index', [
@@ -60,7 +65,7 @@ class ResolucaoController extends Controller
     }
 
     /**
-     * Displays a single Resolucao model.
+     * Displays a single Cidade model.
      * @param integer $id
      * @return mixed
      */
@@ -77,7 +82,7 @@ class ResolucaoController extends Controller
     }
 
     /**
-     * Creates a new Resolucao model.
+     * Creates a new Cidade model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
@@ -85,7 +90,7 @@ class ResolucaoController extends Controller
     {
         if(\Yii::$app->user->can('gerenciar-resolucao')){
 
-            $model = new Resolucao();
+            $model = new Cidade();
 
             if ($model->load(Yii::$app->request->post()) && $model->save()) {
                 return $this->redirect(['view', 'id' => $model->id]);
@@ -101,7 +106,7 @@ class ResolucaoController extends Controller
     }
 
     /**
-     * Updates an existing Resolucao model.
+     * Updates an existing Cidade model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -126,7 +131,7 @@ class ResolucaoController extends Controller
     }
 
     /**
-     * Deletes an existing Resolucao model.
+     * Deletes an existing Cidade model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -144,15 +149,15 @@ class ResolucaoController extends Controller
     }
 
     /**
-     * Finds the Resolucao model based on its primary key value.
+     * Finds the Cidade model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Resolucao the loaded model
+     * @return Cidade the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Resolucao::findOne($id)) !== null) {
+        if (($model = Cidade::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

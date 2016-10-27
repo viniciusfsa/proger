@@ -60,6 +60,9 @@ AppAsset::register($this);
                          ['label' => 'Tipo de Função', 'url' => ['tipo-funcao/index']],     
                          ['label' => 'Vínculo', 'url' => ['tipo-vinculo/index'], 'visible' => Yii::$app->user->can('gerenciar-tipo-vinculo')],
                          ['label' => 'Resolução', 'url' => ['resolucao/index'], 'visible' => Yii::$app->user->can('gerenciar-resolucao')], 
+                         ['label' => 'Cidades', 'url' => ['resolucao/index'], 'visible' => Yii::$app->user->can('gerenciar-resolucao')],//mudar qndo criar permissao
+                         ['label' => 'Estados', 'url' => ['resolucao/index'], 'visible' => Yii::$app->user->can('gerenciar-resolucao')],//mudar qndo criar permissao
+                         ['label' => 'Cursos', 'url' => ['resolucao/index'], 'visible' => Yii::$app->user->can('gerenciar-resolucao')],//mudar qndo criar permissao
 
                     ], 
                     'visible' => Yii::$app->user->can('ver-cadastros-basicos')
