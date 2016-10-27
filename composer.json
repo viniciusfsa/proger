@@ -15,15 +15,13 @@
     "minimum-stability": "stable",
     "require": {
         "php": ">=5.4.0",
-<<<<<<< HEAD
+
         "yiisoft/yii2": ">=2.0.6@stable",
-=======
-        "yiisoft/yii2": ">=2.0@stable",
->>>>>>> b14bcb563f54b3a65ea4a5e253bab6117ea0b69f
         "yiisoft/yii2-bootstrap": "*",
         "yiisoft/yii2-swiftmailer": "*",
 		"yiisoft/yii2-jui": "*",
-		"fxp/composer-asset-plugin":">=1.0"
+		"fxp/composer-asset-plugin":">=1.0",
+		"raoul2000/yii2-bootswatch-asset": "*"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",
