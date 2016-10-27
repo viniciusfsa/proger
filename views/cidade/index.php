@@ -4,13 +4,13 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $searchModel app\models\ResolucaoSearch */
+/* @var $searchModel app\models\CidadeSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Resolucões';
+$this->title = 'Cidades';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="resolucao-index">
+<div class="cidade-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -25,11 +25,8 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             'id',
-            'numero',
-            'assunto',
-            'dataResolucao',
-            'dataPublicacao',
-            'observacao',
+            'nome',
+            'idEstado',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

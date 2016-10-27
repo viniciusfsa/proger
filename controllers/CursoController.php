@@ -1,18 +1,23 @@
 <?php
+/**
+AVISOS
+usando a permissão de resolucao por enquanto, quando criar a permissao
+dar um ctrl h de resolucao pra curso (com case sensitive)
 
+**/
 namespace app\controllers;
 
 use Yii;
-use app\models\Resolucao;
-use app\models\ResolucaoSearch;
+use app\models\Curso;
+use app\models\CursoSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * ResolucaoController implements the CRUD actions for Resolucao model.
+ * CursoController implements the CRUD actions for Curso model.
  */
-class ResolucaoController extends Controller
+class CursoController extends Controller
 {
     /**
      * @inheritdoc
@@ -20,16 +25,6 @@ class ResolucaoController extends Controller
     public function behaviors()
     {
         return [
-            'access' => [
-                'class' => AccessControl::className(),
-                'rules' => [
-                    [
-                        'actions' => ['index', 'view', 'update', 'create','delete'],
-                        'allow' => true,
-                        'roles' => ['@'],
-                    ],
-                ],
-            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
@@ -40,27 +35,21 @@ class ResolucaoController extends Controller
     }
 
     /**
-     * Lists all Resolucao models.
+     * Lists all Curso models.
      * @return mixed
      */
     public function actionIndex()
     {
-        if(\Yii::$app->user->can('gerenciar-resolucao')){
-            $searchModel = new ResolucaoSearch();
-            $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $searchModel = new CursoSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-            return $this->render('index', [
-                'searchModel' => $searchModel,
-                'dataProvider' => $dataProvider,
-            ]);
-        }
-        else{
-            throw new \yii\web\ForbiddenHttpException('Você não está autorizado a realizar essa ação.');
-        }
+        return $this->render('index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
     }
-
-    /**
-     * Displays a single Resolucao model.
+/**
+     * Displays a single Curso model.
      * @param integer $id
      * @return mixed
      */
@@ -77,7 +66,7 @@ class ResolucaoController extends Controller
     }
 
     /**
-     * Creates a new Resolucao model.
+     * Creates a new Curso model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
@@ -85,7 +74,7 @@ class ResolucaoController extends Controller
     {
         if(\Yii::$app->user->can('gerenciar-resolucao')){
 
-            $model = new Resolucao();
+            $model = new Curso();
 
             if ($model->load(Yii::$app->request->post()) && $model->save()) {
                 return $this->redirect(['view', 'id' => $model->id]);
@@ -101,7 +90,7 @@ class ResolucaoController extends Controller
     }
 
     /**
-     * Updates an existing Resolucao model.
+     * Updates an existing Curso model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -126,7 +115,7 @@ class ResolucaoController extends Controller
     }
 
     /**
-     * Deletes an existing Resolucao model.
+     * Deletes an existing Curso model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -144,15 +133,15 @@ class ResolucaoController extends Controller
     }
 
     /**
-     * Finds the Resolucao model based on its primary key value.
+     * Finds the Curso model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Resolucao the loaded model
+     * @return Curso the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Resolucao::findOne($id)) !== null) {
+        if (($model = Curso::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
