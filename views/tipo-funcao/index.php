@@ -1,16 +1,16 @@
 <?php
 
 use yii\helpers\Html;
-use yii\grid\GridView; 
+use yii\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $searchModel app\models\TipoVinculoSearch */
+/* @var $searchModel app\models\tipoFuncaoSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Vínculos';
+$this->title = 'Tipo de Função';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="tipo-vinculo-index">
+<div class="tipo-funcao-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>

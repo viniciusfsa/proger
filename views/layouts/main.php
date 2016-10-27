@@ -10,6 +10,8 @@ use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
 use yii\rbac\DbManager;
 
+
+raoul2000\bootswatch\BootswatchAsset::$theme = 'cerulean'; //aqui você vai escolher o tema a ser usado, as opções disponiveis podem ser vista no site bootswatch.com
 AppAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
@@ -32,29 +34,31 @@ AppAsset::register($this);
 <div class="wrap">
     <?php
     NavBar::begin([
-        //'brandLabel' => 'PROGER',
-        'brandLabel' => '<img src ="' . Yii::$app->request->baseUrl . '/images/logo.png" />',
-        'brandUrl' => Yii::$app->homeUrl,
+        'brandLabel' => 'PROGER',
+    //    'brandLabel' => '<img src ="' . Yii::$app->request->baseUrl . '/images/logo.png" />',
+        'brandUrl' => Yii::$app->homeUrl, 
         'options' => [
-            'class' => 'navbar-inverse navbar-fixed-top',
+            'class' => 'navbar navbar-inverse', //aqui você alterna entre as duas sub-opções do tema para isso use 'navbar navbar-default' ou 'navbar navbar-inverse'
         ],
     ]);
+
 
     $auth = new DbManager;
        echo Nav::widget([
             'options' => ['class' => 'navbar-nav navbar-right'],
             'items' => [
-
-                
                 [
+//                        "<br><br>",
+
                     'label' => 'Cadastros Básicos',
                     'items' => [
                          ['label' => 'Setor', 'url' => ['setor/index'], 'visible' => Yii::$app->user->can('gerenciar-setor')],
-                         ['label' => 'Instituicao', 'url' => ['instituicao/index'],'visible' => Yii::$app->user->can('gerenciar-instituicao')],
+                         ['label' => 'Instituição', 'url' => ['instituicao/index'],'visible' => Yii::$app->user->can('gerenciar-instituicao')],
                          ['label' => 'Financiadora', 'url' => ['financiadora/index'], 'visible' => Yii::$app->user->can('gerenciar-financiadora')],
                          ['label' => 'Situação', 'url' => ['situacao/index']],           
-                         ['label' => 'Financiadora', 'url' => ['financiadora/index'], 'visible' => Yii::$app->user->can('gerenciar-financiadora')],   
-                         ['label' => 'Vínculos', 'url' => ['tipo-vinculo/index'], 'visible' => Yii::$app->user->can('gerenciar-tipo-vinculo')],
+                         ['label' => 'Tipo de Evento', 'url' => ['tipo-evento/index']], 
+                         ['label' => 'Tipo de Função', 'url' => ['tipo-funcao/index']],     
+                         ['label' => 'Vínculo', 'url' => ['tipo-vinculo/index'], 'visible' => Yii::$app->user->can('gerenciar-tipo-vinculo')],
                          ['label' => 'Resolução', 'url' => ['resolucao/index'], 'visible' => Yii::$app->user->can('gerenciar-resolucao')], 
 
                          ['label' => 'Gestor', 'url' => ['gestor/index'], 'visible' => Yii::$app->user->can('gerenciar-gestor')],
@@ -115,7 +119,9 @@ AppAsset::register($this);
             ],
         ]);
         NavBar::end();
+
     ?>
+
 
     <div class="container">
         <?= Breadcrumbs::widget([
@@ -124,6 +130,8 @@ AppAsset::register($this);
         <?= $content ?>
     </div>
 </div>
+
+<div class="menu_sistema"> teste </div>
 
 <footer class="footer">
     <div class="container">

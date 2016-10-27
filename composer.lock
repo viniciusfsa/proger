@@ -4,8 +4,13 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
+
     "hash": "6e34927b1a5beb283e51afca48843cbb",
     "content-hash": "2e8828eef02fa27b023bffcff46d0478",
+
+    "hash": "92373ae127ce99abe193b93a7b3a124d",
+    "content-hash": "4ca8e9f726f12f49159c2591ba289655",
+
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -117,12 +122,12 @@
             "version": "3.2.7",
             "source": {
                 "type": "git",
-                "url": "https://github.com/RobinHerbots/Inputmask.git",
+                "url": "https://github.com/RobinHerbots/jquery.inputmask.git",
                 "reference": "5a72c563b502b8e05958a524cdfffafe9987be38"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/RobinHerbots/Inputmask/zipball/5a72c563b502b8e05958a524cdfffafe9987be38",
+                "url": "https://api.github.com/repos/RobinHerbots/jquery.inputmask/zipball/5a72c563b502b8e05958a524cdfffafe9987be38",
                 "reference": "5a72c563b502b8e05958a524cdfffafe9987be38",
                 "shasum": ""
             },
