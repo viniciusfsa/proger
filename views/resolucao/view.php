@@ -7,7 +7,7 @@ use yii\widgets\DetailView;
 /* @var $model app\models\Resolucao */
 
 $this->title = $model->numero;
-$this->params['breadcrumbs'][] = ['label' => 'Resolucões', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Resoluções', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="resolucao-view">

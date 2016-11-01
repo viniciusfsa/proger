@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\ResolucaoSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Resolucões';
+$this->title = 'Resoluções';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="resolucao-index">
