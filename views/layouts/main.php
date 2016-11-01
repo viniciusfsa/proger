@@ -34,8 +34,8 @@ AppAsset::register($this);
 <div class="wrap">
     <?php
     NavBar::begin([
-        'brandLabel' => 'PROGER',
-    //    'brandLabel' => '<img src ="' . Yii::$app->request->baseUrl . '/images/logo.png" />',
+    //    'brandLabel' => 'PROGER',
+        'brandLabel' => '<img src ="' . Yii::$app->request->baseUrl . '/images/logo.png" />',
         'brandUrl' => Yii::$app->homeUrl, 
         'options' => [
             'class' => 'navbar navbar-inverse', //aqui você alterna entre as duas sub-opções do tema para isso use 'navbar navbar-default' ou 'navbar navbar-inverse'

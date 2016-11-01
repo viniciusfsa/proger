@@ -18,7 +18,7 @@ $this->title = 'Login';
 </style>
 
 <div id="logo" align="center" style="margin-bottom: 20px; margin-top: 50px;">
-    <?php echo '<img src ="' . Yii::$app->request->baseUrl . '/images/logo.png" />' ?>
+    <?php echo '<img src ="' . Yii::$app->request->baseUrl . '/images/logo_invertido.png" />' ?>
 </div>
 
 <div id="geral" class="well" align="center" style="margin: 0 auto; width: 40%;">
