@@ -21,11 +21,9 @@
         "yiisoft/yii2-swiftmailer": "*",
 		"yiisoft/yii2-jui": "*",
 
-		"fxp/composer-asset-plugin":">=1.0",
-		"raoul2000/yii2-bootswatch-asset": "*"
 
 		"raoul2000/yii2-bootswatch-asset" "*",
-		"fxp/composer-asset-plugin":">=1.0"
+        "fxp/composer-asset-plugin":">=1.0"
 
     },
     "require-dev": {

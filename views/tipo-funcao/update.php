@@ -5,9 +5,9 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\tipoFuncao */
 
-$this->title = 'Atualizar Tipo de Função: ' . $model->id;
+$this->title = 'Atualizar Tipo de Função: ' . $model->descricao;
 $this->params['breadcrumbs'][] = ['label' => 'Tipo de Função', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
+$this->params['breadcrumbs'][] = ['label' => $model->descricao, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Atualizar';
 ?>
 <div class="tipo-funcao-update">

@@ -6,7 +6,7 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\models\TipoProger */
 
-$this->title = $model->id;
+$this->title = $model->nome;
 $this->params['breadcrumbs'][] = ['label' => 'Tipo Proger', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
