@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use app\models\Estado;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\CidadeSearch */
@@ -26,7 +27,16 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'id',
             'nome',
-            'idEstado',
+            //'idEstado',
+            [
+                'attribute' => 'idEstado',
+                'label' => 'Estado',
+                'filter' => Estado::dropdown(),
+                'value' => function($model, $index, $dataColumn) {
+                    $dropdown = Estado::dropdown();
+                    return $dropdown[$model->idEstado];
+                },
+            ],
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

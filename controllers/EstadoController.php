@@ -13,6 +13,7 @@ use app\models\EstadoSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
 
 /**
  * EstadoController implements the CRUD actions for Estado model.
@@ -25,6 +26,16 @@ class EstadoController extends Controller
     public function behaviors()
     {
         return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'actions' => ['index', 'view', 'update', 'create','delete'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
@@ -40,13 +51,18 @@ class EstadoController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new EstadoSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        if(\Yii::$app->user->can('gerenciar-resolucao')){
+            $searchModel = new EstadoSearch();
+            $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
+            return $this->render('index', [
+                'searchModel' => $searchModel,
+                'dataProvider' => $dataProvider,
+            ]);
+        }
+        else{
+            throw new \yii\web\ForbiddenHttpException('Você não está autorizado a realizar essa ação.');
+        }
     }
 /**
      * Displays a single Estado model.
@@ -75,6 +91,7 @@ class EstadoController extends Controller
         if(\Yii::$app->user->can('gerenciar-resolucao')){
 
             $model = new Estado();
+            
 
             if ($model->load(Yii::$app->request->post()) && $model->save()) {
                 return $this->redirect(['view', 'id' => $model->id]);

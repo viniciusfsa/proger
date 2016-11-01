@@ -2,6 +2,8 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use \yii\helpers\ArrayHelper;
+use app\models\Pais;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Estado */
@@ -16,7 +18,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'sigla')->textInput() ?>
 
-    <?= $form->field($model, 'idPais')->textInput() ?>
+    <?= $form->field($model, 'idPais')->dropDownList(ArrayHelper::map(Pais::find()->orderBy('nome')->all(),'id', 'nome'),['prompt'=>'Selecione um País']) ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Salvar' : 'Atualizar', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

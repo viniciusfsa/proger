@@ -2,11 +2,12 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use app\models\Estado;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Cidade */
 
-$this->title = $model->id;
+$this->title = $model->nome;
 $this->params['breadcrumbs'][] = ['label' => 'Cidades', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -30,7 +31,12 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'id',
             'nome',
-            'idEstado',
+            //'idEstado',
+            [
+                'attribute' => 'idEstado',
+                'label' => 'Estado',
+                'value' => Estado::findOne($model->idEstado)->nome,
+            ], 
         ],
     ]) ?>
 

@@ -2,11 +2,12 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use app\models\Pais;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Estado */
 
-$this->title = $model->id;
+$this->title = $model->nome;
 $this->params['breadcrumbs'][] = ['label' => 'Estados', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -31,7 +32,12 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'nome',
             'sigla',
-            'idPais',
+            //'idPais',
+            [
+                'attribute' => 'idPais',
+                'label' => 'País',
+                'value' => Pais::findOne($model->idPais)->nome,
+            ],         
         ],
     ]) ?>
 

@@ -8,6 +8,7 @@ use app\models\ResolucaoSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
 
 /**
  * ResolucaoController implements the CRUD actions for Resolucao model.

@@ -2,7 +2,7 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
-
+use app\models\Pais;
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\EstadoSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -27,8 +27,17 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'nome',
             'sigla',
-            'idPais',
-
+            //'idPais',
+            [
+                'attribute' => 'idPais',
+                'label' => 'País',
+                'filter' => Pais::dropdown(),
+                'value' => function($model, $index, $dataColumn) {
+                    $dropdown = Pais::dropdown();
+                    return $dropdown[$model->idPais];
+                },
+            ],
+            
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>

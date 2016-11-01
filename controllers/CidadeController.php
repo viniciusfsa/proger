@@ -13,6 +13,7 @@ use app\models\CidadeSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
 
 /**
  * CidadeController implements the CRUD actions for Cidade model.

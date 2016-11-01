@@ -60,9 +60,9 @@ AppAsset::register($this);
                          ['label' => 'Tipo de Função', 'url' => ['tipo-funcao/index']],     
                          ['label' => 'Vínculo', 'url' => ['tipo-vinculo/index'], 'visible' => Yii::$app->user->can('gerenciar-tipo-vinculo')],
                          ['label' => 'Resolução', 'url' => ['resolucao/index'], 'visible' => Yii::$app->user->can('gerenciar-resolucao')], 
-                         ['label' => 'Cidades', 'url' => ['resolucao/index'], 'visible' => Yii::$app->user->can('gerenciar-resolucao')],//mudar qndo criar permissao
-                         ['label' => 'Estados', 'url' => ['resolucao/index'], 'visible' => Yii::$app->user->can('gerenciar-resolucao')],//mudar qndo criar permissao
-                         ['label' => 'Cursos', 'url' => ['resolucao/index'], 'visible' => Yii::$app->user->can('gerenciar-resolucao')],//mudar qndo criar permissao
+                         ['label' => 'Cidade', 'url' => ['cidade/index'], ],//mudar qndo criar permissao
+                         ['label' => 'Estado', 'url' => ['estado/index'], ],//mudar qndo criar permissao
+                         ['label' => 'Curso', 'url' => ['curso/index'], ],//mudar qndo criar permissao
 
                          ['label' => 'Gestor', 'url' => ['gestor/index'], 'visible' => Yii::$app->user->can('gerenciar-gestor')],
                          ['label' => 'Edital', 'url' => ['edital/index'], /*'visible' => Yii::$app->user->can('gerenciar-gestor')*/],// Dei a permissão de uma existente sómpara aparecer no menu
