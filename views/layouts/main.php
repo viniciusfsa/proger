@@ -34,7 +34,7 @@ AppAsset::register($this);
 <div class="wrap">
     <?php
     NavBar::begin([
-    //    'brandLabel' => 'PROGER',
+    //      'brandLabel' => 'PROGER',
         'brandLabel' => '<img src ="' . Yii::$app->request->baseUrl . '/images/logo.png" />',
         'brandUrl' => Yii::$app->homeUrl, 
         'options' => [
@@ -67,6 +67,7 @@ AppAsset::register($this);
                          ['label' => 'Gestor', 'url' => ['gestor/index'], 'visible' => Yii::$app->user->can('gerenciar-gestor')],
                          ['label' => 'Edital', 'url' => ['edital/index'], /*'visible' => Yii::$app->user->can('gerenciar-gestor')*/],// Dei a permissão de uma existente sómpara aparecer no menu
                          ['label' => 'Tipo Proger', 'url' => ['tipo-proger/index'],],
+                         ['label' => 'Nível de Atuação', 'url' => ['nivel-atuacao/index']], // 'visible' => Yii::$app->user->can('gerenciar-nivel-atuacao')], //verificar como fazer a permissão
 
                     ], 
                     'visible' => Yii::$app->user->can('ver-cadastros-basicos')
