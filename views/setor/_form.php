@@ -12,14 +12,18 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'nome')->textInput() ?>
-
-    <?= $form->field($model, 'sigla')->textInput() ?>
-
-    <?= //$form->field($model, 'ativo')->textInput() 
-    $form->field($model, 'ativo')->radioList(array('1'=>'Sim',0=>'Não'));
+    <?= $form->field($model, 'nome')->textInput(['maxlength' =>100,'style' =>'width: 50%' ]) 
 
     ?>
+
+
+    <?= $form->field($model, 'sigla')->textInput(['maxlength' =>15, 'style' =>'width: 20%']) ?>
+    <?php $model->isNewRecord ? $model->ativo = 1: $model->ativo = $model->ativo ;  ?>
+    
+    <?= //$form->field($model, 'ativo')->textInput()     
+    $form->field($model, 'ativo')->radioList(array('1'=>'Sim','0'=>'Não'));
+    ?>
+    
 
 
 

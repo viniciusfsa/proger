@@ -95,7 +95,7 @@ class SetorController extends Controller
             $model = new Setor();
             if ($model->load(Yii::$app->request->post()) && $model->save()) {
                 return $this->redirect(['view', 'id' => $model->id]);
-            } else {
+            } else {                
                 return $this->render('create', [
                     'model' => $model,
                 ]);

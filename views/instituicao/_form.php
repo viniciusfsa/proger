@@ -14,15 +14,16 @@ use app\models\pais;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'instituicao')->textInput() ?>
-    <?= $form->field($model, 'sigla')->textInput() ?>    
+    <?= $form->field($model, 'instituicao')->textInput(['maxlength' =>100,'style' =>'width: 50%' ]) ?>
+    <?= $form->field($model, 'sigla')->textInput(['maxlength' =>10,'style' =>'width: 15%' ]) ?>    
 
     <?= 
     //$form->field($model, 'idPais')->textInput();
-    $form->field($model, 'idPais')->dropDownList(ArrayHelper::map(pais::find()->orderBy('nome')->all(),'id','nome'),['prompt'=>'']); 
+    $form->field($model, 'idPais')->dropDownList(ArrayHelper::map(pais::find()->orderBy('nome')->all(),'id','nome'),['style' =>'width: 30%'],['prompt'=>'']); 
 
     ?>
 
+     <?php $model->isNewRecord ? $model->ativo = 1: $model->ativo = $model->ativo ;  ?>
     <?=
     // $form->field($model, 'ativo')->textInput()
      $form->field($model, 'ativo')->radioList(array('1'=>'Sim',0=>'Não'));
