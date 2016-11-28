@@ -12,9 +12,9 @@ class RbacController extends Controller
    {
        $auth = Yii::$app->authManager;
 
-       //removeAll();
+       //$auth->revokeAll();
 
-       
+       /*
        // adciona a permissão "Gerenciar Financiadora"
        $gerenciaFinanciadora = $auth->createPermission('gerenciar-financiadora');
        $gerenciaFinanciadora->description = 'Gerenciar Financiadora';
@@ -30,10 +30,7 @@ class RbacController extends Controller
        $gerenciaSetor->description = 'Gerenciar Setor';
        $auth->add($gerenciaSetor);
 
-       // adciona a permissão "Gerenciar Usuario"
-       $gerenciaUsuario = $auth->createPermission('gerenciar-usuario');
-       $gerenciaUsuario->description = 'Gerenciar Usuario';
-       $auth->add($gerenciaUsuario);
+      
 
        // adciona a permissão "Ver cadastros basicos"
        $verCadastrosBasicos = $auth->createPermission('ver-cadastros-basicos');
@@ -54,22 +51,40 @@ class RbacController extends Controller
        $gerenciarGestor = $auth->createPermission('gerenciar-gestor');
        $gerenciarGestor->description = 'Gerenciar Gestor';
        $auth->add($gerenciarGestor);
+       */
 
+        // adciona a permissão "Gerenciar Usuario"
+       $gerenciaUsuario = $auth->createPermission('gerenciar-usuario');
+       $gerenciaUsuario->description = 'Gerenciar Usuario';
+       $auth->add($gerenciaUsuario);
 
+        // adciona a permissão "Cadastros Básicos"
+       $cadastrosBasicos = $auth->createPermission('gerenciamento-cadastros-basicos');
+       $cadastrosBasicos->description = 'Gerenciar Cadastros Básicos';
+       $auth->add($cadastrosBasicos);
+
+        // adciona a permissão "Cadastros Avançados"
+       $cadastrosAvançados = $auth->createPermission('gerenciamento-cadastros-avançados');
+       $cadastrosAvançados->description = 'Gerenciar Cadastros Avançados';
+       $auth->add($cadastrosAvançados);
 
       
 
        // adciona a role "gerente" e da a esta role as permissões criadas acima
        $gerente = $auth->createRole('gerente');
        $gerente->description = 'Gerente';
-       $auth->add($gerente);      
-       $auth->addChild($gerente, $gerenciaFinanciadora);
+       $auth->add($gerente);     
+       /*$auth->addChild($gerente, $gerenciaFinanciadora);
        $auth->addChild($gerente, $gerenciaInstituicao);
        $auth->addChild($gerente, $gerenciaSetor);
        $auth->addChild($gerente, $verCadastrosBasicos);
        $auth->addChild($gerente, $gerenciarResolucao);
        $auth->addChild($gerente, $gerenciarTipoVinculo);
-       $auth->addChild($gerente, $gerenciarGestor);
+       $auth->addChild($gerente, $gerenciarGestor);*/
+
+       $auth->addChild($gerente, $cadastrosBasicos);
+       $auth->addChild($gerente, $cadastrosAvançados);
+
 
        // adciona a role "secretario"
        $secretario = $auth->createRole('secretario');
@@ -89,6 +104,12 @@ class RbacController extends Controller
 
        // Atribui roles para usuários. 1 and 2 são IDs retornados por IdentityInterface::getId()
        // normalmente implementado no seu model User.
+
+
+       
+
+
+      
        
        $auth->assign($admin, 1);
        $auth->assign($gerente, 2);
