@@ -58,6 +58,7 @@ AppAsset::register($this);
                          ['label' => 'Financiadora', 'url' => ['financiadora/index'], 'visible' => Yii::$app->user->can('gerenciamento-cadastros-basicos')],
                          ['label' => 'Gestor', 'url' => ['gestor/index'], 'visible' => Yii::$app->user->can('gerenciamento-cadastros-basicos')],                       
                          ['label' => 'Instituição', 'url' => ['instituicao/index'], 'visible' => Yii::$app->user->can('gerenciamento-cadastros-basicos')],
+                         ['label' => 'Nível de Atuação', 'url' => ['nivel-atuacao/index'], 'visible' => Yii::$app->user->can('gerenciamento-cadastros-basicos')], 
                          ['label' => 'Resolução', 'url' => ['resolucao/index'], 'visible' => Yii::$app->user->can('gerenciamento-cadastros-basicos')], 
                          ['label' => 'Setor', 'url' => ['setor/index'], 'visible' => Yii::$app->user->can('gerenciamento-cadastros-basicos')],
                          ['label' => 'Situação', 'url' => ['situacao/index'], 'visible' => Yii::$app->user->can('gerenciamento-cadastros-basicos')],           
@@ -65,7 +66,7 @@ AppAsset::register($this);
                          ['label' => 'Tipo de Função', 'url' => ['tipo-funcao/index'], 'visible' => Yii::$app->user->can('gerenciamento-cadastros-basicos')],    
                          ['label' => 'Tipo Proger', 'url' => ['tipo-proger/index'], 'visible' => Yii::$app->user->can('gerenciamento-cadastros-basicos')], 
                          ['label' => 'Vínculo', 'url' => ['tipo-vinculo/index'], 'visible' => Yii::$app->user->can('gerenciamento-cadastros-basicos')],                         
-                         ['label' => 'Nível de Atuação', 'url' => ['nivel-atuacao/index'], 'visible' => Yii::$app->user->can('gerenciamento-cadastros-basicos')], 
+                         
 
 
                     ], 
