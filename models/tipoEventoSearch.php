@@ -64,6 +64,8 @@ class tipoEventoSearch extends tipoEvento
 
         $query->andFilterWhere(['like', 'nome', $this->nome]);
 
+        $query->orderBy('nome');
+
         return $dataProvider;
     }
 }

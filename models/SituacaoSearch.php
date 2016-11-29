@@ -64,6 +64,8 @@ class SituacaoSearch extends Situacao
 
         $query->andFilterWhere(['like', 'nome', $this->nome]);
 
+        $query->orderBy('nome');
+
         return $dataProvider;
     }
 }
