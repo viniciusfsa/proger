@@ -5,7 +5,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\NivelAtuacao */
 
-$this->title = 'Atualizar Nível Atuação: ' . $model->id;
+$this->title = 'Atualizar Nível Atuação: ' . $model->nome;
 $this->params['breadcrumbs'][] = ['label' => 'Nivel Atuacaos', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Update';

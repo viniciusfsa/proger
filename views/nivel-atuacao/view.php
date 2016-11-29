@@ -6,8 +6,8 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\models\NivelAtuacao */
 
-$this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Nivel Atuacaos', 'url' => ['index']];
+$this->title = $model->nome;
+$this->params['breadcrumbs'][] = ['label' => 'Nivel Atuação', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="nivel-atuacao-view">
