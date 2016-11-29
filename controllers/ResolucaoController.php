@@ -46,7 +46,7 @@ class ResolucaoController extends Controller
      */
     public function actionIndex()
     {
-        if(\Yii::$app->user->can('gerenciar-resolucao')){
+        if(\Yii::$app->user->can('gerenciamento-cadastros-basicos')){
             $searchModel = new ResolucaoSearch();
             $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
@@ -67,7 +67,7 @@ class ResolucaoController extends Controller
      */
     public function actionView($id)
     {
-        if(\Yii::$app->user->can('gerenciar-resolucao')){
+        if(\Yii::$app->user->can('gerenciamento-cadastros-basicos')){
             return $this->render('view', [
                 'model' => $this->findModel($id),
             ]);
@@ -84,7 +84,7 @@ class ResolucaoController extends Controller
      */
     public function actionCreate()
     {
-        if(\Yii::$app->user->can('gerenciar-resolucao')){
+        if(\Yii::$app->user->can('gerenciamento-cadastros-basicos')){
 
             $model = new Resolucao();
 
@@ -109,7 +109,7 @@ class ResolucaoController extends Controller
      */
     public function actionUpdate($id)
     {
-        if(\Yii::$app->user->can('gerenciar-resolucao')){
+        if(\Yii::$app->user->can('gerenciamento-cadastros-basicos')){
 
             $model = $this->findModel($id);
 
@@ -134,7 +134,7 @@ class ResolucaoController extends Controller
      */
     public function actionDelete($id)
     {
-        if(\Yii::$app->user->can('gerenciar-resolucao')){
+        if(\Yii::$app->user->can('gerenciamento-cadastros-basicos')){
             $this->findModel($id)->delete();
 
             return $this->redirect(['index']);
