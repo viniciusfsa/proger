@@ -50,28 +50,42 @@ AppAsset::register($this);
                 [
 //                        "<br><br>",
 
-                    'label' => 'Cadastros Básicos',
+                    'label' => 'Cadastros',
                     'items' => [
-                         ['label' => 'Setor', 'url' => ['setor/index'], 'visible' => Yii::$app->user->can('gerenciar-setor')],
-                         ['label' => 'Instituição', 'url' => ['instituicao/index'],'visible' => Yii::$app->user->can('gerenciar-instituicao')],
-                         ['label' => 'Financiadora', 'url' => ['financiadora/index'], 'visible' => Yii::$app->user->can('gerenciar-financiadora')],
-                         ['label' => 'Situação', 'url' => ['situacao/index']],           
-                         ['label' => 'Tipo de Evento', 'url' => ['tipo-evento/index']], 
-                         ['label' => 'Tipo de Função', 'url' => ['tipo-funcao/index']],     
-                         ['label' => 'Vínculo', 'url' => ['tipo-vinculo/index'], 'visible' => Yii::$app->user->can('gerenciar-tipo-vinculo')],
-                         ['label' => 'Resolução', 'url' => ['resolucao/index'], 'visible' => Yii::$app->user->can('gerenciar-resolucao')], 
-                         ['label' => 'Cidade', 'url' => ['cidade/index'], ],//mudar qndo criar permissao
-                         ['label' => 'Estado', 'url' => ['estado/index'], ],//mudar qndo criar permissao
-                         ['label' => 'Curso', 'url' => ['curso/index'], ],//mudar qndo criar permissao
+                         ['label' => 'Cidade', 'url' => ['cidade/index'], 'visible' => Yii::$app->user->can('gerenciamento-cadastros-basicos')  ],//mudar qndo criar permissao
+                         ['label' => 'Edital', 'url' => ['edital/index'], 'visible' => Yii::$app->user->can('gerenciamento-cadastros-avancados') ],
+                         ['label' => 'Estado', 'url' => ['estado/index'], 'visible' => Yii::$app->user->can('gerenciamento-cadastros-basicos') ],//mudar qndo criar permissao                                                  
+                         ['label' => 'Financiadora', 'url' => ['financiadora/index'], 'visible' => Yii::$app->user->can('gerenciamento-cadastros-basicos')],
+                         ['label' => 'Gestor', 'url' => ['gestor/index'], 'visible' => Yii::$app->user->can('gerenciamento-cadastros-basicos')],                       
+                         ['label' => 'Instituição', 'url' => ['instituicao/index'], 'visible' => Yii::$app->user->can('gerenciamento-cadastros-basicos')],
+                         ['label' => 'Nível de Atuação', 'url' => ['nivel-atuacao/index'], 'visible' => Yii::$app->user->can('gerenciamento-cadastros-basicos')], 
+                         ['label' => 'Resolução', 'url' => ['resolucao/index'], 'visible' => Yii::$app->user->can('gerenciamento-cadastros-basicos')], 
+                         ['label' => 'Setor', 'url' => ['setor/index'], 'visible' => Yii::$app->user->can('gerenciamento-cadastros-basicos')],
+                         ['label' => 'Situação', 'url' => ['situacao/index'], 'visible' => Yii::$app->user->can('gerenciamento-cadastros-basicos')],           
+                         ['label' => 'Tipo de Evento', 'url' => ['tipo-evento/index'], 'visible' => Yii::$app->user->can('gerenciamento-cadastros-basicos')], 
+                         ['label' => 'Tipo de Função', 'url' => ['tipo-funcao/index'], 'visible' => Yii::$app->user->can('gerenciamento-cadastros-basicos')],    
+                         ['label' => 'Tipo Proger', 'url' => ['tipo-proger/index'], 'visible' => Yii::$app->user->can('gerenciamento-cadastros-basicos')], 
+                         ['label' => 'Vínculo', 'url' => ['tipo-vinculo/index'], 'visible' => Yii::$app->user->can('gerenciamento-cadastros-basicos')],                         
+                         
 
-                         ['label' => 'Gestor', 'url' => ['gestor/index'], 'visible' => Yii::$app->user->can('gerenciar-gestor')],
-                         ['label' => 'Edital', 'url' => ['edital/index'], /*'visible' => Yii::$app->user->can('gerenciar-gestor')*/],// Dei a permissão de uma existente sómpara aparecer no menu
-                         ['label' => 'Tipo Proger', 'url' => ['tipo-proger/index'],],
-                         ['label' => 'Nível de Atuação', 'url' => ['nivel-atuacao/index']], // 'visible' => Yii::$app->user->can('gerenciar-nivel-atuacao')], //verificar como fazer a permissão
 
                     ], 
-                    'visible' => Yii::$app->user->can('ver-cadastros-basicos')
+                    'visible' => Yii::$app->user->can('gerenciamento-cadastros-basicos')
                 ],
+
+                /*
+                [
+                    'label' => 'Cadastros Avançados',
+                    'items' => [
+                        
+                       //  '<li class="divider"></li>',
+                         //'<li class="dropdown-header">Dropdown Header</li>',
+                          ['label' => 'Edital', 'url' => ['edital/index'], ],
+
+                    ],
+                    'visible' => Yii::$app->user->can('gerenciamento-cadastros-avancados')
+                ],
+                */
 
 
                  [

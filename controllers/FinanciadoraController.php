@@ -51,7 +51,7 @@ class FinanciadoraController extends Controller
     public function actionIndex()
     {
 
-        if(\Yii::$app->user->can('gerenciar-financiadora')){
+        if(\Yii::$app->user->can('gerenciamento-cadastros-basicos')){
             $searchModel = new FinanciadoraSearch();
             $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
@@ -74,7 +74,7 @@ class FinanciadoraController extends Controller
      */
     public function actionView($id)
     {
-        if(\Yii::$app->user->can('gerenciar-financiadora')){
+        if(\Yii::$app->user->can('gerenciamento-cadastros-basicos')){
             return $this->render('view', [
             'model' => $this->findModel($id),
             ]);
@@ -92,7 +92,7 @@ class FinanciadoraController extends Controller
      */
     public function actionCreate()
     {
-        if(\Yii::$app->user->can('gerenciar-financiadora')){
+        if(\Yii::$app->user->can('gerenciamento-cadastros-basicos')){
             $model = new Financiadora();
             if ($model->load(Yii::$app->request->post()) && $model->save()) {
                 return $this->redirect(['view', 'id' => $model->id]);
@@ -117,7 +117,7 @@ class FinanciadoraController extends Controller
      */
     public function actionUpdate($id)
     {
-        if(\Yii::$app->user->can('gerenciar-financiadora')){
+        if(\Yii::$app->user->can('gerenciamento-cadastros-basicos')){
             $model = $this->findModel($id);
             if ($model->load(Yii::$app->request->post()) && $model->save()) {
                 return $this->redirect(['view', 'id' => $model->id]);
@@ -142,7 +142,7 @@ class FinanciadoraController extends Controller
      */
     public function actionDelete($id)
     {
-        if(\Yii::$app->user->can('gerenciar-financiadora')){
+        if(\Yii::$app->user->can('gerenciamento-cadastros-basicos')){
              $this->findModel($id)->delete();
             return $this->redirect(['index']);          
         }
