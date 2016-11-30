@@ -4,7 +4,7 @@ namespace app\controllers;
 
 use Yii;
 use app\models\tipoEvento;
-use app\models\tipoEventoSearch;
+use app\models\search\tipoEventoSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
