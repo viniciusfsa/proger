@@ -44,7 +44,7 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'ativo',
                 'format' => 'raw',
-                'label' => 'Situção',
+                'label' => 'Situação',
                 'filter' => [1 => 'Ativo', 0 => 'Inativo'],
                 'value' => function($model, $index, $dataColumn) {
                     switch($model->ativo){
