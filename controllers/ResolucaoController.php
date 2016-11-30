@@ -46,6 +46,9 @@ class ResolucaoController extends Controller
      */
     public function actionIndex()
     {
+
+         Yii::$app->formatter->asDate('now', 'yyyy-MM-dd');
+
         if(\Yii::$app->user->can('gerenciar-resolucao')){
             $searchModel = new ResolucaoSearch();
             $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
@@ -54,6 +57,8 @@ class ResolucaoController extends Controller
                 'searchModel' => $searchModel,
                 'dataProvider' => $dataProvider,
             ]);
+
+           
         }
         else{
             throw new \yii\web\ForbiddenHttpException('Você não está autorizado a realizar essa ação.');
