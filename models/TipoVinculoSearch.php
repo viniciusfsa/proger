@@ -47,6 +47,11 @@ class TipoVinculoSearch extends TipoVinculo
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'sort' => [
+                'defaultOrder' => [
+                    'descricao' => SORT_ASC,                    
+                ]
+            ],
         ]);
 
         $this->load($params);

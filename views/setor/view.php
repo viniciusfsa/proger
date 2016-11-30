@@ -6,7 +6,7 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\models\Setor */
 
-$this->title = $model->nome;
+$this->title = $model->sigla;
 $this->params['breadcrumbs'][] = ['label' => 'Setor', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

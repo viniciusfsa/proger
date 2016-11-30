@@ -47,6 +47,11 @@ class InstituicaoSearch extends Instituicao
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'sort' => [
+                'defaultOrder' => [
+                    'instituicao' => SORT_ASC,                    
+                ]
+            ],
         ]);
 
         $this->load($params);

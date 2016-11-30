@@ -4,7 +4,7 @@
 
 
 
-$this->title = 'My Yii Application';
+$this->title = 'Proger';
 ?>
 <div class="site-index">
  

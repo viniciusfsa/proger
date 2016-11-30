@@ -24,8 +24,15 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
-            'nome',
+            //'id',
+          //  'nome',
+            [
+                'attribute' => 'nome',
+                'label' => 'Nome',
+                'headerOptions' => ['style'=>'text-align:center; width: 1000px;'],
+                'contentOptions'=>['align' => 'left'],
+            ],
+         
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

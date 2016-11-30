@@ -46,7 +46,7 @@ class GestorController extends Controller
      */
     public function actionIndex()
     {
-         if(\Yii::$app->user->can('gerenciar-gestor')){
+         if(\Yii::$app->user->can('gerenciamento-cadastros-basicos')){
             $searchModel = new GestorSearch();
             $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
@@ -67,7 +67,7 @@ class GestorController extends Controller
      */
     public function actionView($id)
     {   
-        if(\Yii::$app->user->can('gerenciar-gestor')){
+        if(\Yii::$app->user->can('gerenciamento-cadastros-basicos')){
             return $this->render('view', [
                 'model' => $this->findModel($id),
             ]);
@@ -84,7 +84,7 @@ class GestorController extends Controller
      */
     public function actionCreate()
     {
-        if(\Yii::$app->user->can('gerenciar-gestor')){
+        if(\Yii::$app->user->can('gerenciamento-cadastros-basicos')){
             $model = new Gestor();
 
             if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -108,7 +108,7 @@ class GestorController extends Controller
      */
     public function actionUpdate($id)
     {
-        if(\Yii::$app->user->can('gerenciar-gestor')){
+        if(\Yii::$app->user->can('gerenciamento-cadastros-basicos')){
             $model = $this->findModel($id);
 
             if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -132,7 +132,7 @@ class GestorController extends Controller
      */
     public function actionDelete($id)
     {
-        if(\Yii::$app->user->can('gerenciar-gestor')){
+        if(\Yii::$app->user->can('gerenciamento-cadastros-basicos')){
             $this->findModel($id)->delete();
 
             return $this->redirect(['index']);
@@ -151,7 +151,7 @@ class GestorController extends Controller
      */
     protected function findModel($id)
     {
-        if(\Yii::$app->user->can('gerenciar-gestor')){
+        if(\Yii::$app->user->can('gerenciamento-cadastros-basicos')){
             if (($model = Gestor::findOne($id)) !== null) {
                 return $model;
             } else {

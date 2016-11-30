@@ -65,6 +65,8 @@ class TipoFuncaoSearch extends TipoFuncao
 
         $query->andFilterWhere(['like', 'descricao', $this->descricao]);
 
+        $query->orderBy('descricao');
+
         return $dataProvider;
     }
 }
