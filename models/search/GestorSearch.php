@@ -1,6 +1,6 @@
 <?php
 
-namespace app\models;
+namespace app\models\search;
 
 use Yii;
 use yii\base\Model;
@@ -45,8 +45,17 @@ class GestorSearch extends Gestor
 
         // add conditions that should always apply here
 
-        $dataProvider = new ActiveDataProvider([
+        /*$dataProvider = new ActiveDataProvider([
             'query' => $query,
+        ]); */
+
+         $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+            'sort' => [
+                'defaultOrder' => [
+                    'nome' => SORT_ASC,                    
+                ]
+            ],
         ]);
 
         $this->load($params);

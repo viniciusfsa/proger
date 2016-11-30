@@ -60,7 +60,7 @@ class FinanciadoraController extends Controller
                 'dataProvider' => $dataProvider,
             ]);          
         }
-        else{
+       else{
             throw new \yii\web\ForbiddenHttpException('Você não está autorizado a realizar essa ação.');
         }
 

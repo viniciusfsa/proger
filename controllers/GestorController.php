@@ -4,7 +4,7 @@ namespace app\controllers;
 
 use Yii;
 use app\models\Gestor;
-use app\models\GestorSearch;
+use app\models\search\GestorSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -59,6 +59,8 @@ class GestorController extends Controller
             throw new \yii\web\ForbiddenHttpException('Você não está autorizado a realizar essa ação.');
         }
     }
+
+
 
     /**
      * Displays a single Gestor model.

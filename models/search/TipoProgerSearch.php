@@ -1,16 +1,16 @@
 <?php
 
-namespace app\models;
+namespace app\models\search;
 
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Edital;
+use app\models\TipoProger;
 
 /**
- * EditalSearch represents the model behind the search form about `app\models\Edital`.
+ * TipoProgerSearch represents the model behind the search form about `app\models\TipoProger`.
  */
-class EditalSearch extends Edital
+class TipoProgerSearch extends TipoProger
 {
     /**
      * @inheritdoc
@@ -18,8 +18,8 @@ class EditalSearch extends Edital
     public function rules()
     {
         return [
-            [['id', 'ano'], 'integer'],
-            [['nome', 'numero'], 'safe'],
+            [['id'], 'integer'],
+            [['nome'], 'safe'],
         ];
     }
 
@@ -41,9 +41,13 @@ class EditalSearch extends Edital
      */
     public function search($params)
     {
-        $query = Edital::find();
+        $query = TipoProger::find();
 
         // add conditions that should always apply here
+
+       /* $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+        ]);*/
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -65,11 +69,9 @@ class EditalSearch extends Edital
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'ano' => $this->ano,
         ]);
 
-        $query->andFilterWhere(['like', 'nome', $this->nome])
-            ->andFilterWhere(['like', 'numero', $this->numero]);
+        $query->andFilterWhere(['like', 'nome', $this->nome]);
 
         return $dataProvider;
     }

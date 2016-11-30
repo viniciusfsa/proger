@@ -4,7 +4,7 @@ namespace app\controllers;
 
 use Yii;
 use app\models\Edital;
-use app\models\EditalSearch;
+use app\models\search\EditalSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
