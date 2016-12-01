@@ -35,13 +35,18 @@ class NivelAtuacaoController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new NivelAtuacaoSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        if(\Yii::$app->user->can('gerenciamento-cadastros-basicos')){
+            $searchModel = new NivelAtuacaoSearch();
+            $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
+            return $this->render('index', [
+                'searchModel' => $searchModel,
+                'dataProvider' => $dataProvider,
+            ]);
+        }
+        else{
+            throw new \yii\web\ForbiddenHttpException('Você não está autorizado a realizar essa ação.');
+        }
     }
 
     /**
@@ -51,9 +56,14 @@ class NivelAtuacaoController extends Controller
      */
     public function actionView($id)
     {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
+        if(\Yii::$app->user->can('gerenciamento-cadastros-basicos')){
+            return $this->render('view', [
+                'model' => $this->findModel($id),
+            ]);
+        }
+        else{
+            throw new \yii\web\ForbiddenHttpException('Você não está autorizado a realizar essa ação.');
+        }
     }
 
     /**
@@ -63,15 +73,20 @@ class NivelAtuacaoController extends Controller
      */
     public function actionCreate()
     {
-        $model = new NivelAtuacao();
+        if(\Yii::$app->user->can('gerenciamento-cadastros-basicos')){
+            $model = new NivelAtuacao();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            #return $this->redirect(['view', 'id' => $model->id]);
-            return $this->redirect(['index']);
-        } else {
-            return $this->render('create', [
-                'model' => $model,
-            ]);
+            if ($model->load(Yii::$app->request->post()) && $model->save()) {
+                #return $this->redirect(['view', 'id' => $model->id]);
+                return $this->redirect(['index']);
+            } else {
+                return $this->render('create', [
+                    'model' => $model,
+                ]);
+            }
+        }
+        else{
+            throw new \yii\web\ForbiddenHttpException('Você não está autorizado a realizar essa ação.');
         }
     }
 
@@ -83,14 +98,19 @@ class NivelAtuacaoController extends Controller
      */
     public function actionUpdate($id)
     {
-        $model = $this->findModel($id);
+        if(\Yii::$app->user->can('gerenciamento-cadastros-basicos')){
+            $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('update', [
-                'model' => $model,
-            ]);
+            if ($model->load(Yii::$app->request->post()) && $model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            } else {
+                return $this->render('update', [
+                    'model' => $model,
+                ]);
+            }
+        }
+        else{
+            throw new \yii\web\ForbiddenHttpException('Você não está autorizado a realizar essa ação.');
         }
     }
 
@@ -102,9 +122,14 @@ class NivelAtuacaoController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        if(\Yii::$app->user->can('gerenciamento-cadastros-basicos')){
+            $this->findModel($id)->delete();
 
-        return $this->redirect(['index']);
+            return $this->redirect(['index']);
+        }
+        else{
+            throw new \yii\web\ForbiddenHttpException('Você não está autorizado a realizar essa ação.');
+        } 
     }
 
     /**

@@ -7,7 +7,7 @@ use yii\widgets\DetailView;
 /* @var $model app\models\NivelAtuacao */
 
 $this->title = $model->nome;
-$this->params['breadcrumbs'][] = ['label' => 'Nivel Atuação', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Nível Atuação', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="nivel-atuacao-view">
@@ -19,7 +19,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a('Excluir', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
-                'confirm' => 'Tem certeza que deseja deletar este registro?',
+                'confirm' => 'Tem certeza que deseja excluir este registro?',
                 'method' => 'post',
             ],
         ]) ?>

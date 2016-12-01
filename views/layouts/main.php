@@ -52,6 +52,7 @@ AppAsset::register($this);
 
                     'label' => 'Cadastros',
                     'items' => [
+                        ['label' => 'Área de Atuação', 'url' => ['area-atuacao/index'], 'visible' => Yii::$app->user->can('gerenciamento-cadastros-basicos')  ],
                          ['label' => 'Cidade', 'url' => ['cidade/index'], 'visible' => Yii::$app->user->can('gerenciamento-cadastros-basicos')  ],//mudar qndo criar permissao
                          ['label' => 'Edital', 'url' => ['edital/index'], 'visible' => Yii::$app->user->can('gerenciamento-cadastros-avancados') ],
                          ['label' => 'Estado', 'url' => ['estado/index'], 'visible' => Yii::$app->user->can('gerenciamento-cadastros-basicos') ],//mudar qndo criar permissao                                                  

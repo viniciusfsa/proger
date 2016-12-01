@@ -6,8 +6,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\AreaAtuacao */
 
-$this->title = 'Create Area Atuacao';
-$this->params['breadcrumbs'][] = ['label' => 'Area Atuacaos', 'url' => ['index']];
+$this->title = 'Nova Área de Atuação';
+$this->params['breadcrumbs'][] = ['label' => 'Áreas de Atuação', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="area-atuacao-create">

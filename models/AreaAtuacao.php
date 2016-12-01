@@ -49,8 +49,8 @@ class AreaAtuacao extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'nome' => 'Nome',
-            'codigo' => 'Codigo',
-            'idNivelAtuacao' => 'Id Nivel Atuacao',
+            'codigo' => 'Código',
+            'idNivelAtuacao' => 'Nível de Atuação',
         ];
     }
 

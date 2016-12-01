@@ -7,7 +7,7 @@ use yii\helpers\Html;
 /* @var $model app\models\NivelAtuacao */
 
 $this->title = 'Novo Nível de Atuação';
-$this->params['breadcrumbs'][] = ['label' => 'Nivel Atuacaos', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Nível Atuação', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="nivel-atuacao-create">

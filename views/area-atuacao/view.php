@@ -2,12 +2,13 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use app\models\NivelAtuacao;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\AreaAtuacao */
 
-$this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Area Atuacaos', 'url' => ['index']];
+$this->title = $model->nome;
+$this->params['breadcrumbs'][] = ['label' => 'Área de Atuação', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="area-atuacao-view">
@@ -15,11 +16,11 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->id], [
+        <?= Html::a('Atualizar', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Excluir', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
+                'confirm' => 'Tem certeza que deseja excluir este registro?',
                 'method' => 'post',
             ],
         ]) ?>
@@ -31,7 +32,12 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'nome',
             'codigo',
-            'idNivelAtuacao',
+            
+            [
+                'attribute' => 'idNivelAtuacao',
+                'label' => 'Nível de Atuação',
+                'value' => NivelAtuacao::findOne($model->idNivelAtuacao)->nome,
+            ], 
         ],
     ]) ?>
 
