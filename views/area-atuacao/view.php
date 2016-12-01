@@ -2,15 +2,16 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use app\models\NivelAtuacao;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\NivelAtuacao */
+/* @var $model app\models\AreaAtuacao */
 
 $this->title = $model->nome;
-$this->params['breadcrumbs'][] = ['label' => 'Nível Atuação', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Área de Atuação', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="nivel-atuacao-view">
+<div class="area-atuacao-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
@@ -30,6 +31,13 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'id',
             'nome',
+            'codigo',
+            
+            [
+                'attribute' => 'idNivelAtuacao',
+                'label' => 'Nível de Atuação',
+                'value' => NivelAtuacao::findOne($model->idNivelAtuacao)->nome,
+            ], 
         ],
     ]) ?>
 

@@ -3,16 +3,16 @@
 namespace app\controllers;
 
 use Yii;
-use app\models\NivelAtuacao;
-use app\models\NivelAtuacaoSearch;
+use app\models\AreaAtuacao;
+use app\models\AreaAtuacaoSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * NivelAtuacaoController implements the CRUD actions for NivelAtuacao model.
+ * AreaAtuacaoController implements the CRUD actions for AreaAtuacao model.
  */
-class NivelAtuacaoController extends Controller
+class AreaAtuacaoController extends Controller
 {
     /**
      * @inheritdoc
@@ -30,13 +30,13 @@ class NivelAtuacaoController extends Controller
     }
 
     /**
-     * Lists all NivelAtuacao models.
+     * Lists all AreaAtuacao models.
      * @return mixed
      */
     public function actionIndex()
     {
         if(\Yii::$app->user->can('gerenciamento-cadastros-basicos')){
-            $searchModel = new NivelAtuacaoSearch();
+            $searchModel = new AreaAtuacaoSearch(); 
             $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
             return $this->render('index', [
@@ -50,7 +50,7 @@ class NivelAtuacaoController extends Controller
     }
 
     /**
-     * Displays a single NivelAtuacao model.
+     * Displays a single AreaAtuacao model.
      * @param integer $id
      * @return mixed
      */
@@ -67,18 +67,17 @@ class NivelAtuacaoController extends Controller
     }
 
     /**
-     * Creates a new NivelAtuacao model.
+     * Creates a new AreaAtuacao model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
         if(\Yii::$app->user->can('gerenciamento-cadastros-basicos')){
-            $model = new NivelAtuacao();
+            $model = new AreaAtuacao();
 
             if ($model->load(Yii::$app->request->post()) && $model->save()) {
-                #return $this->redirect(['view', 'id' => $model->id]);
-                return $this->redirect(['index']);
+                return $this->redirect(['view', 'id' => $model->id]);
             } else {
                 return $this->render('create', [
                     'model' => $model,
@@ -91,7 +90,7 @@ class NivelAtuacaoController extends Controller
     }
 
     /**
-     * Updates an existing NivelAtuacao model.
+     * Updates an existing AreaAtuacao model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -115,7 +114,7 @@ class NivelAtuacaoController extends Controller
     }
 
     /**
-     * Deletes an existing NivelAtuacao model.
+     * Deletes an existing AreaAtuacao model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -129,19 +128,19 @@ class NivelAtuacaoController extends Controller
         }
         else{
             throw new \yii\web\ForbiddenHttpException('Você não está autorizado a realizar essa ação.');
-        } 
+        }
     }
 
     /**
-     * Finds the NivelAtuacao model based on its primary key value.
+     * Finds the AreaAtuacao model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return NivelAtuacao the loaded model
+     * @return AreaAtuacao the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = NivelAtuacao::findOne($id)) !== null) {
+        if (($model = AreaAtuacao::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

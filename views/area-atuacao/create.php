@@ -4,13 +4,13 @@ use yii\helpers\Html;
 
 
 /* @var $this yii\web\View */
-/* @var $model app\models\NivelAtuacao */
+/* @var $model app\models\AreaAtuacao */
 
-$this->title = 'Novo Nível de Atuação';
-$this->params['breadcrumbs'][] = ['label' => 'Nível Atuação', 'url' => ['index']];
+$this->title = 'Nova Área de Atuação';
+$this->params['breadcrumbs'][] = ['label' => 'Áreas de Atuação', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="nivel-atuacao-create">
+<div class="area-atuacao-create">
 
     <h1><?= Html::encode($this->title) ?></h1>
 

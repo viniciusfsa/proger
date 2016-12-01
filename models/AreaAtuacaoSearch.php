@@ -5,12 +5,12 @@ namespace app\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\NivelAtuacao;
+use app\models\AreaAtuacao;
 
 /**
- * NivelAtuacaoSearch represents the model behind the search form about `app\models\NivelAtuacao`.
+ * AreaAtuacaoSearch represents the model behind the search form about `app\models\AreaAtuacao`.
  */
-class NivelAtuacaoSearch extends NivelAtuacao
+class AreaAtuacaoSearch extends AreaAtuacao
 {
     /**
      * @inheritdoc
@@ -18,8 +18,8 @@ class NivelAtuacaoSearch extends NivelAtuacao
     public function rules()
     {
         return [
-            [['id'], 'integer'],
-            [['nome'], 'safe'],
+            [['id', 'idNivelAtuacao'], 'integer'],
+            [['nome', 'codigo'], 'safe'],
         ];
     }
 
@@ -41,7 +41,7 @@ class NivelAtuacaoSearch extends NivelAtuacao
      */
     public function search($params)
     {
-        $query = NivelAtuacao::find();
+        $query = AreaAtuacao::find();
 
         // add conditions that should always apply here
 
@@ -65,9 +65,11 @@ class NivelAtuacaoSearch extends NivelAtuacao
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
+            'idNivelAtuacao' => $this->idNivelAtuacao,
         ]);
 
-        $query->andFilterWhere(['like', 'nome', $this->nome]);
+        $query->andFilterWhere(['like', 'nome', $this->nome])
+            ->andFilterWhere(['like', 'codigo', $this->codigo]);
 
         return $dataProvider;
     }
