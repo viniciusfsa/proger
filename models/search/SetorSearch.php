@@ -47,6 +47,15 @@ class SetorSearch extends Setor
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'sort' => [
+                'defaultOrder' => [
+                    'sigla' => SORT_ASC,                    
+                ]
+            ],
+
+
+
+
         ]);
 
         $this->load($params);

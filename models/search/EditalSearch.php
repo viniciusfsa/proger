@@ -1,16 +1,16 @@
 <?php
 
-namespace app\models;
+namespace app\models\search;
 
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Gestor;
+use app\models\Edital;
 
 /**
- * GestorSearch represents the model behind the search form about `app\models\Gestor`.
+ * EditalSearch represents the model behind the search form about `app\models\Edital`.
  */
-class GestorSearch extends Gestor
+class EditalSearch extends Edital
 {
     /**
      * @inheritdoc
@@ -18,8 +18,8 @@ class GestorSearch extends Gestor
     public function rules()
     {
         return [
-            [['id'], 'integer'],
-            [['nome'], 'safe'],
+            [['id', 'ano'], 'integer'],
+            [['nome', 'numero'], 'safe'],
         ];
     }
 
@@ -41,12 +41,17 @@ class GestorSearch extends Gestor
      */
     public function search($params)
     {
-        $query = Gestor::find();
+        $query = Edital::find();
 
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'sort' => [
+                'defaultOrder' => [
+                    'nome' => SORT_ASC,                    
+                ]
+            ],
         ]);
 
         $this->load($params);
@@ -60,9 +65,11 @@ class GestorSearch extends Gestor
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
+            'ano' => $this->ano,
         ]);
 
-        $query->andFilterWhere(['like', 'nome', $this->nome]);
+        $query->andFilterWhere(['like', 'nome', $this->nome])
+            ->andFilterWhere(['like', 'numero', $this->numero]);
 
         return $dataProvider;
     }

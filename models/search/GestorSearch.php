@@ -1,16 +1,16 @@
 <?php
 
-namespace app\models;
+namespace app\models\search;
 
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Estado;
+use app\models\Gestor;
 
 /**
- * EstadoSearch represents the model behind the search form about `app\models\Estado`.
+ * GestorSearch represents the model behind the search form about `app\models\Gestor`.
  */
-class EstadoSearch extends Estado
+class GestorSearch extends Gestor
 {
     /**
      * @inheritdoc
@@ -18,8 +18,8 @@ class EstadoSearch extends Estado
     public function rules()
     {
         return [
-            [['id', 'idPais'], 'integer'],
-            [['nome', 'sigla'], 'safe'],
+            [['id'], 'integer'],
+            [['nome'], 'safe'],
         ];
     }
 
@@ -41,11 +41,15 @@ class EstadoSearch extends Estado
      */
     public function search($params)
     {
-        $query = Estado::find();
+        $query = Gestor::find();
 
         // add conditions that should always apply here
 
-        $dataProvider = new ActiveDataProvider([
+        /*$dataProvider = new ActiveDataProvider([
+            'query' => $query,
+        ]); */
+
+         $dataProvider = new ActiveDataProvider([
             'query' => $query,
             'sort' => [
                 'defaultOrder' => [
@@ -65,11 +69,9 @@ class EstadoSearch extends Estado
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'idPais' => $this->idPais,
         ]);
 
-        $query->andFilterWhere(['like', 'nome', $this->nome])
-            ->andFilterWhere(['like', 'sigla', $this->sigla]);
+        $query->andFilterWhere(['like', 'nome', $this->nome]);
 
         return $dataProvider;
     }

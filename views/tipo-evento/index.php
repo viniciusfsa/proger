@@ -25,7 +25,13 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
           //  'id',
-            'nome',
+          //  'nome',
+            [
+                'attribute' => 'nome',
+                'label' => 'Nome',
+                'headerOptions' => ['style'=>'text-align:center; width: 1000px;'],
+                'contentOptions'=>['align' => 'left'],
+            ],
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

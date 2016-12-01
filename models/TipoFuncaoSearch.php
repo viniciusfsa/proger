@@ -1,6 +1,6 @@
 <?php
 
-namespace app\models;
+namespace app\models\search;
 
 use Yii; 
 use yii\base\Model;
@@ -64,6 +64,8 @@ class TipoFuncaoSearch extends TipoFuncao
         ]);
 
         $query->andFilterWhere(['like', 'descricao', $this->descricao]);
+
+        $query->orderBy('descricao');
 
         return $dataProvider;
     }

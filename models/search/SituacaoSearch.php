@@ -1,16 +1,16 @@
 <?php
 
-namespace app\models;
+namespace app\models\search;
 
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\TipoProger;
+use app\models\Situacao;
 
 /**
- * TipoProgerSearch represents the model behind the search form about `app\models\TipoProger`.
+ * SituacaoSearch represents the model behind the search form about `app\models\Situacao`.
  */
-class TipoProgerSearch extends TipoProger
+class SituacaoSearch extends Situacao
 {
     /**
      * @inheritdoc
@@ -41,7 +41,7 @@ class TipoProgerSearch extends TipoProger
      */
     public function search($params)
     {
-        $query = TipoProger::find();
+        $query = Situacao::find();
 
         // add conditions that should always apply here
 
@@ -63,6 +63,8 @@ class TipoProgerSearch extends TipoProger
         ]);
 
         $query->andFilterWhere(['like', 'nome', $this->nome]);
+
+        $query->orderBy('nome');
 
         return $dataProvider;
     }

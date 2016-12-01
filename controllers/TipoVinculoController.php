@@ -35,7 +35,7 @@ class TipoVinculoController extends Controller
      */
     public function actionIndex()
     {
-        if(\Yii::$app->user->can('gerenciar-tipo-vinculo')){
+        if(\Yii::$app->user->can('gerenciamento-cadastros-basicos')){
             $searchModel = new TipoVinculoSearch();
             $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
@@ -55,7 +55,7 @@ class TipoVinculoController extends Controller
      */
     public function actionView($id)
     {
-        if(\Yii::$app->user->can('gerenciar-tipo-vinculo')){
+        if(\Yii::$app->user->can('gerenciamento-cadastros-basicos')){
             return $this->render('view', [
                 'model' => $this->findModel($id),
             ]);
@@ -71,7 +71,7 @@ class TipoVinculoController extends Controller
      */
     public function actionCreate()
     {
-        if(\Yii::$app->user->can('gerenciar-tipo-vinculo')){
+        if(\Yii::$app->user->can('gerenciamento-cadastros-basicos')){
             $model = new TipoVinculo();
 
             if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -94,7 +94,7 @@ class TipoVinculoController extends Controller
      */
     public function actionUpdate($id)
     {
-        if(\Yii::$app->user->can('gerenciar-tipo-vinculo')){
+        if(\Yii::$app->user->can('gerenciamento-cadastros-basicos')){
             $model = $this->findModel($id);
 
             if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -117,7 +117,7 @@ class TipoVinculoController extends Controller
      */
     public function actionDelete($id)
     {
-        if(\Yii::$app->user->can('gerenciar-tipo-vinculo')){
+        if(\Yii::$app->user->can('gerenciamento-cadastros-basicos')){
             $this->findModel($id)->delete();
 
             return $this->redirect(['index']);

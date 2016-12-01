@@ -1,16 +1,16 @@
 <?php
 
-namespace app\models;
+namespace app\models\search;
 
-use Yii;
+use Yii; 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Situacao;
+use app\models\tipoFuncao;
 
 /**
- * SituacaoSearch represents the model behind the search form about `app\models\Situacao`.
+ * tipoFuncaoSearch represents the model behind the search form about `app\models\tipoFuncao`.
  */
-class SituacaoSearch extends Situacao
+class TipoFuncaoSearch extends TipoFuncao
 {
     /**
      * @inheritdoc
@@ -18,8 +18,8 @@ class SituacaoSearch extends Situacao
     public function rules()
     {
         return [
-            [['id'], 'integer'],
-            [['nome'], 'safe'],
+            [['id', 'ativo'], 'integer'],
+            [['descricao'], 'safe'],
         ];
     }
 
@@ -41,7 +41,7 @@ class SituacaoSearch extends Situacao
      */
     public function search($params)
     {
-        $query = Situacao::find();
+        $query = tipoFuncao::find();
 
         // add conditions that should always apply here
 
@@ -60,9 +60,12 @@ class SituacaoSearch extends Situacao
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
+            'ativo' => $this->ativo,
         ]);
 
-        $query->andFilterWhere(['like', 'nome', $this->nome]);
+        $query->andFilterWhere(['like', 'descricao', $this->descricao]);
+
+        $query->orderBy('descricao');
 
         return $dataProvider;
     }

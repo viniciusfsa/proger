@@ -4,7 +4,7 @@ namespace app\controllers;
 
 use Yii;
 use app\models\TipoProger;
-use app\models\TipoProgerSearch;
+use app\models\search\TipoProgerSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
