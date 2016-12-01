@@ -45,13 +45,19 @@ class EditalController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new EditalSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        if(\Yii::$app->user->can('gerenciamento-cadastros-avancados')){
 
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
+            $searchModel = new EditalSearch();
+            $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+            return $this->render('index', [
+                'searchModel' => $searchModel,
+                'dataProvider' => $dataProvider,
+            ]);
+        }
+       else{
+            throw new \yii\web\ForbiddenHttpException('Você não está autorizado a realizar essa ação.');
+        }
     }
 
     /**
@@ -61,9 +67,14 @@ class EditalController extends Controller
      */
     public function actionView($id)
     {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
+        if(\Yii::$app->user->can('gerenciamento-cadastros-avancados')){
+            return $this->render('view', [
+                'model' => $this->findModel($id),
+            ]);
+        }
+       else{
+            throw new \yii\web\ForbiddenHttpException('Você não está autorizado a realizar essa ação.');
+        }
     }
 
     /**
@@ -73,14 +84,19 @@ class EditalController extends Controller
      */
     public function actionCreate()
     {
-        $model = new Edital();
+        if(\Yii::$app->user->can('gerenciamento-cadastros-avancados')){
+            $model = new Edital();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('create', [
-                'model' => $model,
-            ]);
+            if ($model->load(Yii::$app->request->post()) && $model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            } else {
+                return $this->render('create', [
+                    'model' => $model,
+                ]);
+            }
+        }
+       else{
+            throw new \yii\web\ForbiddenHttpException('Você não está autorizado a realizar essa ação.');
         }
     }
 
@@ -92,14 +108,20 @@ class EditalController extends Controller
      */
     public function actionUpdate($id)
     {
-        $model = $this->findModel($id);
+        if(\Yii::$app->user->can('gerenciamento-cadastros-avancados')){
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('update', [
-                'model' => $model,
-            ]);
+            $model = $this->findModel($id);
+
+            if ($model->load(Yii::$app->request->post()) && $model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            } else {
+                return $this->render('update', [
+                    'model' => $model,
+                ]);
+            }
+        }
+       else{
+            throw new \yii\web\ForbiddenHttpException('Você não está autorizado a realizar essa ação.');
         }
     }
 
@@ -111,9 +133,15 @@ class EditalController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        if(\Yii::$app->user->can('gerenciamento-cadastros-avancados')){
+            
+            $this->findModel($id)->delete();
 
-        return $this->redirect(['index']);
+            return $this->redirect(['index']);
+        }
+       else{
+            throw new \yii\web\ForbiddenHttpException('Você não está autorizado a realizar essa ação.');
+        }
     }
 
     /**
