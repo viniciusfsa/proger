@@ -47,6 +47,11 @@ class SituacaoSearch extends Situacao
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'sort' => [
+                'defaultOrder' => [
+                    'nome' => SORT_ASC,                    
+                ]
+            ]
         ]);
 
         $this->load($params);
@@ -63,8 +68,6 @@ class SituacaoSearch extends Situacao
         ]);
 
         $query->andFilterWhere(['like', 'nome', $this->nome]);
-
-        $query->orderBy('nome');
 
         return $dataProvider;
     }
