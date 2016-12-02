@@ -47,6 +47,11 @@ class tipoEventoSearch extends tipoEvento
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'sort' => [
+                'defaultOrder' => [
+                    'nome' => SORT_ASC,                    
+                ]
+            ]
         ]);
 
         $this->load($params);
@@ -63,8 +68,6 @@ class tipoEventoSearch extends tipoEvento
         ]);
 
         $query->andFilterWhere(['like', 'nome', $this->nome]);
-
-        $query->orderBy('nome');
 
         return $dataProvider;
     }

@@ -36,7 +36,9 @@ class TipoProger extends \yii\db\ActiveRecord
         return [
             [['nome'], 'required'],
             [['nome'], 'string'],
+
         ];
+
     }
 
     /**
@@ -105,4 +107,6 @@ class TipoProger extends \yii\db\ActiveRecord
     {
         return $this->hasMany(ResolucaoProger::className(), ['idTipoProger' => 'id']);
     }
+
+
 }

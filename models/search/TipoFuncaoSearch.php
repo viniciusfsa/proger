@@ -47,6 +47,11 @@ class TipoFuncaoSearch extends TipoFuncao
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'sort' => [
+                'defaultOrder' => [
+                    'descricao' => SORT_ASC,                    
+                ]
+            ]
         ]);
 
         $this->load($params);
@@ -64,8 +69,6 @@ class TipoFuncaoSearch extends TipoFuncao
         ]);
 
         $query->andFilterWhere(['like', 'descricao', $this->descricao]);
-
-        $query->orderBy('descricao');
 
         return $dataProvider;
     }
