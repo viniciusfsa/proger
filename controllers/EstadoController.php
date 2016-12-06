@@ -9,7 +9,7 @@ namespace app\controllers;
 
 use Yii;
 use app\models\Estado;
-use app\models\EstadoSearch;
+use app\models\search\EstadoSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;

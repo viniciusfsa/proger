@@ -2,15 +2,16 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
-use app\models\Pais;
+use app\models\Gestor;
+
 /* @var $this yii\web\View */
-/* @var $searchModel app\models\EstadoSearch */
+/* @var $searchModel app\models\search\CursoProgerSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Estados';
+$this->title = 'Curso Proger';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="estado-index">
+<div class="curso-proger-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -26,18 +27,20 @@ $this->params['breadcrumbs'][] = $this->title;
 
             //'id',
             'nome',
-            'sigla',
-            //'idPais',
-            [
-                'attribute' => 'idPais',
-                'label' => 'País',
-                'filter' => Pais::dropdown(),
-                'value' => function($model, $index, $dataColumn) {
-                    $dropdown = Pais::dropdown();
-                    return $dropdown[$model->idPais];
-                },
-            ],
-            
+            'descricao',
+            'idSituacao',
+            'idAreaAtuacao',
+            // 'idSetor',
+            // 'interdepartamental',
+            // 'interinstitucional',
+            // 'cargaHoraria',
+            // 'dataInicio',
+            // 'dataFim',
+            // 'observacoes',
+            // 'idTipoProger',
+            // 'idProger',
+            // 'idGestor',
+
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
