@@ -65,10 +65,13 @@ use nex\datepicker\DatePicker;
     </div>
 
     <div class="input-group drp-container">
-         <?= $form->field($model, 'dataFim')->widget(\yii\jui\DatePicker::classname(), [
-        'language' => 'pt-br',
-        'dateFormat' => 'dd/MM/yyyy',
-    ]) ?>
+        <?= 
+            $form->field($model, 'dataFim')->widget(\yii\jui\DatePicker::classname(), 
+            [
+                'language' => 'pt-br',
+                'dateFormat' => 'dd/MM/yyyy',
+            ])  
+        ?>
     </div>
   
 
