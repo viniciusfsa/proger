@@ -26,7 +26,12 @@ $this->params['breadcrumbs'][] = $this->title;
 
             //'id',
             'nome',
-            'sigla',
+            //'sigla',
+            [
+                'attribute' => 'sigla',
+                'label' => 'Sigla',
+                'headerOptions' => ['style'=>'width: 120px;'],
+            ],
             //'idPais',
             [
                 'attribute' => 'idPais',
