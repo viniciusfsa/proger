@@ -120,4 +120,15 @@ class CursoProger extends \yii\db\ActiveRecord
     {
         return $this->hasOne(TipoProger::className(), ['id' => 'idTipoProger']);
     }
+
+    /*public function beforeSave($insert)
+    {
+        var_dump($insert);
+        $this->dataInicio = date('Ymd H:i:s', strtotime($this->dataInicio));
+        $this->dataFim = date('Ymd H:i:s', strtotime($this->dataFim));
+
+        return parent::beforeSave($insert);
+    }*/
+
+
 }

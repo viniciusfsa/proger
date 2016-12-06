@@ -11,6 +11,7 @@ use app\assets\AppAsset;
 use yii\rbac\DbManager;
 
 
+
 raoul2000\bootswatch\BootswatchAsset::$theme = 'cerulean'; //aqui você vai escolher o tema a ser usado, as opções disponiveis podem ser vista no site bootswatch.com
 AppAsset::register($this);
 ?>
