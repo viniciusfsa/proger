@@ -4,7 +4,7 @@ namespace app\controllers;
 
 use Yii;
 use app\models\Resolucao;
-use app\models\ResolucaoSearch;
+use app\models\search\ResolucaoSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -50,23 +50,24 @@ class ResolucaoController extends Controller
 
          Yii::$app->formatter->asDate('now', 'yyyy-MM-dd');
 
-        if(\Yii::$app->user->can('gerenciar-resolucao')){
+        //if(\Yii::$app->user->can('gerenciar-resolucao')){
 
-        if(\Yii::$app->user->can('gerenciamento-cadastros-basicos')){
+            if(\Yii::$app->user->can('gerenciamento-cadastros-basicos')){
 
-            $searchModel = new ResolucaoSearch();
-            $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+                $searchModel = new ResolucaoSearch();
+                $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-            return $this->render('index', [
-                'searchModel' => $searchModel,
-                'dataProvider' => $dataProvider,
-            ]);
+                return $this->render('index', [
+                    'searchModel' => $searchModel,
+                    'dataProvider' => $dataProvider,
+                ]);
 
-           
-        }
-        else{
-            throw new \yii\web\ForbiddenHttpException('Você não está autorizado a realizar essa ação.');
-        }
+               
+            }
+            else{
+                throw new \yii\web\ForbiddenHttpException('Você não está autorizado a realizar essa ação.');
+            }
+       // }
     }
 
     /**

@@ -9,7 +9,7 @@ namespace app\controllers;
 
 use Yii;
 use app\models\Cidade;
-use app\models\CidadeSearch;
+use app\models\search\CidadeSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;

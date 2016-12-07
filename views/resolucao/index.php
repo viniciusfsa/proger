@@ -31,8 +31,22 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             'numero',
             'assunto',
-            'dataResolucao',
-            'dataPublicacao',
+            //'dataResolucao',
+            [
+                'attribute' => 'dataResolucao',
+                'label' => 'Data da Resolução',
+                'value' => function($model, $index, $dataColumn) {
+                    return date_format(date_create($model->dataResolucao), 'd/m/Y');
+                },
+            ],
+            //'dataPublicacao',
+            [
+                'attribute' => 'dataPublicacao',
+                'label' => 'Data da Publicação',
+                'value' => function($model, $index, $dataColumn) {
+                    return date_format(date_create($model->dataPublicacao), 'd/m/Y');
+                },
+            ],
             'observacao',
 
             ['class' => 'yii\grid\ActionColumn'],

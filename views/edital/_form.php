@@ -12,11 +12,11 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'nome')->textInput(['maxlength' =>100,'style' =>'width: 50%']) ?>
+    <?= $form->field($model, 'nome')->textInput(['maxlength' =>50,'style' =>'width: 50%']) ?>
 
-    <?= $form->field($model, 'ano')->textInput(['maxlength' =>4,'style' =>'width: 50%', 'onlynumber' => 'true' ]) ?>
+    <?= $form->field($model, 'ano')->textInput(['maxlength' =>4,'style' =>'width: 15%', 'onlynumber' => 'true' ]) ?>
 
-    <?= $form->field($model, 'numero')->textInput(['maxlength' =>20,'style' =>'width: 50%' ]) ?>
+    <?= $form->field($model, 'numero')->textInput(['maxlength' =>20,'style' =>'width: 15%' ]) ?>
 
 
     <div class="form-group">

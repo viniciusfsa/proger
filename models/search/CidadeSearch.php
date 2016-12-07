@@ -1,16 +1,16 @@
 <?php
 
-namespace app\models;
+namespace app\models\search;
 
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Financiamento;
+use app\models\Cidade;
 
 /**
- * FinanciamentoSearch represents the model behind the search form about `app\models\Financiamento`.
+ * CidadeSearch represents the model behind the search form about `app\models\Cidade`.
  */
-class FinanciamentoSearch extends Financiamento
+class CidadeSearch extends Cidade
 {
     /**
      * @inheritdoc
@@ -18,7 +18,7 @@ class FinanciamentoSearch extends Financiamento
     public function rules()
     {
         return [
-            [['id'], 'integer'],
+            [['id', 'idEstado'], 'integer'],
             [['nome'], 'safe'],
         ];
     }
@@ -41,12 +41,17 @@ class FinanciamentoSearch extends Financiamento
      */
     public function search($params)
     {
-        $query = Financiamento::find();
+        $query = Cidade::find();
 
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'sort' => [
+                'defaultOrder' => [
+                    'nome' => SORT_ASC,                    
+                ]
+            ],
         ]);
 
         $this->load($params);
@@ -60,6 +65,7 @@ class FinanciamentoSearch extends Financiamento
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
+            'idEstado' => $this->idEstado,
         ]);
 
         $query->andFilterWhere(['like', 'nome', $this->nome]);

@@ -4,7 +4,7 @@ namespace app\controllers;
 
 use Yii;
 use app\models\TipoVinculo;
-use app\models\TipoVinculoSearch;
+use app\models\search\TipoVinculoSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;

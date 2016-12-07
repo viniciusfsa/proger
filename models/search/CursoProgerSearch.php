@@ -1,16 +1,16 @@
 <?php
 
-namespace app\models;
+namespace app\models\search;
 
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Estado;
+use app\models\CursoProger;
 
 /**
- * EstadoSearch represents the model behind the search form about `app\models\Estado`.
+ * CursoProgerSearch represents the model behind the search form about `app\models\CursoProger`.
  */
-class EstadoSearch extends Estado
+class CursoProgerSearch extends CursoProger
 {
     /**
      * @inheritdoc
@@ -18,8 +18,8 @@ class EstadoSearch extends Estado
     public function rules()
     {
         return [
-            [['id', 'idPais'], 'integer'],
-            [['nome', 'sigla'], 'safe'],
+            [['id', 'idSituacao', 'idAreaAtuacao', 'idSetor', 'interdepartamental', 'interinstitucional', 'cargaHoraria', 'idTipoProger', 'idProger', 'idGestor'], 'integer'],
+            [['nome', 'descricao', 'dataInicio', 'dataFim', 'observacoes'], 'safe'],
         ];
     }
 
@@ -41,7 +41,7 @@ class EstadoSearch extends Estado
      */
     public function search($params)
     {
-        $query = Estado::find();
+        $query = CursoProger::find();
 
         // add conditions that should always apply here
 
@@ -54,6 +54,8 @@ class EstadoSearch extends Estado
             ],
         ]);
 
+
+
         $this->load($params);
 
         if (!$this->validate()) {
@@ -65,11 +67,22 @@ class EstadoSearch extends Estado
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'idPais' => $this->idPais,
+            'idSituacao' => $this->idSituacao,
+            'idAreaAtuacao' => $this->idAreaAtuacao,
+            'idSetor' => $this->idSetor,
+            'interdepartamental' => $this->interdepartamental,
+            'interinstitucional' => $this->interinstitucional,
+            'cargaHoraria' => $this->cargaHoraria,
+            'dataInicio' => $this->dataInicio,
+            'dataFim' => $this->dataFim,
+            'idTipoProger' => $this->idTipoProger,
+            'idProger' => $this->idProger,
+            'idGestor' => $this->idGestor,
         ]);
 
         $query->andFilterWhere(['like', 'nome', $this->nome])
-            ->andFilterWhere(['like', 'sigla', $this->sigla]);
+            ->andFilterWhere(['like', 'descricao', $this->descricao])
+            ->andFilterWhere(['like', 'observacoes', $this->observacoes]);
 
         return $dataProvider;
     }

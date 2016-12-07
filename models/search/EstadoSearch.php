@@ -2,15 +2,15 @@
 
 namespace app\models\search;
 
-use Yii; 
+use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\tipoFuncao;
+use app\models\Estado;
 
 /**
- * tipoFuncaoSearch represents the model behind the search form about `app\models\tipoFuncao`.
+ * EstadoSearch represents the model behind the search form about `app\models\Estado`.
  */
-class TipoFuncaoSearch extends TipoFuncao
+class EstadoSearch extends Estado
 {
     /**
      * @inheritdoc
@@ -18,8 +18,8 @@ class TipoFuncaoSearch extends TipoFuncao
     public function rules()
     {
         return [
-            [['id', 'ativo'], 'integer'],
-            [['descricao'], 'safe'],
+            [['id', 'idPais'], 'integer'],
+            [['nome', 'sigla'], 'safe'],
         ];
     }
 
@@ -41,12 +41,17 @@ class TipoFuncaoSearch extends TipoFuncao
      */
     public function search($params)
     {
-        $query = tipoFuncao::find();
+        $query = Estado::find();
 
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'sort' => [
+                'defaultOrder' => [
+                    'nome' => SORT_ASC,                    
+                ]
+            ],
         ]);
 
         $this->load($params);
@@ -60,12 +65,11 @@ class TipoFuncaoSearch extends TipoFuncao
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'ativo' => $this->ativo,
+            'idPais' => $this->idPais,
         ]);
 
-        $query->andFilterWhere(['like', 'descricao', $this->descricao]);
-
-        $query->orderBy('descricao');
+        $query->andFilterWhere(['like', 'nome', $this->nome])
+            ->andFilterWhere(['like', 'sigla', $this->sigla]);
 
         return $dataProvider;
     }

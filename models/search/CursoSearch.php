@@ -5,12 +5,12 @@ namespace app\models\search;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\tipoEvento;
+use app\models\Curso;
 
 /**
- * tipoEventoSearch represents the model behind the search form about `app\models\tipoEvento`.
+ * CursoSearch represents the model behind the search form about `app\models\Curso`.
  */
-class tipoEventoSearch extends tipoEvento
+class CursoSearch extends Curso
 {
     /**
      * @inheritdoc
@@ -41,12 +41,17 @@ class tipoEventoSearch extends tipoEvento
      */
     public function search($params)
     {
-        $query = tipoEvento::find();
+        $query = Curso::find();
 
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'sort' => [
+                'defaultOrder' => [
+                    'nome' => SORT_ASC,                    
+                ]
+            ],
         ]);
 
         $this->load($params);
@@ -63,8 +68,6 @@ class tipoEventoSearch extends tipoEvento
         ]);
 
         $query->andFilterWhere(['like', 'nome', $this->nome]);
-
-        $query->orderBy('nome');
 
         return $dataProvider;
     }

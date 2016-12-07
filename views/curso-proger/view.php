@@ -2,42 +2,47 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
-use app\models\Pais;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\Estado */
+/* @var $model app\models\CursoProger */
 
 $this->title = $model->nome;
-$this->params['breadcrumbs'][] = ['label' => 'Estados', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Curso Proger', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="estado-view">
+<div class="curso-proger-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-     <p>
+    <p>
         <?= Html::a('Atualizar', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
         <?= Html::a('Excluir', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
-                'confirm' => 'Você tem certeza que deseja excluir este item?',
+                'confirm' => 'Are you sure you want to delete this item?',
                 'method' => 'post',
             ],
         ]) ?>
     </p>
-    
+
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-           // 'id',
+            //'id',
             'nome',
-            'sigla',
-            //'idPais',
-            [
-                'attribute' => 'idPais',
-                'label' => 'País',
-                'value' => Pais::findOne($model->idPais)->nome,
-            ],         
+            'descricao',
+            'idSituacao',
+            'idAreaAtuacao',
+            'idSetor',
+            'interdepartamental',
+            'interinstitucional',
+            'cargaHoraria',
+            'dataInicio',
+            'dataFim',
+            'observacoes',
+            'idTipoProger',
+            'idProger',
+            'idGestor',
         ],
     ]) ?>
 

@@ -1,16 +1,16 @@
 <?php
 
-namespace app\models;
+namespace app\models\search;
 
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Curso;
+use app\models\TipoVinculo;
 
 /**
- * CursoSearch represents the model behind the search form about `app\models\Curso`.
+ * TipoVinculoSearch represents the model behind the search form about `app\models\TipoVinculo`.
  */
-class CursoSearch extends Curso
+class TipoVinculoSearch extends TipoVinculo
 {
     /**
      * @inheritdoc
@@ -18,8 +18,8 @@ class CursoSearch extends Curso
     public function rules()
     {
         return [
-            [['id'], 'integer'],
-            [['nome'], 'safe'],
+            [['id', 'ativo'], 'integer'],
+            [['descricao'], 'safe'],
         ];
     }
 
@@ -41,12 +41,17 @@ class CursoSearch extends Curso
      */
     public function search($params)
     {
-        $query = Curso::find();
+        $query = TipoVinculo::find();
 
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'sort' => [
+                'defaultOrder' => [
+                    'descricao' => SORT_ASC,                    
+                ]
+            ],
         ]);
 
         $this->load($params);
@@ -60,9 +65,10 @@ class CursoSearch extends Curso
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
+            'ativo' => $this->ativo,
         ]);
 
-        $query->andFilterWhere(['like', 'nome', $this->nome]);
+        $query->andFilterWhere(['like', 'descricao', $this->descricao]);
 
         return $dataProvider;
     }

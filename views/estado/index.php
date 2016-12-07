@@ -24,9 +24,14 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
+            //'id',
             'nome',
-            'sigla',
+            //'sigla',
+            [
+                'attribute' => 'sigla',
+                'label' => 'Sigla',
+                'headerOptions' => ['style'=>'width: 120px;'],
+            ],
             //'idPais',
             [
                 'attribute' => 'idPais',
