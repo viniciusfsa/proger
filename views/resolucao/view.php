@@ -1,4 +1,4 @@
-xz<?php
+<?php
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
@@ -31,8 +31,18 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'numero',
             'assunto',
-            'dataResolucao',
-            'dataPublicacao',
+            //'dataResolucao',
+            [
+                'attribute' => 'dataResolucao',
+                'label' => 'Data da Resolução',
+                'value' => date_format(date_create($model->dataResolucao), 'd/m/Y'),
+            ],
+            //'dataPublicacao',
+            [
+                'attribute' => 'dataPublicacao',
+                'label' => 'Data da Publicação',
+                'value' => date_format(date_create($model->dataPublicacao), 'd/m/Y'),
+            ],
             'observacao',
         ],
     ]) ?>

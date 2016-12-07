@@ -30,7 +30,12 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'id',
             'nome',
-            'ano',
+            //'ano',
+            [
+                'attribute' => 'ano',
+                'label' => 'Ano',
+                'value' => date_format(date_create($model->ano), 'd/m/Y'),
+            ],
             'numero',
         ],
     ]) ?>

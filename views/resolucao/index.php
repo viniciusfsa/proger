@@ -27,9 +27,13 @@ $this->params['breadcrumbs'][] = $this->title;
             //'id',
             [
                 'attribute' =>'id', 
-                'headerOptions' => ['style'=>'text-align:center; width: 70px;']
+                'headerOptions' => ['style'=>'text-align:center; width: 60px;']
             ],
-            'numero',
+            //'numero',
+            [
+                'attribute' =>'numero', 
+                'headerOptions' => ['style'=>'text-align:center; width: 100px;']
+            ],
             'assunto',
             //'dataResolucao',
             [
