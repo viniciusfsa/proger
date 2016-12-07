@@ -26,7 +26,16 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             //'id',
-            'instituicao',
+            //'instituicao',
+            [
+                'attribute' =>'instituicao',
+                'headerOptions' => ['style'=>'text-align:center; width: 500px;']
+            ],
+            //'sigla',
+            [
+                'attribute' =>'sigla',
+                'headerOptions' => ['style'=>'text-align:center; width: 130px;']
+            ],
             //'idPais',
 
             [
@@ -37,8 +46,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     $dropdown = pais::dropdown();
                     return $dropdown[$model->id];
                 },
-                'headerOptions' => ['style'=>'text-align:center; width: 130px;'],
-                'contentOptions'=>['align' => 'center', 'style'=>'width: 130px;'],
+                'headerOptions' => ['style'=>'text-align:center; width: 290px;'],
             ],
 
             [
@@ -55,7 +63,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'headerOptions' => ['style'=>'text-align:center; width: 120px;'],
                 'contentOptions'=>['align' => 'center']
             ],
-            'sigla',
+            
 
 
 

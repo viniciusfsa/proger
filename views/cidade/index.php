@@ -26,7 +26,11 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             //'id',
-            'nome',
+            //'nome',
+            [
+                'attribute' =>'nome', 
+                'headerOptions' => ['style'=>'text-align:center;']
+            ],
             //'idEstado',
             [
                 'attribute' => 'idEstado',
@@ -36,6 +40,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     $dropdown = Estado::dropdown();
                     return $dropdown[$model->idEstado];
                 },
+                'headerOptions' => ['style'=>'text-align:center;']
             ],
 
             ['class' => 'yii\grid\ActionColumn'],
