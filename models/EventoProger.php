@@ -5,19 +5,18 @@ namespace app\models;
 use Yii;
 
 /**
- * This is the model class for table "cursoProger".
+ * This is the model class for table "eventoProger".
  *
  * @property integer $id
  * @property string $nome
  * @property string $descricao
+ * @property integer $idTipoEvento
  * @property integer $idSituacao
  * @property integer $idAreaAtuacao
- * @property integer $idSetor
- * @property integer $interdepartamental
- * @property integer $interinstitucional
- * @property integer $cargaHoraria
  * @property string $dataInicio
  * @property string $dataFim
+ * @property integer $cargaHoraria
+ * @property integer $numeroParticipantes
  * @property string $observacoes
  * @property integer $idTipoProger
  * @property integer $idProger
@@ -25,18 +24,18 @@ use Yii;
  *
  * @property AreaAtuacao $idAreaAtuacao0
  * @property Gestor $idGestor0
- * @property Setor $idSetor0
  * @property Situacao $idSituacao0
+ * @property TipoEvento $idTipoEvento0
  * @property TipoProger $idTipoProger0
  */
-class CursoProger extends \yii\db\ActiveRecord
+class EventoProger extends \yii\db\ActiveRecord
 {
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return 'cursoProger';
+        return 'eventoProger';
     }
 
     /**
@@ -45,14 +44,14 @@ class CursoProger extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['nome', 'descricao', 'idSituacao', 'idAreaAtuacao', 'idSetor', 'interdepartamental', 'interinstitucional', 'cargaHoraria', 'dataInicio', 'dataFim', 'idGestor'], 'required'],
+            [['nome', 'descricao', 'idTipoEvento', 'idSituacao', 'idAreaAtuacao', 'dataInicio', 'dataFim', 'cargaHoraria', 'numeroParticipantes', 'idGestor'], 'required'],
+            [['idTipoEvento', 'idSituacao', 'idAreaAtuacao', 'cargaHoraria', 'numeroParticipantes', 'idTipoProger', 'idGestor'], 'integer'],
             [['nome', 'descricao', 'observacoes'], 'string'],
-            [['idSituacao', 'idAreaAtuacao', 'idSetor', 'interdepartamental', 'interinstitucional', 'cargaHoraria', 'idTipoProger', 'idProger', 'idGestor'], 'integer'],
             [['dataInicio', 'dataFim'], 'safe'],
             [['idAreaAtuacao'], 'exist', 'skipOnError' => true, 'targetClass' => AreaAtuacao::className(), 'targetAttribute' => ['idAreaAtuacao' => 'id']],
             [['idGestor'], 'exist', 'skipOnError' => true, 'targetClass' => Gestor::className(), 'targetAttribute' => ['idGestor' => 'id']],
-            [['idSetor'], 'exist', 'skipOnError' => true, 'targetClass' => Setor::className(), 'targetAttribute' => ['idSetor' => 'id']],
             [['idSituacao'], 'exist', 'skipOnError' => true, 'targetClass' => Situacao::className(), 'targetAttribute' => ['idSituacao' => 'id']],
+            [['idTipoEvento'], 'exist', 'skipOnError' => true, 'targetClass' => TipoEvento::className(), 'targetAttribute' => ['idTipoEvento' => 'id']],
             [['idTipoProger'], 'exist', 'skipOnError' => true, 'targetClass' => TipoProger::className(), 'targetAttribute' => ['idTipoProger' => 'id']],
         ];
     }
@@ -66,17 +65,16 @@ class CursoProger extends \yii\db\ActiveRecord
             'id' => 'ID',
             'nome' => 'Nome',
             'descricao' => 'Descrição',
+            'idTipoEvento' => 'Tipo Evento',
             'idSituacao' => 'Situação',
             'idAreaAtuacao' => 'Área Atuação',
-            'idSetor' => 'Setor',
-            'interdepartamental' => 'Interdepartamental',
-            'interinstitucional' => 'Interinstitucional',
-            'cargaHoraria' => 'Carga Horária',
-            'dataInicio' => 'Data Inicio',
+            'dataInicio' => 'Data Início',
             'dataFim' => 'Data Fim',
+            'cargaHoraria' => 'Carga Horária',
+            'numeroParticipantes' => 'Número Participantes',
             'observacoes' => 'Observações',
-            'idTipoProger' => 'Tipo Proger',
-            'idProger' => 'Proger',
+            'idTipoProger' => 'Tipo de Vínculo',
+            'idProger' => 'Vínculo',
             'idGestor' => 'Gestor',
         ];
     }
@@ -100,17 +98,17 @@ class CursoProger extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getIdSetor0()
+    public function getIdSituacao0()
     {
-        return $this->hasOne(Setor::className(), ['id' => 'idSetor']);
+        return $this->hasOne(Situacao::className(), ['id' => 'idSituacao']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getIdSituacao0()
+    public function getIdTipoEvento0()
     {
-        return $this->hasOne(Situacao::className(), ['id' => 'idSituacao']);
+        return $this->hasOne(TipoEvento::className(), ['id' => 'idTipoEvento']);
     }
 
     /**
@@ -121,14 +119,22 @@ class CursoProger extends \yii\db\ActiveRecord
         return $this->hasOne(TipoProger::className(), ['id' => 'idTipoProger']);
     }
 
-    /*public function beforeSave($insert)
+
+
+    public function beforeSave($insert)
     {
-        var_dump($insert);
         $this->dataInicio = date('Ymd H:i:s', strtotime($this->dataInicio));
         $this->dataFim = date('Ymd H:i:s', strtotime($this->dataFim));
+        //$this->id = 2;
+        //$this->dataInicio = \Yii::$app->formatter->asDate($this->dataInicio, 'php:Y-m-d H:i:s');
+        //$this->dataFim = \Yii::$app->formatter->asDate($this->dataFim, 'php:Y-m-d H:i:s');
+/*
+        $date = DateTime::createFromFormat('d/m/Y', $value);
+        $model->posted =  $date->format('Y-m-d');
+    */
+//        return true;
 
+        //deletar comentarios acima ^
         return parent::beforeSave($insert);
-    }*/
-
-
+    }
 }

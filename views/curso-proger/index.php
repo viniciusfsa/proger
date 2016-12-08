@@ -20,6 +20,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a('Novo', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
     <?= GridView::widget([
+
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
@@ -32,14 +33,47 @@ $this->params['breadcrumbs'][] = $this->title;
             'idAreaAtuacao',
             // 'idSetor',
             // 'interdepartamental',
+            [
+                'attribute' => 'ativo',
+                'format' => 'raw',
+                'label' => 'Interdepartamental',
+                'filter' => [1 => 'Ativo', 0 => 'Inativo'],
+                'value' => function($model, $index, $dataColumn) {
+                    switch($model->interdepartamental){
+                        case 1: return  '<p class="label label-success">Ativo</p>';
+                        case 0: return '<p class="label label-danger">Inativo</p>';
+                    }
+                },
+                'headerOptions' => ['style'=>'text-align:center; width: 120px;'],
+                'contentOptions'=>['align' => 'center']
+            ],
             // 'interinstitucional',
+            [
+                'attribute' => 'ativo',
+                'format' => 'raw',
+                'label' => 'Interinstitucional',
+                'filter' => [1 => 'Ativo', 0 => 'Inativo'],
+                'value' => function($model, $index, $dataColumn) {
+                    switch($model->interinstitucional){
+                        case 1: return  '<p class="label label-success">Ativo</p>';
+                        case 0: return '<p class="label label-danger">Inativo</p>';
+                    }
+                },
+                'headerOptions' => ['style'=>'text-align:center; width: 120px;'],
+                'contentOptions'=>['align' => 'center']
+            ],
             // 'cargaHoraria',
-            // 'dataInicio',
-            // 'dataFim',
+            'dataInicio',
+           /* [
+                'attribute' => 'dataInicio',
+                'label' => 'Data Inicio',
+                'value' => date_format(date_create($model, 'dataInicio', $index, $dataColumn), 'd/m/Y H:i:s'),
+            ],*/
+             'dataFim',
             // 'observacoes',
             // 'idTipoProger',
             // 'idProger',
-            // 'idGestor',
+             'idGestor',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

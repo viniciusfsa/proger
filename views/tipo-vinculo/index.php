@@ -25,12 +25,15 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             //'id',
-            'descricao',
+            //'descricao',
+            [
+                'attribute' => 'descricao',
+                'headerOptions' => ['style'=>'text-align:center;'],
+            ],
             //'ativo',
             [
                 'attribute' => 'ativo',
                 'format' => 'raw',
-                'label' => 'Situação',
                 'filter' => [1 => 'Ativo', 0 => 'Inativo'],
                 'value' => function($model, $index, $dataColumn) {
                     switch($model->ativo){

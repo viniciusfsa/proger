@@ -5,12 +5,12 @@ namespace app\models\search;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Curso;
+use app\models\EventoProger;
 
 /**
- * CursoSearch represents the model behind the search form about `app\models\Curso`.
+ * EventoPorger represents the model behind the search form about `app\models\EventoProger`.
  */
-class CursoSearch extends Curso
+class EventoPorger extends EventoProger
 {
     /**
      * @inheritdoc
@@ -18,8 +18,8 @@ class CursoSearch extends Curso
     public function rules()
     {
         return [
-            [['id'], 'integer'],
-            [['nome'], 'safe'],
+            [['id', 'idTipoEvento', 'idSituacao', 'idAreaAtuacao', 'cargaHoraria', 'numeroParticipantes', 'idTipoProger', 'idProger', 'idGestor'], 'integer'],
+            [['nome', 'descricao', 'dataInicio', 'dataFim', 'observacoes'], 'safe'],
         ];
     }
 
@@ -41,17 +41,12 @@ class CursoSearch extends Curso
      */
     public function search($params)
     {
-        $query = Curso::find();
+        $query = EventoProger::find();
 
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
-            'sort' => [
-                'defaultOrder' => [
-                   // 'nome' => SORT_ASC,                    
-                ]
-            ],
         ]);
 
         $this->load($params);
@@ -65,9 +60,21 @@ class CursoSearch extends Curso
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
+            'idTipoEvento' => $this->idTipoEvento,
+            'idSituacao' => $this->idSituacao,
+            'idAreaAtuacao' => $this->idAreaAtuacao,
+            'dataInicio' => $this->dataInicio,
+            'dataFim' => $this->dataFim,
+            'cargaHoraria' => $this->cargaHoraria,
+            'numeroParticipantes' => $this->numeroParticipantes,
+            'idTipoProger' => $this->idTipoProger,
+            'idProger' => $this->idProger,
+            'idGestor' => $this->idGestor,
         ]);
 
-        $query->andFilterWhere(['like', 'nome', $this->nome]);
+        $query->andFilterWhere(['like', 'nome', $this->nome])
+            ->andFilterWhere(['like', 'descricao', $this->descricao])
+            ->andFilterWhere(['like', 'observacoes', $this->observacoes]);
 
         return $dataProvider;
     }

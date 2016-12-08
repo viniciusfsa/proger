@@ -25,17 +25,25 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             //'id',
-            'nome',
-            'sigla',
+            //'nome',
+            [
+                'attribute' =>'nome', 
+                'headerOptions' => ['style'=>'text-align:center;']
+            ],
+            //'sigla',
+            [
+                'attribute' => 'sigla',
+                'headerOptions' => ['style'=>'text-align:center; width: 120px;'],
+            ],
             //'idPais',
             [
                 'attribute' => 'idPais',
-                'label' => 'País',
                 'filter' => Pais::dropdown(),
                 'value' => function($model, $index, $dataColumn) {
                     $dropdown = Pais::dropdown();
                     return $dropdown[$model->idPais];
                 },
+                'headerOptions' => ['style'=>'text-align:center;']
             ],
             
             ['class' => 'yii\grid\ActionColumn'],

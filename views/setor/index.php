@@ -19,6 +19,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a('Novo', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
     <?= GridView::widget([
+       
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [

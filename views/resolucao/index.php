@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use kartik\widgets\DatePicker;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\ResolucaoSearch */
@@ -27,13 +28,60 @@ $this->params['breadcrumbs'][] = $this->title;
             //'id',
             [
                 'attribute' =>'id', 
-                'headerOptions' => ['style'=>'text-align:center; width: 70px;']
+                'headerOptions' => ['style'=>'text-align:center; width: 60px;']
             ],
-            'numero',
-            'assunto',
-            'dataResolucao',
-            'dataPublicacao',
-            'observacao',
+            //'numero',
+            [
+                'attribute' =>'numero', 
+                'headerOptions' => ['style'=>'text-align:center; width: 100px;']
+            ],
+            //'assunto',
+            [
+                'attribute' =>'assunto', 
+                'headerOptions' => ['style'=>'text-align:center; width: 300px;']
+            ],
+
+            //'dataResolucao',
+            [
+                'attribute' => 'dataResolucao',
+                'headerOptions' => ['style'=>'text-align:center; width: 150px;'],
+                'filter' => DatePicker::widget([
+                        'name' => 'Data Resolução',
+                        'options' => ['placeholder' => ''],
+
+                        'pluginOptions' => [
+                            'autoclose'=>false,
+                            'format' => 'dd/mm/yyyy',
+                            'todayHighlight' => true,
+                        ]
+                    ]),
+                'value' => function($model, $index, $dataColumn) {
+                    return date_format(date_create($model->dataResolucao), 'd/m/Y');
+                },
+            ],
+            //'dataPublicacao',
+            [
+                'attribute' => 'dataPublicacao',
+                'headerOptions' => ['style'=>'text-align:center; width: 150px;'],
+                'filter' => DatePicker::widget([
+                        'name' => 'Data Publicação',
+                        'options' => ['placeholder' => ''],
+
+                        'pluginOptions' => [
+                            'autoclose'=>false,
+                            'format' => 'dd/mm/yyyy',
+                            'todayHighlight' => true,
+                        ]
+                    ]),
+                'value' => function($model, $index, $dataColumn) {
+                    return date_format(date_create($model->dataPublicacao), 'd/m/Y');
+                },
+            ],
+            //'observacao',
+            [
+                'attribute' =>'observacao', 
+                'headerOptions' => ['style'=>'text-align:center; width: 285px;']
+            ],
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

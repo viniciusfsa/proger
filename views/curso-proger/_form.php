@@ -8,6 +8,8 @@ use app\models\Situacao;
 use app\models\Setor;
 use app\models\TipoProger;
 use \yii\helpers\ArrayHelper;
+use nex\datepicker\DatePicker;
+//use kartik\widgets\DatePicker;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\CursoProger */
@@ -55,12 +57,23 @@ use \yii\helpers\ArrayHelper;
         $form->field($model, 'cargaHoraria')->textInput(['maxlength' =>5,'style' =>'width: 20%', 'onlynumber' => 'true']) 
     ?>
 
-    <?= 
-        $form->field($model, 'dataInicio')->textInput() 
+    <div class="input-group drp-container">
+         <?= $form->field($model, 'dataInicio')->widget(\yii\jui\DatePicker::classname(), [
+        'language' => 'pt-br',
+        'dateFormat' => 'dd/MM/yyyy',
+    ]) ?>
+    </div>
 
-    ?>
-
-    <?= $form->field($model, 'dataFim')->textInput() ?>
+    <div class="input-group drp-container">
+        <?= 
+            $form->field($model, 'dataFim')->widget(\yii\jui\DatePicker::classname(), 
+            [
+                'language' => 'pt-br',
+                'dateFormat' => 'dd/MM/yyyy',
+            ])  
+        ?>
+    </div>
+  
 
     <?= 
         //$form->field($model, 'observacoes')->textInput(['maxlength' =>500,'style' =>'width: 50%' ]) 
@@ -72,7 +85,7 @@ use \yii\helpers\ArrayHelper;
         $form->field($model, 'idTipoProger')->dropDownList(ArrayHelper::map(TipoProger::find()->orderBy('nome')->all(),'id', 'nome'),['prompt'=>'Selecione o Tipo', 'style' =>'width: 50%']) 
     ?>
 
-    <?= $form->field($model, 'idProger')->textInput() ?>
+    <?= $form->field($model, 'idProger')->textInput(['style' =>'width: 50%']) ?>
 
     <?= 
         //$form->field($model, 'idGestor')->textInput()

@@ -15,14 +15,17 @@
     "minimum-stability": "stable",
     "require": {
         "php": ">=5.4.0",
-
         "yiisoft/yii2": ">=2.0.6@stable",
         "yiisoft/yii2-bootstrap": "*",
         "yiisoft/yii2-swiftmailer": "*",
 		"yiisoft/yii2-jui": "*",
-
-
-		"raoul2000/yii2-bootswatch-asset" "*",
+        "kartik-v/yii2-widgets": "dev-master",
+        "kartik-v/yii2-date-range": "*",
+        "kartik-v/yii2-field-range": "*",
+        "kartik-v/yii2-export": "@dev",
+        "kartik-v/yii2-mpdf": "*",
+       
+		"raoul2000/yii2-bootswatch-asset": "*",
         "fxp/composer-asset-plugin":">=1.0"
 
     },
