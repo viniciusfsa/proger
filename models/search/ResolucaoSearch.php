@@ -47,6 +47,12 @@ class ResolucaoSearch extends Resolucao
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'sort' => [
+                'defaultOrder' => [
+                    'dataResolucao' => SORT_ASC,    
+                    'numero' => SORT_ASC,                  
+                ]
+            ],
         ]);
 
         $this->load($params);

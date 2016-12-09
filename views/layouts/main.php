@@ -49,6 +49,18 @@ AppAsset::register($this);
             'options' => ['class' => 'navbar-nav navbar-right'],
             'items' => [
                 [
+                    'label' => 'Gestão',
+                    'items' => [
+                         ['label' => 'Programa', 'url' => ['programa-proger/index']],
+                         ['label' => 'Projeto', 'url' => ['projeto-proger/index']],
+                         ['label' => 'Curso', 'url' => ['curso-proger/index']],
+                         ['label' => 'Evento', 'url' => ['evento-proger/index']],
+                      
+                    ],
+                    //'visible' => Yii::$app->user->can('gerenciar-usuario')
+                ],
+
+                [
 //                        "<br><br>",
 
                     'label' => 'Cadastros',

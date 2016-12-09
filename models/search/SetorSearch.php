@@ -49,7 +49,7 @@ class SetorSearch extends Setor
             'query' => $query,
             'sort' => [
                 'defaultOrder' => [
-                    'sigla' => SORT_ASC,                    
+                    'nome' => SORT_ASC,                    
                 ]
             ],
 

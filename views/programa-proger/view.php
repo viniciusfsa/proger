@@ -4,13 +4,13 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\Edital */
+/* @var $model app\models\ProgramaProger */
 
-$this->title = $model->numero;
-$this->params['breadcrumbs'][] = ['label' => 'Edital', 'url' => ['index']];
+$this->title = $model->nome;
+$this->params['breadcrumbs'][] = ['label' => 'Programa Proger', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="edital-view">
+<div class="programa-proger-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
@@ -19,7 +19,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a('Excluir', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
-                'confirm' => 'Você tem certeza que deseja excluir este item?',
+                'confirm' => 'Tem certeza que deseja excluir este registro?',
                 'method' => 'post',
             ],
         ]) ?>
@@ -30,13 +30,16 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'id',
             'nome',
-            //'ano',
-            [
-                'attribute' => 'ano',
-                'label' => 'Ano',
-                'value' => date_format(date_create($model->ano), 'd/m/Y'),
-            ],
-            'numero',
+            'descricao',
+            'idSituacao',
+            'idAreaAtuacao',
+            'idSetor',
+            'interdepartamental',
+            'interinstitucional',
+            'dataInicio',
+            'dataFim',
+            'observacoes',
+            'idGestor',
         ],
     ]) ?>
 

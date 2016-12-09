@@ -2,16 +2,15 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
-use app\models\Estado;
 
 /* @var $this yii\web\View */
-/* @var $searchModel app\models\CidadeSearch */
+/* @var $searchModel app\models\search\ProgramaProgerSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Cidades';
+$this->title = 'Programa Proger';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="cidade-index">
+<div class="programa-proger-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -27,21 +26,25 @@ $this->params['breadcrumbs'][] = $this->title;
 
             //'id',
             //'nome',
+            //'descricao',
+            //'idSituacao',
+            //'idAreaAtuacao',
+            // 'idSetor',
+            // 'interdepartamental',
+            // 'interinstitucional',
+            // 'dataInicio',
+            // 'dataFim',
+            // 'observacoes',
+            // 'idGestor',
+
+
             [
-                'attribute' =>'nome', 
-                'headerOptions' => ['style'=>'text-align:center;']
+                'attribute' => 'nome',
+                'label' => 'Nome',
+                'headerOptions' => ['style'=>'text-align:center; width: 1000px;'],
+                'contentOptions'=>['align' => 'left'],
             ],
-            //'idEstado',
-            [
-                'attribute' => 'idEstado',
-                'label' => 'Estado',
-                'filter' => Estado::dropdown(),
-                'value' => function($model, $index, $dataColumn) {
-                    $dropdown = Estado::dropdown();
-                    return $dropdown[$model->idEstado];
-                },
-                'headerOptions' => ['style'=>'text-align:center;']
-            ],
+            
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

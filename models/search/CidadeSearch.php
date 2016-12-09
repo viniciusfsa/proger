@@ -48,7 +48,7 @@ class CidadeSearch extends Cidade
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
             'sort' => [
-                'defaultOrder' => [
+                'defaultOrder' => [ 
                     'nome' => SORT_ASC,                    
                 ]
             ],
