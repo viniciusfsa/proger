@@ -32,12 +32,12 @@ use nex\datepicker\DatePicker;
 
     <?= $form->field($model, 'dataInicio')->widget(\yii\jui\DatePicker::classname(), [
         'language' => 'pt-br',
-        'dateFormat' => 'dd-MM-yyyy',
+        'dateFormat' => 'dd/MM/yyyy',
     ]) ?>
 
     <?= $form->field($model, 'dataFim')->widget(\yii\jui\DatePicker::classname(), [
         'language' => 'pt-br',
-        'dateFormat' => 'dd-MM-yyyy',
+        'dateFormat' => 'dd/MM/yyyy',
     ]) ?>
 
     

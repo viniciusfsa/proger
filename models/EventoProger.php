@@ -44,15 +44,14 @@ class EventoProger extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['nome', 'descricao', 'idTipoEvento', 'idSituacao', 'idAreaAtuacao', 'dataInicio', 'dataFim', 'cargaHoraria', 'numeroParticipantes', 'idGestor'], 'required'],
-            [['idTipoEvento', 'idSituacao', 'idAreaAtuacao', 'cargaHoraria', 'numeroParticipantes', 'idTipoProger', 'idGestor'], 'integer'],
+            [['nome', 'descricao', 'idTipoEvento', 'idSituacao', 'idAreaAtuacao', 'dataInicio', 'dataFim', 'cargaHoraria', 'numeroParticipantes','idGestor'], 'required'],
+            [['idTipoEvento', 'idSituacao', 'idAreaAtuacao', 'cargaHoraria', 'numeroParticipantes', 'idGestor'], 'integer'],
             [['nome', 'descricao', 'observacoes'], 'string'],
             [['dataInicio', 'dataFim'], 'safe'],
             [['idAreaAtuacao'], 'exist', 'skipOnError' => true, 'targetClass' => AreaAtuacao::className(), 'targetAttribute' => ['idAreaAtuacao' => 'id']],
             [['idGestor'], 'exist', 'skipOnError' => true, 'targetClass' => Gestor::className(), 'targetAttribute' => ['idGestor' => 'id']],
             [['idSituacao'], 'exist', 'skipOnError' => true, 'targetClass' => Situacao::className(), 'targetAttribute' => ['idSituacao' => 'id']],
             [['idTipoEvento'], 'exist', 'skipOnError' => true, 'targetClass' => TipoEvento::className(), 'targetAttribute' => ['idTipoEvento' => 'id']],
-            [['idTipoProger'], 'exist', 'skipOnError' => true, 'targetClass' => TipoProger::className(), 'targetAttribute' => ['idTipoProger' => 'id']],
         ];
     }
 
@@ -125,6 +124,11 @@ class EventoProger extends \yii\db\ActiveRecord
     {
         $this->dataInicio = date('Ymd H:i:s', strtotime($this->dataInicio));
         $this->dataFim = date('Ymd H:i:s', strtotime($this->dataFim));
+
+        //ver direitinho como pegar esses atributos em especial o idProger aqui está só de teste pra ver se está salvado. Funcionou salvar
+        $this->idTipoProger = 1;
+        $this->idProger = 1;
+
         //$this->id = 2;
         //$this->dataInicio = \Yii::$app->formatter->asDate($this->dataInicio, 'php:Y-m-d H:i:s');
         //$this->dataFim = \Yii::$app->formatter->asDate($this->dataFim, 'php:Y-m-d H:i:s');
@@ -135,6 +139,7 @@ class EventoProger extends \yii\db\ActiveRecord
 //        return true;
 
         //deletar comentarios acima ^
+        //return true;
         return parent::beforeSave($insert);
     }
 }
