@@ -21,6 +21,9 @@ use yii\rbac\DbManager;
  * @property Movimento[] $movimentos
  * @property GruposUsuario $grupo
  */
+
+
+
 class Usuario extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 {
 
@@ -35,6 +38,9 @@ class Usuario extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     /**
      * @inheritdoc
      */
+
+
+    public $permissoes;
     public static function tableName()
     {
         return 'Usuario';
@@ -59,7 +65,7 @@ class Usuario extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     public function scenarios()
     {
         return [
-            'cadastro' => ['nome', 'login', 'senha', 'nameGrupo', 'repeat_password', 'situacao'],
+            'cadastro' => ['nome', 'login', 'senha', 'nameGrupo', 'repeat_password', 'situacao','permissoes'],
             'update' => ['nome', 'login', 'nameGrupo', 'situacao'],
             'redefinirSenha' => ['senha', 'repeat_password'],
         ];
@@ -78,6 +84,7 @@ class Usuario extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
             'senha' => 'Senha',
             'repeat_password' => 'Confirmação de senha',
             'situacao' => 'Situação',
+            'permissoes' => 'Permissões',
         ];
     }
     
@@ -268,5 +275,15 @@ class Usuario extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
         $log->save();
 
     }
+
+
+    public function save($runValidation = true, $attributeNames = NULL){
+        
+        return parent::save($runValidation , $attributeNames);
+    }
+
+
+
+
 
 }

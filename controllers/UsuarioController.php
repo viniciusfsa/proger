@@ -5,6 +5,7 @@ namespace app\controllers;
 use Yii;
 use yii\rbac\DbManager;
 use app\models\Usuario;
+use app\models\Setor;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -129,6 +130,8 @@ class UsuarioController extends Controller
         if(\Yii::$app->user->can('gerenciar-usuario')){
 
             $model = new Usuario();
+            $setores = Setor::find()->all();
+            $setores = Setor::find()->where(['ativo' => '1'])->all();
             $model->scenario = 'cadastro';
 
             if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -138,6 +141,7 @@ class UsuarioController extends Controller
             } else {
                 return $this->render('create', [
                     'model' => $model,
+                    'setores' => $setores,
                 ]);
             }
 

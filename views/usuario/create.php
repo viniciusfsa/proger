@@ -60,6 +60,23 @@ $this->params['breadcrumbs'][] = $this->title;
 				<?= $form->field($model, 'repeat_password')->passwordInput(['maxlength' => 10])->label('Confirmação de senha: ') ?>
 			</div>
 		</div>
+
+		<div class="panel panel-default">
+        <div class="panel-heading"><b>Permissões</b></div>
+        <div class="panel-body">
+          
+          <?php
+              $setores = ArrayHelper::map($setores, 'id', 'nome');
+          ?>
+          <div class="checkbox">
+            <?= $form->field($model, 'permissoes')->checkBoxList($setores, ['template'=>'{input} <p>{label}</p>', 'separator'=>'</br>'])->label(false); ?>
+          </div>
+
+        </div>
+      </div>
+
+
+		
 			
 	</div>
 
