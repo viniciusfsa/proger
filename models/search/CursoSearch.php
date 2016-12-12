@@ -49,7 +49,7 @@ class CursoSearch extends Curso
             'query' => $query,
             'sort' => [
                 'defaultOrder' => [
-                   // 'nome' => SORT_ASC,                    
+                    'nome' => SORT_ASC,                    
                 ]
             ],
         ]);

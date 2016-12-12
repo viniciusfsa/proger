@@ -48,6 +48,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'filter' => DatePicker::widget([
                         'name' => 'Data Resolução',
                         'options' => ['placeholder' => ''],
+                        'type' => DatePicker::TYPE_INPUT,
 
                         'pluginOptions' => [
                             'autoclose'=>false,
@@ -66,6 +67,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'filter' => DatePicker::widget([
                         'name' => 'Data Publicação',
                         'options' => ['placeholder' => ''],
+                        'type' => DatePicker::TYPE_INPUT,
 
                         'pluginOptions' => [
                             'autoclose'=>false,

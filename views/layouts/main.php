@@ -66,11 +66,12 @@ AppAsset::register($this);
                     'label' => 'Cadastros',
                     'items' => [
                         ['label' => 'Área de Atuação', 'url' => ['area-atuacao/index'], 'visible' => Yii::$app->user->can('gerenciamento-cadastros-basicos')  ],
-                         ['label' => 'Cidade', 'url' => ['cidade/index'], 'visible' => Yii::$app->user->can('gerenciamento-cadastros-basicos')  ],//mudar qndo criar permissao
+                         ['label' => 'Cidade', 'url' => ['cidade/index'], 'visible' => Yii::$app->user->can('gerenciamento-cadastros-basicos')  ],
+                         ['label' => 'Curso', 'url' => ['curso/index'], 'visible' => Yii::$app->user->can('gerenciamento-cadastros-basicos')  ],
                          ['label' => 'Edital', 'url' => ['edital/index'], 'visible' => Yii::$app->user->can('gerenciamento-cadastros-avancados') ],
                          ['label' => 'Estado', 'url' => ['estado/index'], 'visible' => Yii::$app->user->can('gerenciamento-cadastros-basicos') ],//mudar qndo criar permissao                                                  
                          ['label' => 'Financiadora', 'url' => ['financiadora/index'], 'visible' => Yii::$app->user->can('gerenciamento-cadastros-basicos')],
-                         ['label' => 'Gestor', 'url' => ['gestor/index'], 'visible' => Yii::$app->user->can('gerenciamento-cadastros-basicos')],                       
+                         ['label' => 'Gestor', 'url' => ['gestor/index'], 'visible' => Yii::$app->user->can('gerenciamento-cadastros-basicos')],               
                          ['label' => 'Instituição', 'url' => ['instituicao/index'], 'visible' => Yii::$app->user->can('gerenciamento-cadastros-basicos')],
                          ['label' => 'Nível de Atuação', 'url' => ['nivel-atuacao/index'], 'visible' => Yii::$app->user->can('gerenciamento-cadastros-basicos')], 
                          ['label' => 'Resolução', 'url' => ['resolucao/index'], 'visible' => Yii::$app->user->can('gerenciamento-cadastros-basicos')], 
