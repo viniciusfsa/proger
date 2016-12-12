@@ -42,10 +42,11 @@ class CursoProger extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
-    public function rules()
+    public function rules() 
     {
         return [
-            [['nome', 'descricao', 'idSituacao', 'idAreaAtuacao', 'idSetor', 'interdepartamental', 'interinstitucional', 'cargaHoraria', 'dataInicio', 'dataFim', 'idGestor'], 'required'],
+            [['nome'], 'required', 'message' => 'Informe o nome do Curso' ],
+            [['descricao', 'idSituacao', 'idAreaAtuacao', 'idSetor', 'interdepartamental', 'interinstitucional', 'cargaHoraria', 'dataInicio', 'dataFim', 'idGestor'], 'required'],
             [['nome', 'descricao', 'observacoes'], 'string'],
             [['idSituacao', 'idAreaAtuacao', 'idSetor', 'interdepartamental', 'interinstitucional', 'cargaHoraria', 'idTipoProger', 'idProger', 'idGestor'], 'integer'],
             [['dataInicio', 'dataFim'], 'safe'],
@@ -95,6 +96,7 @@ class CursoProger extends \yii\db\ActiveRecord
     public function getIdGestor0()
     {
         return $this->hasOne(Gestor::className(), ['id' => 'idGestor']);
+
     }
 
     /**
@@ -102,7 +104,8 @@ class CursoProger extends \yii\db\ActiveRecord
      */
     public function getIdSetor0()
     {
-        return $this->hasOne(Setor::className(), ['id' => 'idSetor']);
+        //return $this->hasOne(Setor::className(), ['id' => 'idSetor']);
+        $setor = Setor::model()->findByPk(2);
     }
 
     /**
@@ -111,6 +114,15 @@ class CursoProger extends \yii\db\ActiveRecord
     public function getIdSituacao0()
     {
         return $this->hasOne(Situacao::className(), ['id' => 'idSituacao']);
+        /*switch ($this->ativo) {
+            case 1:
+                return 'Ativo';
+                break;
+
+            case 0:
+                return 'Inativo';
+                break;
+        }*/
     }
 
     /**
@@ -121,14 +133,32 @@ class CursoProger extends \yii\db\ActiveRecord
         return $this->hasOne(TipoProger::className(), ['id' => 'idTipoProger']);
     }
 
-    /*public function beforeSave($insert)
+    public function getInterdepartamental()
     {
-        var_dump($insert);
-        $this->dataInicio = date('Ymd H:i:s', strtotime($this->dataInicio));
-        $this->dataFim = date('Ymd H:i:s', strtotime($this->dataFim));
+        switch ($this->interdepartamental) {
+            case 1:
+                return 'Sim';
+                break;
 
-        return parent::beforeSave($insert);
-    }*/
+            case 0:
+                return 'Não';
+                break;
+        }
+    }
+
+    public function getInterinstitucional()
+    {
+        switch ($this->interinstitucional) {
+            case 1:
+                return 'Sim';
+                break;
+
+            case 0:
+                return 'Não';
+                break;
+        }
+    }
+
 
 
 }

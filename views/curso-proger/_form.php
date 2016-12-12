@@ -8,7 +8,7 @@ use app\models\Situacao;
 use app\models\Setor;
 use app\models\TipoProger;
 use \yii\helpers\ArrayHelper;
-use nex\datepicker\DatePicker;
+use kartik\widgets\DatePicker;
 //use kartik\widgets\DatePicker;
 
 /* @var $this yii\web\View */
@@ -57,22 +57,31 @@ use nex\datepicker\DatePicker;
         $form->field($model, 'cargaHoraria')->textInput(['maxlength' =>5,'style' =>'width: 20%', 'onlynumber' => 'true']) 
     ?>
 
-    <div class="input-group drp-container">
-         <?= $form->field($model, 'dataInicio')->widget(\yii\jui\DatePicker::classname(), [
-        'language' => 'pt-br',
-        'dateFormat' => 'dd/MM/yyyy',
-    ]) ?>
-    </div>
+    <?= $form->field($model, 'dataInicio', ['options' => ['style' =>'width: 20%']])->widget(DatePicker::classname(),
+        ['options' => ['placeholder' => ''],
+          'value' => date('d-M-Y'),
+          'type' => DatePicker::TYPE_COMPONENT_APPEND,
+          
+          'pluginOptions' => [
+            'autoclose'=>true,
+            'format' => 'dd/mm/yyyy',
+            'todayHighlight' => true,
+          ]
+        ]);
+    ?>
 
-    <div class="input-group drp-container">
-        <?= 
-            $form->field($model, 'dataFim')->widget(\yii\jui\DatePicker::classname(), 
-            [
-                'language' => 'pt-br',
-                'dateFormat' => 'dd/MM/yyyy',
-            ])  
-        ?>
-    </div>
+    <?= $form->field($model, 'dataFim', ['options' => ['style' =>'width: 20%']])->widget(DatePicker::classname(),
+        ['options' => ['placeholder' => ''],
+          'value' => date('d-M-Y'),
+          'type' => DatePicker::TYPE_COMPONENT_APPEND,
+          
+          'pluginOptions' => [
+            'autoclose'=>true,
+            'format' => 'dd/mm/yyyy',
+            'todayHighlight' => true,
+          ]
+        ]);
+    ?>
   
 
     <?= 

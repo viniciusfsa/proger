@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 use app\models\Gestor;
+use kartik\widgets\DatePicker;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\search\CursoProgerSearch */
@@ -27,17 +28,23 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             //'id',
-            'nome',
+            //'nome',
+            [
+                'attribute' => 'nome',
+                //'label' => 'Situação',
+                'headerOptions' => ['style'=>'text-align:center; width: 550px;'],
+                //'contentOptions'=>['align' => 'center']
+            ],
             'descricao',
             'idSituacao',
             'idAreaAtuacao',
             // 'idSetor',
             // 'interdepartamental',
             [
-                'attribute' => 'ativo',
+                'attribute' => 'interdepartamental',
                 'format' => 'raw',
                 'label' => 'Interdepartamental',
-                'filter' => [1 => 'Ativo', 0 => 'Inativo'],
+                'filter' => [1 => 'Sim', 0 => 'Não'],
                 'value' => function($model, $index, $dataColumn) {
                     switch($model->interdepartamental){
                         case 1: return  '<p class="label label-success">Ativo</p>';
@@ -49,10 +56,10 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             // 'interinstitucional',
             [
-                'attribute' => 'ativo',
+                'attribute' => 'interinstitucional',
                 'format' => 'raw',
                 'label' => 'Interinstitucional',
-                'filter' => [1 => 'Ativo', 0 => 'Inativo'],
+                'filter' => [1 => 'Sim', 0 => 'Não'],
                 'value' => function($model, $index, $dataColumn) {
                     switch($model->interinstitucional){
                         case 1: return  '<p class="label label-success">Ativo</p>';
@@ -62,18 +69,48 @@ $this->params['breadcrumbs'][] = $this->title;
                 'headerOptions' => ['style'=>'text-align:center; width: 120px;'],
                 'contentOptions'=>['align' => 'center']
             ],
-            // 'cargaHoraria',
-            'dataInicio',
+
+             'cargaHoraria',
+            //'dataInicio',
            /* [
                 'attribute' => 'dataInicio',
-                'label' => 'Data Inicio',
-                'value' => date_format(date_create($model, 'dataInicio', $index, $dataColumn), 'd/m/Y H:i:s'),
+                'headerOptions' => ['style'=>'text-align:center; width: 150px;'],
+                'filter' => DatePicker::widget([
+                        'name' => 'Data Inicio',
+                        'options' => ['placeholder' => ''],
+
+                        'pluginOptions' => [
+                            'autoclose'=>false,
+                            'format' => 'dd/mm/yyyy',
+                            'todayHighlight' => true,
+                        ]
+                    ]),
+                'value' => function($model, $index, $dataColumn) {
+                    return date_format(date_create($model->dataInicio), 'd/m/Y');
+                },
+            ],
+            //'dataFim',
+            [
+                'attribute' => 'dataFim',
+                'headerOptions' => ['style'=>'text-align:center; width: 150px;'],
+                'filter' => DatePicker::widget([
+                        'name' => 'Data Fim',
+                        'options' => ['placeholder' => ''],
+
+                        'pluginOptions' => [
+                            'autoclose'=>false,
+                            'format' => 'dd/mm/yyyy',
+                            'todayHighlight' => true,
+                        ]
+                    ]),
+                'value' => function($model, $index, $dataColumn) {
+                    return date_format(date_create($model->dataFim), 'd/m/Y');
+                },
             ],*/
-             'dataFim',
             // 'observacoes',
             // 'idTipoProger',
             // 'idProger',
-             'idGestor',
+            // 'idGestor',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],
