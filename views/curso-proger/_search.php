@@ -27,15 +27,15 @@ use yii\widgets\ActiveForm;
 
     <?php // echo $form->field($model, 'idSetor') ?>
 
-    <?php // echo $form->field($model, 'interdepartamental') ?>
+    <?php  echo $form->field($model, 'interdepartamental') ?>
 
-    <?php // echo $form->field($model, 'interinstitucional') ?>
+    <?php  echo $form->field($model, 'interinstitucional') ?>
 
     <?php // echo $form->field($model, 'cargaHoraria') ?>
 
-    <?php // echo $form->field($model, 'dataInicio') ?>
+    <?php  echo $form->field($model, 'dataInicio') ?>
 
-    <?php // echo $form->field($model, 'dataFim') ?>
+    <?php  echo $form->field($model, 'dataFim') ?>
 
     <?php // echo $form->field($model, 'observacoes') ?>
 
