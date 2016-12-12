@@ -6,6 +6,7 @@ use \yii\helpers\ArrayHelper;
 use app\models\Situacao;
 use app\models\AreaAtuacao;
 use app\models\Setor;
+use app\models\Gestor;
 use nex\datepicker\DatePicker;
 
 
@@ -14,7 +15,7 @@ use nex\datepicker\DatePicker;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="programa-proger-form">
+<div class="programa-proger-form"> 
 
     <?php $form = ActiveForm::begin(); ?>
 
@@ -22,7 +23,7 @@ use nex\datepicker\DatePicker;
 
     <?= $form->field($model, 'descricao')->textarea(['maxlength' =>500,'style' =>'width: 50%' ]) ?>
 
-    <?= $form->field($model, 'idSituacao')->dropDownList(ArrayHelper::map(Situacao::find()->orderBy('nome')->all(),'id', 'nome'),['prompt'=>'Selecione uma Situação', 'style' =>'width: 50%']) ?>
+    <?= $form->field($model, 'idSituacao')->dropDownList(ArrayHelper::map(Situacao::find()->orderBy('nome')->all(),'id', 'nome'),['style' =>'width: 50%', 'default' => '1']) ?>
 
     <?= $form->field($model, 'idAreaAtuacao')->dropDownList(ArrayHelper::map(AreaAtuacao::find()->orderBy('nome')->all(),'id', 'nome'),['prompt'=>'Selecione uma Área de Atuação', 'style' =>'width: 50%'])  ?>
 
@@ -44,7 +45,8 @@ use nex\datepicker\DatePicker;
     
     <?= $form->field($model, 'observacoes')->textarea(['maxlength' =>500,'style' =>'width: 50%' ]) ?>
 
-    <?= $form->field($model, 'idGestor')->textInput() ?>
+   
+    <?= $form->field($model, 'idGestor')->dropDownList(ArrayHelper::map(Gestor::find()->orderBy('nome')->all(),'id', 'nome'),['prompt'=>'Selecione um Setor Gestor', 'style' =>'width: 50%']) ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Salvar' : 'Atualizar', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
