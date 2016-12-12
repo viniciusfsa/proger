@@ -28,7 +28,7 @@ $this->params['breadcrumbs'][] = $this->title;
             //'descricao',
             [
                 'attribute' => 'descricao',
-                'headerOptions' => ['style'=>'text-align:center;'],
+                'headerOptions' => ['style'=>'text-align:center; '],
             ],
             //'ativo',
             [
@@ -41,7 +41,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         case 0: return '<p class="label label-danger">Inativo</p>';
                     }
                 },
-                'headerOptions' => ['style'=>'text-align:center; width: 200px;'],
+                'headerOptions' => ['style'=>'text-align:center; width: 220px;'],
                 'contentOptions'=>['align' => 'center']
             ],
             ['class' => 'yii\grid\ActionColumn'],

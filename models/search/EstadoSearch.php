@@ -49,7 +49,8 @@ class EstadoSearch extends Estado
             'query' => $query,
             'sort' => [
                 'defaultOrder' => [
-                    'nome' => SORT_ASC,                    
+                    'idPais' => SORT_ASC,
+                    'nome' => SORT_ASC,   
                 ]
             ],
         ]);

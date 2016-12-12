@@ -27,12 +27,12 @@ $this->params['breadcrumbs'][] = $this->title;
             //'id',
             [
                 'attribute' =>'id', 
-                'headerOptions' => ['style'=>'text-align:center;']
+                'headerOptions' => ['style'=>'text-align:center; width: 120px;']
             ],
             //'nome',
             [
                 'attribute' =>'nome', 
-                'headerOptions' => ['style'=>'text-align:center;']
+                'headerOptions' => ['style'=>'text-align:center; width: 900px;']
             ],
 
             ['class' => 'yii\grid\ActionColumn'],

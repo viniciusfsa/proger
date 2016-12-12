@@ -52,6 +52,7 @@ class ProgramaProger extends \yii\db\ActiveRecord
         ];
     }
 
+
     /**
      * @inheritdoc
      */
@@ -60,16 +61,16 @@ class ProgramaProger extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'nome' => 'Nome',
-            'descricao' => 'Descricao',
-            'idSituacao' => 'Id Situacao',
-            'idAreaAtuacao' => 'Id Area Atuacao',
-            'idSetor' => 'Id Setor',
+            'descricao' => 'Descrição/Objetivo',
+            'idSituacao' => 'Situação',
+            'idAreaAtuacao' => 'Área de Atuação',
+            'idSetor' => 'Setor',
             'interdepartamental' => 'Interdepartamental',
             'interinstitucional' => 'Interinstitucional',
-            'dataInicio' => 'Data Inicio',
+            'dataInicio' => 'Data Início',
             'dataFim' => 'Data Fim',
-            'observacoes' => 'Observacoes',
-            'idGestor' => 'Id Gestor',
+            'observacoes' => 'Observações',
+            'idGestor' => 'Setor Gestor',
         ];
     }
 
@@ -103,5 +104,35 @@ class ProgramaProger extends \yii\db\ActiveRecord
     public function getIdSituacao0()
     {
         return $this->hasOne(Situacao::className(), ['id' => 'idSituacao']);
+    }
+
+
+    public function getDepartamental(){
+
+        switch ($this->interdepartamental) {
+            case 1:
+                return 'Sim';
+                break;
+
+            case 0:
+                return 'Não';
+                break;
+        }
+
+    }
+
+
+    public function getInstitucional(){
+
+        switch ($this->interinstitucional) {
+            case 1:
+                return 'Sim';
+                break;
+
+            case 0:
+                return 'Não';
+                break;
+        }
+
     }
 }
