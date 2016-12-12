@@ -62,14 +62,14 @@ $this->params['breadcrumbs'][] = $this->title;
 		</div>
 
 		<div class="panel panel-default">
-        <div class="panel-heading"><b>Permissões</b></div>
+        <div class="panel-heading"><b>Setor de Gestão</b></div>
         <div class="panel-body">
           
           <?php
-              $setores = ArrayHelper::map($setores, 'id', 'nome');
+              $gestores = ArrayHelper::map($gestores, 'id', 'nome');
           ?>
           <div class="checkbox">
-            <?= $form->field($model, 'permissoes')->checkBoxList($setores, ['template'=>'{input} <p>{label}</p>', 'separator'=>'</br>'])->label(false); ?>
+            <?= $form->field($model, 'gestores')->checkBoxList($gestores, ['template'=>'{input} <p>{label}</p>', 'separator'=>'</br>'])->label(false); ?>
           </div>
 
         </div>

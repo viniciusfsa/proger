@@ -5,7 +5,8 @@ namespace app\controllers;
 use Yii;
 use yii\rbac\DbManager;
 use app\models\Usuario;
-use app\models\Setor;
+use app\models\Gestor;
+use app\models\UsuarioGestor;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -13,6 +14,7 @@ use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 use app\models\search\UsuarioSearch;
 use yii\web\Response;
+use yii\helpers\ArrayHelper;
 
 /**
  * UsuarioController implements the CRUD actions for Usuario model.
@@ -130,8 +132,7 @@ class UsuarioController extends Controller
         if(\Yii::$app->user->can('gerenciar-usuario')){
 
             $model = new Usuario();
-            $setores = Setor::find()->all();
-            $setores = Setor::find()->where(['ativo' => '1'])->all();
+            $gestores = Gestor::find()->all();            
             $model->scenario = 'cadastro';
 
             if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -141,7 +142,7 @@ class UsuarioController extends Controller
             } else {
                 return $this->render('create', [
                     'model' => $model,
-                    'setores' => $setores,
+                    'gestores' => $gestores,
                 ]);
             }
 
@@ -166,6 +167,13 @@ class UsuarioController extends Controller
 
             $model = $this->findModel($id);
             $model->scenario = 'update';
+            $todosGestores = Gestor::find()->all(); 
+            $todosGestores = ArrayHelper::map(Gestor::find()->all(), 'id', 'nome');
+
+            foreach ($todosGestores as $key => $value) {
+            //$permissoes[$key] = ['name' => $key, 'descricao' => $value];
+                $p[$key] = $value;
+            }
 
             if ($model->load(Yii::$app->request->post()) && $model->save()) {
                 return $this->redirect(['index']);
@@ -174,6 +182,7 @@ class UsuarioController extends Controller
                 //die();
                 return $this->render('update', [
                     'model' => $model,
+                    'todosGestores' => $p,
                 ]);
             }
 
@@ -296,6 +305,10 @@ class UsuarioController extends Controller
     protected function findModel($id)
     {
         if (($model = Usuario::findOne($id)) !== null) {
+            //$model->gestores = usuarioGestor::findAll();
+            $model->gestores = [[1,4,5]];
+            var_dump($model);
+            die();
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

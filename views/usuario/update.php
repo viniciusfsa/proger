@@ -21,10 +21,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <hr style="height:1px; border:none; background-color:#D0D0D0; margin-top: 10px; margin-bottom: 15px;" />
 
-    <?php $form = ActiveForm::begin([
-    	'options' => ['class' => 'form-horizontal'],
-    ]); ?>
-
+    <?php $form = ActiveForm::begin(); ?>
     <div class="conteudo">
 
 		<div class="row">
@@ -50,6 +47,32 @@ $this->params['breadcrumbs'][] = $this->title;
 				<?= $form->field($model, 'situacao')->dropDownList([1 => 'Ativo', 0 => 'Inativo'])->label('Situação: ');  ?>
 			</div>
 		</div>
+
+
+		<div class="panel panel-default">
+	      <div class="panel-heading"><b>Setor de gestão</b></div>
+	      <div class="panel-body">
+
+	      	<?php
+
+	      		if($model->gestores){
+
+		      		foreach ($model->gestores as $key => $value) {
+		      			$lista[] = $value;
+		      		}
+		      		$model->gestores = $lista;
+
+	      		}
+
+	      	?>
+	      	<div class="checkbox">
+	        	<?= $form->field($model, 'gestores')->checkBoxList($todosGestores, ['template'=>'{input} <p>{label}</p>', 'separator'=>'</br>'])->label(false); 
+	        	?>
+	        </div>
+	        
+	      </div>
+	    </div>
+
 
 		<div class="row">
 			<?= Html::a('Redefinir Senha', ['redefinirsenha', 'id' => $model->idUsuario], ['class' => 'btn btn-danger']) ?>

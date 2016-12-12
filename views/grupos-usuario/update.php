@@ -41,8 +41,7 @@ $this->params['breadcrumbs'][] = $this->title;
 		      			$lista[] = $key;
 		      		}
 
-		      		$model->permissoes = $lista;
-
+		      		$model->permissoes = $lista;		      		      			
 	      		}
 
 	      	?>

@@ -40,7 +40,7 @@ class Usuario extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
      */
 
 
-    public $permissoes;
+    public $gestores;
     public static function tableName()
     {
         return 'Usuario';
@@ -65,7 +65,7 @@ class Usuario extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     public function scenarios()
     {
         return [
-            'cadastro' => ['nome', 'login', 'senha', 'nameGrupo', 'repeat_password', 'situacao','permissoes'],
+            'cadastro' => ['nome', 'login', 'senha', 'nameGrupo', 'repeat_password', 'situacao','gestores'],
             'update' => ['nome', 'login', 'nameGrupo', 'situacao'],
             'redefinirSenha' => ['senha', 'repeat_password'],
         ];
@@ -84,7 +84,7 @@ class Usuario extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
             'senha' => 'Senha',
             'repeat_password' => 'Confirmação de senha',
             'situacao' => 'Situação',
-            'permissoes' => 'Permissões',
+            'gestores' => 'Gestores',
         ];
     }
     
@@ -278,8 +278,16 @@ class Usuario extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 
 
     public function save($runValidation = true, $attributeNames = NULL){
+        parent::save($runValidation , $attributeNames);
+        foreach ($this->gestores as $key => $value) {
+
+                $usuarioGestor = new UsuarioGestor();
+                $usuarioGestor->idUsuario = $this->getId();
+                $usuarioGestor->idGestor = $value;
+                $usuarioGestor->save();
+        }
         
-        return parent::save($runValidation , $attributeNames);
+        return null;        
     }
 
 
