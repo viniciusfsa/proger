@@ -108,5 +108,17 @@ class TipoProger extends \yii\db\ActiveRecord
         return $this->hasMany(ResolucaoProger::className(), ['idTipoProger' => 'id']);
     }
 
+    public static function dropdown() { 
+ 
+       $models = static::find()->orderBy('nome')->all(); 
+       $dropdown = null; 
+ 
+       foreach ($models as $model) { 
+           $dropdown[$model->id] = $model->nome; 
+       } 
+ 
+       return $dropdown; 
+   } 
+
 
 }

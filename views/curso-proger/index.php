@@ -4,6 +4,11 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 use app\models\Gestor;
 use kartik\widgets\DatePicker;
+use app\models\Setor;
+use app\models\Situacao;
+use app\models\AreaAtuacao;
+use app\models\TipoProger;
+
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\search\CursoProgerSearch */
@@ -22,6 +27,8 @@ $this->params['breadcrumbs'][] = $this->title;
     </p>
     <?= GridView::widget([
 
+        
+
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
@@ -36,83 +43,80 @@ $this->params['breadcrumbs'][] = $this->title;
                 //'contentOptions'=>['align' => 'center']
             ],
             'descricao',
-            'idSituacao',
-            'idAreaAtuacao',
+            //'idSituacao',
+            [
+                'attribute' => 'idSituacao',
+                'filter' => Situacao::dropdown(),
+                'value' => function($model, $index, $dataColumn) {
+                    $dropdown = Situacao::dropdown();
+                    return $dropdown[$model->idSituacao];
+                },
+                'headerOptions' => ['style'=>'text-align:center;']
+            ],
+            //'idAreaAtuacao',
+            [
+                'attribute' => 'idAreaAtuacao',
+                'filter' => AreaAtuacao::dropdown(),
+                'value' => function($model, $index, $dataColumn) {
+                    $dropdown = AreaAtuacao::dropdown();
+                    return $dropdown[$model->idAreaAtuacao];
+                },
+                'headerOptions' => ['style'=>'text-align:center;']
+            ],
             // 'idSetor',
             // 'interdepartamental',
-            [
+            /*[
                 'attribute' => 'interdepartamental',
                 'format' => 'raw',
                 'label' => 'Interdepartamental',
                 'filter' => [1 => 'Sim', 0 => 'Não'],
                 'value' => function($model, $index, $dataColumn) {
                     switch($model->interdepartamental){
-                        case 1: return  '<p class="label label-success">Ativo</p>';
-                        case 0: return '<p class="label label-danger">Inativo</p>';
+                        case 1: return  '<p class="label label-success">Sim</p>';
+                        case 0: return '<p class="label label-danger">Não</p>';
                     }
                 },
                 'headerOptions' => ['style'=>'text-align:center; width: 120px;'],
                 'contentOptions'=>['align' => 'center']
-            ],
+            ],*/
             // 'interinstitucional',
-            [
+            /*[
                 'attribute' => 'interinstitucional',
                 'format' => 'raw',
                 'label' => 'Interinstitucional',
                 'filter' => [1 => 'Sim', 0 => 'Não'],
                 'value' => function($model, $index, $dataColumn) {
                     switch($model->interinstitucional){
-                        case 1: return  '<p class="label label-success">Ativo</p>';
-                        case 0: return '<p class="label label-danger">Inativo</p>';
+                        case 1: return  '<p class="label label-success">Sim</p>';
+                        case 0: return '<p class="label label-danger">Não</p>';
                     }
                 },
                 'headerOptions' => ['style'=>'text-align:center; width: 120px;'],
                 'contentOptions'=>['align' => 'center']
-            ],
+            ],*/
 
              'cargaHoraria',
             //'dataInicio',
-           /* [
-                'attribute' => 'dataInicio',
-                'headerOptions' => ['style'=>'text-align:center; width: 150px;'],
-                'filter' => DatePicker::widget([
-                        'name' => 'Data Inicio',
-                        'options' => ['placeholder' => ''],
-
-                        'pluginOptions' => [
-                            'autoclose'=>false,
-                            'format' => 'dd/mm/yyyy',
-                            'todayHighlight' => true,
-                        ]
-                    ]),
-                'value' => function($model, $index, $dataColumn) {
-                    return date_format(date_create($model->dataInicio), 'd/m/Y');
-                },
-            ],
             //'dataFim',
-            [
-                'attribute' => 'dataFim',
-                'headerOptions' => ['style'=>'text-align:center; width: 150px;'],
-                'filter' => DatePicker::widget([
-                        'name' => 'Data Fim',
-                        'options' => ['placeholder' => ''],
-
-                        'pluginOptions' => [
-                            'autoclose'=>false,
-                            'format' => 'dd/mm/yyyy',
-                            'todayHighlight' => true,
-                        ]
-                    ]),
-                'value' => function($model, $index, $dataColumn) {
-                    return date_format(date_create($model->dataFim), 'd/m/Y');
-                },
-            ],*/
             // 'observacoes',
             // 'idTipoProger',
+            /*[
+                'attribute' => 'idTipoProger',
+                'filter' => TipoProger::dropdown(),
+                'value' => function($model, $index, $dataColumn) {
+                    $dropdown = TipoProger::dropdown();
+                    return $dropdown[$model->idTipoProger];
+                },
+                'headerOptions' => ['style'=>'text-align:center;']
+            ],*/
             // 'idProger',
             // 'idGestor',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],
-    ]); ?>
+    ]); 
+
+?>
+
+
 </div>

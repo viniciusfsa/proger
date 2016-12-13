@@ -2,6 +2,11 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use app\models\Setor;
+use app\models\Situacao;
+use app\models\AreaAtuacao;
+use app\models\TipoProger;
+use app\models\Gestor;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\CursoProger */
@@ -19,7 +24,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a('Excluir', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
+                'confirm' => 'Confirma a exclusão deste item?',
                 'method' => 'post',
             ],
         ]) ?>
@@ -31,14 +36,24 @@ $this->params['breadcrumbs'][] = $this->title;
             //'id',
             'nome',
             'descricao',
-            'idSituacao',
-            'idAreaAtuacao',
+            //'idSituacao',
+            [
+                'attribute' => 'idSituacao',
+                'label' => 'Situação',
+                'value' => Situacao::findOne($model->idSituacao)->nome,
+            ], 
+            //'idAreaAtuacao',
+            [
+                'attribute' => 'idAreaAtuacao',
+                'label' => 'Área Atuação',
+                'value' => AreaAtuacao::findOne($model->idAreaAtuacao)->nome,
+            ], 
             //'idSetor',
             [
                 'attribute' => 'idSetor',
-                //'value' => $model->getIdGestor0(),
                 'label' => 'Setor',
-            ],
+                'value' => Setor::findOne($model->idSetor)->nome,
+            ],  
             
             //'interdepartamental',
             [
@@ -66,9 +81,24 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value' => date_format(date_create($model->dataFim), 'd/m/Y'),
             ],
             'observacoes',
-            'idTipoProger',
-            'idProger',
-            'idGestor',
+            //'idTipoProger',
+            [
+                'attribute' => 'idTipoProger',
+                'label' => 'Tipo Proger',
+                //'value' => TipoProger::findOne($model->idTipoProger)->nome,
+            ], 
+            //'idProger',
+            /*[
+                'attribute' => 'idProger',
+                'label' => 'Situação',
+                'value' => Situacao::findOne($model->idProger)->nome,
+            ],*/
+            //'idGestor',
+            [
+                'attribute' => 'idGestor',
+                'label' => 'Gestor',
+                'value' => Gestor::findOne($model->idGestor)->nome,
+            ],
         ],
     ]) ?>
 

@@ -39,6 +39,12 @@ class CursoProger extends \yii\db\ActiveRecord
         return 'cursoProger';
     }
 
+    public function relations() {
+        return array(
+        'Integrante' => array(self::BELONGS_TO, 'Integrante', 'id'),
+        );
+    }
+
     /**
      * @inheritdoc
      */
@@ -55,6 +61,7 @@ class CursoProger extends \yii\db\ActiveRecord
             [['idSetor'], 'exist', 'skipOnError' => true, 'targetClass' => Setor::className(), 'targetAttribute' => ['idSetor' => 'id']],
             [['idSituacao'], 'exist', 'skipOnError' => true, 'targetClass' => Situacao::className(), 'targetAttribute' => ['idSituacao' => 'id']],
             [['idTipoProger'], 'exist', 'skipOnError' => true, 'targetClass' => TipoProger::className(), 'targetAttribute' => ['idTipoProger' => 'id']],
+
         ];
     }
 
@@ -114,15 +121,6 @@ class CursoProger extends \yii\db\ActiveRecord
     public function getIdSituacao0()
     {
         return $this->hasOne(Situacao::className(), ['id' => 'idSituacao']);
-        /*switch ($this->ativo) {
-            case 1:
-                return 'Ativo';
-                break;
-
-            case 0:
-                return 'Inativo';
-                break;
-        }*/
     }
 
     /**
@@ -159,6 +157,58 @@ class CursoProger extends \yii\db\ActiveRecord
         }
     }
 
+    public static function dropdown() { 
+ 
+       $models = static::find()->orderBy('nome')->all(); 
+       $dropdown = null; 
+ 
+       foreach ($models as $model) { 
+           $dropdown[$model->id] = $model->nome; 
+       } 
+ 
+       return $dropdown; 
+   } 
+
 
 
 }
+
+
+//class TableB extends ActiveRecord {
+class Integrante extends \yii\db\ActiveRecord {
+    
+    public static function tableName()
+    {
+        return 'integrante';
+    }
+
+    public function relations() {
+        return array(
+        'CursoProger' => array(self::BELONGS_TO, 'CursoProger', 'id'),
+        );
+    }
+
+
+    public function search() {
+        
+        $criteria = new CDbCriteria();
+            $criteria->with = array('CursoProger');
+         
+            $criteria->compare('CursoProger.cp', Yii::app()->request->getParam('CursoProger'), true);
+           
+            $sort = new CSort();
+            $sort->attributes = array(
+                'CursoProger.cp' => array(
+                    'asc' => 'CursoProger.cp ASC',
+                    'desc' => 'CursoProger.cp DESC'
+                ),
+                '*'
+            );
+            return new CActiveDataProvider($this,
+                array(
+                    'criteria' => $criteria,
+                    'sort' => $sort
+                ));
+    }
+    
+}  

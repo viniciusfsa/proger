@@ -30,12 +30,12 @@ use kartik\widgets\DatePicker;
 
     <?= 
         //$form->field($model, 'idSituacao')->textInput() 
-        $form->field($model, 'idSituacao')->dropDownList(ArrayHelper::map(Situacao::find()->orderBy('nome')->all(),'id', 'nome'),['prompt'=>'Selecione uma Situacao', 'style' =>'width: 50%']) 
+        $form->field($model, 'idSituacao')->dropDownList(ArrayHelper::map(Situacao::find()->orderBy('nome')->all(),'id', 'nome'),['prompt'=>'Selecione uma Situação', 'style' =>'width: 50%']) 
     ?>
 
     <?= 
         //$form->field($model, 'idAreaAtuacao')->textInput() 
-        $form->field($model, 'idAreaAtuacao')->dropDownList(ArrayHelper::map(AreaAtuacao::find()->orderBy('nome')->all(),'id', 'nome'),['prompt'=>'Selecione uma Area de Atuação', 'style' =>'width: 50%']) 
+        $form->field($model, 'idAreaAtuacao')->dropDownList(ArrayHelper::map(AreaAtuacao::find()->orderBy('nome')->all(),'id', 'nome'),['prompt'=>'Selecione uma Área de Atuação', 'style' =>'width: 50%']) 
     ?>
 
     <?= 
