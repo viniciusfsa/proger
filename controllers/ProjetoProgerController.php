@@ -1,24 +1,28 @@
 <?php
-/**
-AVISOS
-usando a permissão de resolucao por enquanto, quando criar a permissao
-dar um ctrl h de resolucao pra cidade (com case sensitive)
 
-**/
 namespace app\controllers;
 
 use Yii;
-use app\models\Cidade;
-use app\models\search\CidadeSearch;
+use app\models\ProjetoProger;
+use app\models\ProjetoProgerSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 
 /**
- * CidadeController implements the CRUD actions for Cidade model.
+ * ProjetoProgerController implements the CRUD actions for ProjetoProger model.
  */
-class CidadeController extends Controller
+
+/**
+*
+*
+* Mudar a permissão de acesso de "cadastros basicos" para "gestao"!
+*
+*
+*/
+
+class ProjetoProgerController extends Controller
 {
     /**
      * @inheritdoc
@@ -46,13 +50,13 @@ class CidadeController extends Controller
     }
 
     /**
-     * Lists all Cidade models.
+     * Lists all ProjetoProger models.
      * @return mixed
      */
     public function actionIndex()
     {
         if(\Yii::$app->user->can('gerenciamento-cadastros-basicos')){
-            $searchModel = new CidadeSearch();
+            $searchModel = new ProjetoProgerSearch();
             $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
             return $this->render('index', [
@@ -65,7 +69,7 @@ class CidadeController extends Controller
     }
 
     /**
-     * Displays a single Cidade model.
+     * Displays a single ProjetoProger model.
      * @param integer $id
      * @return mixed
      */
@@ -75,22 +79,20 @@ class CidadeController extends Controller
             return $this->render('view', [
                 'model' => $this->findModel($id),
             ]);
-        }
-        else{
+        } else {
             throw new \yii\web\ForbiddenHttpException('Você não está autorizado a realizar essa ação.');
         }
     }
 
     /**
-     * Creates a new Cidade model.
+     * Creates a new ProjetoProger model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
         if(\Yii::$app->user->can('gerenciamento-cadastros-basicos')){
-
-            $model = new Cidade();
+            $model = new ProjetoProger();
 
             if ($model->load(Yii::$app->request->post()) && $model->save()) {
                 return $this->redirect(['view', 'id' => $model->id]);
@@ -99,14 +101,13 @@ class CidadeController extends Controller
                     'model' => $model,
                 ]);
             }
-        }
-        else{
+        } else {
             throw new \yii\web\ForbiddenHttpException('Você não está autorizado a realizar essa ação.');
         }
     }
 
     /**
-     * Updates an existing Cidade model.
+     * Updates an existing ProjetoProger model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -114,7 +115,6 @@ class CidadeController extends Controller
     public function actionUpdate($id)
     {
         if(\Yii::$app->user->can('gerenciamento-cadastros-basicos')){
-
             $model = $this->findModel($id);
 
             if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -124,14 +124,13 @@ class CidadeController extends Controller
                     'model' => $model,
                 ]);
             }
-        }
-        else{
+        } else {
             throw new \yii\web\ForbiddenHttpException('Você não está autorizado a realizar essa ação.');
         }
     }
 
     /**
-     * Deletes an existing Cidade model.
+     * Deletes an existing ProjetoProger model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -142,25 +141,25 @@ class CidadeController extends Controller
             $this->findModel($id)->delete();
 
             return $this->redirect(['index']);
-        }
-        else{
+        } else {
             throw new \yii\web\ForbiddenHttpException('Você não está autorizado a realizar essa ação.');
         }
     }
 
     /**
-     * Finds the Cidade model based on its primary key value.
+     * Finds the ProjetoProger model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Cidade the loaded model
+     * @return ProjetoProger the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Cidade::findOne($id)) !== null) {
+        if (($model = ProjetoProger::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
+
     }
 }
