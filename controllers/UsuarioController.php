@@ -165,24 +165,17 @@ class UsuarioController extends Controller
 
         if(\Yii::$app->user->can('gerenciar-usuario')){
 
-            $model = $this->findModel($id);
+            $model = $this->findModel($id);             
+            $gestores = Gestor::find()->all(); 
             $model->scenario = 'update';
-            $todosGestores = Gestor::find()->all(); 
-            $todosGestores = ArrayHelper::map(Gestor::find()->all(), 'id', 'nome');
 
-            foreach ($todosGestores as $key => $value) {
-            //$permissoes[$key] = ['name' => $key, 'descricao' => $value];
-                $p[$key] = $value;
-            }
 
-            if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            if ($model->load(Yii::$app->request->post()) && $model->save() ) {                   
                 return $this->redirect(['index']);
-            } else {
-                //print_r($model->getErrors());
-                //die();
+            } else {                
                 return $this->render('update', [
                     'model' => $model,
-                    'todosGestores' => $p,
+                    'todosGestores' => $gestores,
                 ]);
             }
 
@@ -304,11 +297,12 @@ class UsuarioController extends Controller
      */
     protected function findModel($id)
     {
+        $connection = \Yii::$app->db;
         if (($model = Usuario::findOne($id)) !== null) {
-            //$model->gestores = usuarioGestor::findAll();
-            $model->gestores = [[1,4,5]];
-            var_dump($model);
-            die();
+            $model->gestores = $connection->createCommand('SELECT idGestor FROM usuarioGestor where idUsuario = '.$model->idUsuario)->queryColumn();
+           // var_dump($model->gestores);
+            //die();            
+            //$model->gestores = ArrayHelper::getColumn($model->gestores, 'idGestor');
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

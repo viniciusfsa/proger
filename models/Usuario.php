@@ -66,7 +66,7 @@ class Usuario extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     {
         return [
             'cadastro' => ['nome', 'login', 'senha', 'nameGrupo', 'repeat_password', 'situacao','gestores'],
-            'update' => ['nome', 'login', 'nameGrupo', 'situacao'],
+            'update' => ['nome', 'login', 'nameGrupo', 'situacao','gestores'],
             'redefinirSenha' => ['senha', 'repeat_password'],
         ];
     }
@@ -99,30 +99,7 @@ class Usuario extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
         return GruposUsuario::findOne($this->nameGrupo);
     }
 
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getHistoricoRemanejamentos()
-    {
-        return $this->hasMany(HistoricoRemanejamento::className(), ['idUsuario' => 'idUsuario']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getMovimentoSemCotas()
-    {
-        return $this->hasMany(MovimentoSemCotas::className(), ['idUsuario' => 'idUsuario']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getMovimentos()
-    {
-        return $this->hasMany(Movimento::className(), ['idUsuario' => 'idUsuario']);
-    }
-    
+       
     //Implementação dos métodos da interface IdentityInterface
     
     public function validatePassword($password)
@@ -228,6 +205,16 @@ class Usuario extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
         $auth->assign($role, $this->idUsuario);
 
 
+
+        foreach ($this->gestores as $key => $value) {
+
+                $usuarioGestor = new UsuarioGestor();
+                $usuarioGestor->idUsuario = $this->getId();
+                $usuarioGestor->idGestor = $value;
+                $usuarioGestor->save();
+        }
+
+
         /*  ID - AÇÃO:
             ----------------
             1 - CADASTRO
@@ -275,22 +262,6 @@ class Usuario extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
         $log->save();
 
     }
-
-
-    public function save($runValidation = true, $attributeNames = NULL){
-        parent::save($runValidation , $attributeNames);
-        foreach ($this->gestores as $key => $value) {
-
-                $usuarioGestor = new UsuarioGestor();
-                $usuarioGestor->idUsuario = $this->getId();
-                $usuarioGestor->idGestor = $value;
-                $usuarioGestor->save();
-        }
-        
-        return null;        
-    }
-
-
 
 
 

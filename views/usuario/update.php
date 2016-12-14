@@ -65,6 +65,9 @@ $this->params['breadcrumbs'][] = $this->title;
 	      		}
 
 	      	?>
+	      	<?php
+              $todosGestores = ArrayHelper::map($todosGestores, 'id', 'nome');
+          ?>
 	      	<div class="checkbox">
 	        	<?= $form->field($model, 'gestores')->checkBoxList($todosGestores, ['template'=>'{input} <p>{label}</p>', 'separator'=>'</br>'])->label(false); 
 	        	?>
