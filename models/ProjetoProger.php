@@ -15,7 +15,7 @@ use Yii;
  * @property integer $idSetor
  * @property integer $idPrograma
  * @property integer $interdepartamental
- * @property integer $interrinstituicional
+ * @property integer $interinstitucional
  * @property string $dataInicio
  * @property string $dataFim
  * @property string $observacoes
@@ -42,9 +42,9 @@ class ProjetoProger extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['nome', 'descricao', 'idSituacao', 'idAreaAtuacao', 'idSetor', 'interdepartamental', 'interrinstituicional', 'dataInicio', 'dataFim', 'idGestor'], 'required'],
+            [['nome', 'descricao', 'idSituacao', 'idAreaAtuacao', 'idSetor', 'interdepartamental', 'interinstitucional', 'dataInicio', 'dataFim', 'idGestor'], 'required'],
             [['nome', 'descricao', 'observacoes'], 'string'],
-            [['idSituacao', 'idAreaAtuacao', 'idSetor', 'idPrograma', 'interdepartamental', 'interrinstituicional', 'idGestor'], 'integer'],
+            [['idSituacao', 'idAreaAtuacao', 'idSetor', 'idPrograma', 'interdepartamental', 'interinstitucional', 'idGestor'], 'integer'],
             [['dataInicio', 'dataFim'], 'safe'],
             [['idAreaAtuacao'], 'exist', 'skipOnError' => true, 'targetClass' => AreaAtuacao::className(), 'targetAttribute' => ['idAreaAtuacao' => 'id']],
             [['idGestor'], 'exist', 'skipOnError' => true, 'targetClass' => Gestor::className(), 'targetAttribute' => ['idGestor' => 'id']],
@@ -67,7 +67,7 @@ class ProjetoProger extends \yii\db\ActiveRecord
             'idSetor' => 'Setor',
             'idPrograma' => 'Programa',
             'interdepartamental' => 'Interdepartamental',
-            'interrinstituicional' => 'Interrinstituicional',
+            'interinstitucional' => 'interinstitucional',
             'dataInicio' => 'Data de Início',
             'dataFim' => 'Data do Fim',
             'observacoes' => 'Observações',

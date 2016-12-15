@@ -19,7 +19,7 @@ class ProjetoProgerSearch extends ProjetoProger
     public function rules()
     {
         return [
-            [['id', 'idSituacao', 'idAreaAtuacao', 'idSetor', 'idPrograma', 'interdepartamental', 'interrinstituicional', 'idGestor'], 'integer'],
+            [['id', 'idSituacao', 'idAreaAtuacao', 'idSetor', 'idPrograma', 'interdepartamental', 'interinstitucional', 'idGestor'], 'integer'],
             [['nome', 'descricao', 'dataInicio', 'dataFim', 'observacoes'], 'safe'],
         ];
     }
@@ -63,10 +63,10 @@ class ProjetoProgerSearch extends ProjetoProger
             'id' => $this->id,
             'idSituacao' => $this->idSituacao,
             'idAreaAtuacao' => $this->idAreaAtuacao,
-            'idSetor' => Setor::,
+            'idSetor' => $this->idSetor,
             'idPrograma' => $this->idPrograma,
             'interdepartamental' => $this->interdepartamental,
-            'interrinstituicional' => $this->interrinstituicional,
+            'interinstitucional' => $this->interinstitucional,
             'dataInicio' => $this->dataInicio,
             'dataFim' => $this->dataFim,
             'idGestor' => $this->idGestor,

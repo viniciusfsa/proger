@@ -28,8 +28,8 @@ use kartik\widgets\DatePicker;
         $model->isNewRecord ? $model->interdepartamental = 1: $model->interdepartamental = $model->interdepartamental ; ?>    
     <?= $form->field($model, 'interdepartamental')->radioList(array('1'=>'Sim','0'=>'Não')) ?>
 
-    <?php $model->isNewRecord ? $model->interrinstituicional = 1: $model->interrinstituicional = $model->interrinstituicional ;  ?>
-    <?= $form->field($model, 'interrinstituicional')->radioList(array('1'=>'Sim','0'=>'Não')) ?>
+    <?php $model->isNewRecord ? $model->interinstitucional = 1: $model->interinstitucional = $model->interinstitucional ;  ?>
+    <?= $form->field($model, 'interinstitucional')->radioList(array('1'=>'Sim','0'=>'Não')) ?>
 
     <?= $form->field($model, 'dataInicio', ['options' => ['style' =>'width: 20%']])->widget(DatePicker::classname(),
         ['options' => ['placeholder' => ''],
