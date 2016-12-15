@@ -46,7 +46,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'dataResolucao',
                 'headerOptions' => ['style'=>'text-align:center; width: 150px;'],
                 'filter' => DatePicker::widget([
-                        'name' => 'Data Resolução',
+                        'model' => $searchModel,
+                        'attribute' => 'dataResolucao',
                         'options' => ['placeholder' => ''],
                         'type' => DatePicker::TYPE_INPUT,
 
@@ -54,6 +55,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             'autoclose'=>false,
                             'format' => 'dd/mm/yyyy',
                             'todayHighlight' => true,
+                            'clearBtn' => true,
                         ]
                     ]),
                 'value' => function($model, $index, $dataColumn) {
@@ -65,7 +67,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'dataPublicacao',
                 'headerOptions' => ['style'=>'text-align:center; width: 150px;'],
                 'filter' => DatePicker::widget([
-                        'name' => 'Data Publicação',
+                        'model' => $searchModel,
+                        'attribute' => 'dataPublicacao',
                         'options' => ['placeholder' => ''],
                         'type' => DatePicker::TYPE_INPUT,
 
@@ -73,6 +76,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             'autoclose'=>false,
                             'format' => 'dd/mm/yyyy',
                             'todayHighlight' => true,
+                            'clearBtn' => true,
                         ]
                     ]),
                 'value' => function($model, $index, $dataColumn) {
