@@ -2,7 +2,10 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
-
+use app\models\Situacao;
+use app\models\AreaAtuacao;
+use app\models\Setor;
+use app\models\Programa;
 /* @var $this yii\web\View */
 /* @var $model app\models\ProjetoProger */
 
@@ -31,14 +34,38 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'nome',
             'descricao',
-            'idSituacao',
-            'idAreaAtuacao',
-            'idSetor',
-            'idPrograma',
+            //'idSituacao',
+            [
+                'attribute' => 'idSituacao',
+                'value' => Situacao::findOne($model->idSituacao)->nome,
+            ],
+            //'idAreaAtuacao',
+            [
+                'attribute' => 'idAreaAtuacao',
+                'value' => AreaAtuacao::findOne($model->idAreaAtuacao)->nome,
+            ],
+            //'idSetor',
+            [
+                'attribute' => 'idSetor',
+                'value' => Setor::findOne($model->idSetor)->nome,
+            ],
+            //'idPrograma',
+            [
+                'attribute' => 'idPrograma',
+                'value' => Programa::findOne($model->idPrograma)->nome,
+            ],
             'interdepartamental',
             'interinstitucional',
-            'dataInicio',
-            'dataFim',
+            //'dataInicio',
+            [
+                'attribute' => 'dataInicio',
+                'value' => date_format(date_create($model->dataResolucao), 'd/m/Y'),
+            ],
+            //'dataFim',
+            [
+                'attribute' => 'dataFim',
+                'value' => date_format(date_create($model->dataResolucao), 'd/m/Y'),
+            ],
             'observacoes',
             'idGestor',
         ],

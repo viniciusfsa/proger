@@ -35,7 +35,6 @@ $this->params['breadcrumbs'][] = $this->title;
             //'idPais',
             [
                 'attribute' => 'idPais',
-                'label' => 'País',
                 'value' => Pais::findOne($model->idPais)->nome,
             ],         
         ],

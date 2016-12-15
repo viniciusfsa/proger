@@ -3,6 +3,8 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 use app\models\Setor;
+use app\models\Situacao;
+use app\models\AreaAtuacao;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\search\ProjetoProgerSearch */
@@ -28,8 +30,26 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'nome',
             //'descricao',
-            'idSituacao',
-            'idAreaAtuacao',
+            //'idSituacao',
+            [
+                'attribute' => 'idSituacao',
+                'filter' => Situacao::dropdown(),
+                'value' => function($model, $index, $dataColumn) {
+                    $dropdown = Situacao::dropdown();
+                    return $dropdown[$model->idSituacao];
+                },
+                'headerOptions' => ['style'=>'text-align:center; width: 260px']
+            ],
+            //'idAreaAtuacao',
+            [
+                'attribute' => 'idAreaAtuacao',
+                'filter' => AreaAtuacao::dropdown(),
+                'value' => function($model, $index, $dataColumn) {
+                    $dropdown = AreaAtuacao::dropdown();
+                    return $dropdown[$model->idAreaAtuacao];
+                },
+                'headerOptions' => ['style'=>'text-align:center; width: 260px']
+            ],
             //'idSetor',
             [
                 'attribute' => 'idSetor',

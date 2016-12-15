@@ -34,13 +34,11 @@ $this->params['breadcrumbs'][] = $this->title;
             //'dataResolucao',
             [
                 'attribute' => 'dataResolucao',
-                'label' => 'Data da Resolução',
                 'value' => date_format(date_create($model->dataResolucao), 'd/m/Y'),
             ],
             //'dataPublicacao',
             [
                 'attribute' => 'dataPublicacao',
-                'label' => 'Data da Publicação',
                 'value' => date_format(date_create($model->dataPublicacao), 'd/m/Y'),
             ],
             'observacao',
