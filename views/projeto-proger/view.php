@@ -36,7 +36,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'idSetor',
             'idPrograma',
             'interdepartamental',
-            'interrinstituicional',
+            'interinstitucional',
             'dataInicio',
             'dataFim',
             'observacoes',

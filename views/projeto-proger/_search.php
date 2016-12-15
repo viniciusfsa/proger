@@ -31,7 +31,7 @@ use yii\widgets\ActiveForm;
 
     <?php // echo $form->field($model, 'interdepartamental') ?>
 
-    <?php // echo $form->field($model, 'interrinstituicional') ?>
+    <?php // echo $form->field($model, 'interinstitucional') ?>
 
     <?php // echo $form->field($model, 'dataInicio') ?>
 

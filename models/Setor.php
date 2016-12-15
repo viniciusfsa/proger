@@ -95,6 +95,17 @@ class Setor extends \yii\db\ActiveRecord
                 return 'Inativo';
                 break;
         }
-
     }
+
+    public static function dropdown() { 
+ 
+       $models = static::find()->orderBy('nome')->all(); 
+       $dropdown = null; 
+ 
+       foreach ($models as $model) { 
+           $dropdown[$model->id] = $model->nome; 
+       } 
+ 
+       return $dropdown; 
+   } 
 }
