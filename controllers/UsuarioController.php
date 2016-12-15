@@ -75,11 +75,23 @@ class UsuarioController extends Controller
      */
     public function actionView($id)
     {
+        $connection = \Yii::$app->db;        
+
+        $sql = "SELECT g.nome from usuarioGestor ug 
+        INNER JOIN gestor g ON ug.idGestor = g.id
+        where idUsuario = ".$id;
+
+        $command = $connection->createCommand($sql);
+        $resultado = $command->queryAll();
+
+        //var_dump($resultado);
+        //die();
 
         if(\Yii::$app->user->can('gerenciar-usuario')){
 
             return $this->render('view', [
                 'model' => $this->findModel($id),
+                'gestores' =>$resultado,
             ]);
 
         }

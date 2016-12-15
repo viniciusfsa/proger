@@ -204,14 +204,18 @@ class Usuario extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
         $role = $auth->getRole($this->nameGrupo);
         $auth->assign($role, $this->idUsuario);
 
+        //Exclui os setores gestores vinculados ao usuario
+        $connection = \Yii::$app->db;
+        $connection->createCommand('DELETE FROM usuarioGestor where idUsuario = '.$this->idUsuario)->execute();
 
-
-        foreach ($this->gestores as $key => $value) {
-
-                $usuarioGestor = new UsuarioGestor();
-                $usuarioGestor->idUsuario = $this->getId();
-                $usuarioGestor->idGestor = $value;
-                $usuarioGestor->save();
+        //Adiciona os setores gestores
+        if($this->gestores){
+            foreach ($this->gestores as $key => $value) {
+                    $usuarioGestor = new UsuarioGestor();
+                    $usuarioGestor->idUsuario = $this->getId();
+                    $usuarioGestor->idGestor = $value;
+                    $usuarioGestor->save();
+            }
         }
 
 

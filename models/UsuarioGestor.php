@@ -42,8 +42,7 @@ class UsuarioGestor extends \yii\db\ActiveRecord
      */
     public function attributeLabels()
     {
-        return [
-            'id' => 'ID',
+        return [            
             'idUsuario' => 'Id Usuario',
             'idGestor' => 'Id Gestor',
         ];

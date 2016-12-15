@@ -2,6 +2,8 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use yii\grid\GridView;
+use yii\data\ArrayDataProvider;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Usuario */
@@ -52,5 +54,37 @@ $this->params['breadcrumbs'][] = $model->nome;
             ],
         ],
     ]) ?>
+
+
+    <?php
+       // var_dump($gestores);
+       // die();
+    ?>
+
+    <?php
+        $provider = new ArrayDataProvider([
+        'allModels' => $gestores,
+        'pagination' => [
+            'pageSize' => 10,
+        ],
+        'sort' => [
+            'attributes' => ['nome'],
+        ],
+    ]);
+    ?>
+
+    <label>Setores de Gestão: </label>
+
+    <?= GridView::widget([
+        'dataProvider' => $provider,
+    ]) ?>
+
+     
+
+
+
+
+
+    
 
 </div>
