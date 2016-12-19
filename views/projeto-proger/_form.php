@@ -63,6 +63,7 @@ use app\models\Gestor;
     <?= $form->field($model, 'observacoes')->textArea(['maxlength' =>500,'style' =>'width: 50%' ]) ?>
 
     <?= $form->field($model, 'idGestor')->dropDownList(ArrayHelper::map(Gestor::find()->orderBy('nome')->all(),'id', 'nome'),['prompt'=>'Selecione um gestor', 'style' =>'width: 50%']) ?>
+    
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Salvar' : 'Atualizar', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
