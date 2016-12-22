@@ -5,13 +5,15 @@ use yii\widgets\DetailView;
 use app\models\Situacao;
 use app\models\AreaAtuacao;
 use app\models\Setor;
-use app\models\Programa;
+use app\models\Gestor;
+use app\models\ProgramaProger;
 /* @var $this yii\web\View */
 /* @var $model app\models\ProjetoProger */
 
 $this->title = $model->nome;
-$this->params['breadcrumbs'][] = ['label' => 'Projets', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Projetos', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
+
 ?>
 <div class="projeto-proger-view">
 
@@ -52,22 +54,34 @@ $this->params['breadcrumbs'][] = $this->title;
             //'idPrograma',
             [
                 'attribute' => 'idPrograma',
-                'value' => Programa::findOne($model->idPrograma)->nome,
+                'value' => ProgramaProger::findOne($model->idPrograma)->nome,
             ],
-            'interdepartamental',
-            'interinstitucional',
+            //'interdepartamental',
+            [            
+                'attribute' => 'interdepartamental',                
+                'value' => $model->getInterdepartamental(),                
+            ],
+            //'interinstitucional',
+            [            
+                'attribute' => 'interinstitucional',                
+                'value' => $model->getInterinstitucional(),                
+            ],
             //'dataInicio',
             [
                 'attribute' => 'dataInicio',
-                'value' => date_format(date_create($model->dataResolucao), 'd/m/Y'),
+                'value' => date_format(date_create($model->dataInicio), 'd/m/Y'),
             ],
             //'dataFim',
             [
                 'attribute' => 'dataFim',
-                'value' => date_format(date_create($model->dataResolucao), 'd/m/Y'),
+                'value' => date_format(date_create($model->dataFim), 'd/m/Y'),
             ],
             'observacoes',
-            'idGestor',
+            //'idGestor',
+            [
+                'attribute' => 'idGestor',
+                'value' => Gestor::findOne($model->idGestor)->nome,
+            ],
         ],
     ]) ?>
 

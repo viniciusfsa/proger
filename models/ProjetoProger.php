@@ -106,4 +106,28 @@ class ProjetoProger extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Situacao::className(), ['id' => 'idSituacao']);
     }
+
+     public function getInterdepartamental(){
+        switch ($this->interdepartamental) {
+            case 1:
+                return 'Sim';
+                break;
+
+            case 0:
+                return 'Não';
+                break;
+        }
+     }
+
+     public function getInterinstitucional(){
+        switch ($this->interinstitucional) {
+            case 1:
+                return 'Sim';
+                break;
+
+            case 0:
+                return 'Não';
+                break;
+        }
+     }
 }

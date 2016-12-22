@@ -40,7 +40,7 @@ use app\models\Gestor;
         ['options' => ['placeholder' => ''],
           'value' => date('d-M-Y'),
           'type' => DatePicker::TYPE_COMPONENT_APPEND,
-          
+
           'pluginOptions' => [
             'autoclose'=>true,
             'format' => 'dd/mm/yyyy',
