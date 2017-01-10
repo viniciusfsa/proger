@@ -57,7 +57,7 @@ AppAsset::register($this);
                          ['label' => 'Evento', 'url' => ['evento-proger/index']],
                       
                     ],
-                    //'visible' => Yii::$app->user->can('gerenciar-usuario')
+                    'visible' => Yii::$app->user->can('gerenciamento-cadastros-avancados') 
                 ],
 
                 [
