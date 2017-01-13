@@ -61,6 +61,12 @@ $this->params['breadcrumbs'][] = $this->title;
 			</div>
 		</div>
 
+		<div class="row">
+			<div class="col-md-3">
+				<?= $form->field($model, 'email')->textInput(['maxlength' => 100])->label('Email: ') ?>
+			</div>
+		</div>
+
 		<div class="panel panel-default">
         <div class="panel-heading"><b>Setor de Gestão</b></div>
         <div class="panel-body">

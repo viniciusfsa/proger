@@ -52,9 +52,10 @@ class Usuario extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     public function rules()
     {
         return [
-            [['nome', 'login', 'senha', 'nameGrupo', 'situacao'], 'required'],
+            [['nome', 'login', 'senha', 'nameGrupo', 'situacao', 'email'], 'required'],
             [['nome', 'login', 'senha'], 'string'],
             [['idUsuario', 'situacao'], 'integer'],
+            [['email'], 'email'],
             [['repeat_password'], 'required', 'message' => 'Confirme sua senha.', 'on' => ['cadastro', 'redefinirSenha']],
             [['senha, repeat_password'], 'required', 'on'=>['cadastro', 'redefinirSenha']],
             ['repeat_password', 'compare', 'compareAttribute'=>'senha', 'message'=>"As senhas não correspondem.", 'on'=>['cadastro','redefinirSenha']],
@@ -65,7 +66,7 @@ class Usuario extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     public function scenarios()
     {
         return [
-            'cadastro' => ['nome', 'login', 'senha', 'nameGrupo', 'repeat_password', 'situacao','gestores'],
+            'cadastro' => ['nome', 'login', 'senha', 'nameGrupo', 'repeat_password', 'situacao','gestores', 'email', 'verification_code'],
             'update' => ['nome', 'login', 'nameGrupo', 'situacao','gestores'],
             'redefinirSenha' => ['senha', 'repeat_password'],
         ];
@@ -85,6 +86,8 @@ class Usuario extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
             'repeat_password' => 'Confirmação de senha',
             'situacao' => 'Situação',
             'gestores' => 'Gestores',
+            'email' => 'Email',
+            'verification_code' => 'Verification Code',
         ];
     }
     

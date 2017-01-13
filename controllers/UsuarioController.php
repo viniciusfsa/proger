@@ -147,7 +147,10 @@ class UsuarioController extends Controller
             $gestores = Gestor::find()->all();            
             $model->scenario = 'cadastro';
 
-            if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            if ($model->load(Yii::$app->request->post()) ) {
+
+                $model->verification_code = '123456789';
+                $model->save();
 
                 return $this->redirect(['index']);
                 
