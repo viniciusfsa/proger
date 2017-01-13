@@ -105,29 +105,35 @@ class UsuarioController extends Controller
     public function actionMinhaConta($id)
     {
 
-        $model = $this->findModel($id);
-        $model->scenario = 'redefinirSenha'; 
+        if(\Yii::$app->user->id == $id){ //Verifica se o id passando como parâmetro corresponde ao usuário logado, evitando que o usuário possa alterar senha de outro
+            $model = $this->findModel($id);
+            $model->scenario = 'redefinirSenha'; 
 
-        if(Yii::$app->request->isAjax){
+            if(Yii::$app->request->isAjax){
 
-            Yii::$app->response->format = Response::FORMAT_JSON;
+                Yii::$app->response->format = Response::FORMAT_JSON;
 
-            if ($model->load(Yii::$app->request->post()) && $model->save()) {
+                if ($model->load(Yii::$app->request->post()) && $model->save()) {
 
-                return 'Senha alterada com sucesso!';
+                    return 'Senha alterada com sucesso!';
+
+                }
+                else{
+                    return 'Não foi possível alterar sua senha.';
+                }
 
             }
             else{
-                return 'Não foi possível alterar sua senha.';
-            }
 
+                return $this->render('minha-conta', [
+                    'model' => $model,
+                ]);
+
+            }
         }
         else{
 
-            return $this->render('minha-conta', [
-                'model' => $model,
-            ]);
-
+            throw new \yii\web\ForbiddenHttpException('Você não está autorizado a realizar essa ação.');
         }
 
 
