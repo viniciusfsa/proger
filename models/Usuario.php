@@ -68,7 +68,8 @@ class Usuario extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
         return [
             'cadastro' => ['nome', 'login', 'senha', 'nameGrupo', 'repeat_password', 'situacao','gestores', 'email', 'verification_code'],
             'update' => ['nome', 'login', 'nameGrupo', 'situacao','gestores'],
-            'redefinirSenha' => ['senha', 'repeat_password'],
+            'recoverpass' => ['verification_code'],
+            'resetpass' => ['senha', 'repeat_password'],
         ];
     }
 

@@ -41,11 +41,9 @@ $this->title = 'Login';
     
     <?= $form->field($model, 'username')->label('Usuário:'); ?>
     <?= $form->field($model, 'password')->passwordInput()->label('Senha:') ?>
-    <a href="recuperar-senha.php">
-        Redefinir Senha
-    <br />
+    <a href="index.php?r=site%2Frecoverpass">
+        Esqueci minha Senha        
     </a>
-
     <div class="form-group"> 
          <?= Html::submitButton('Entrar', ['class' => 'btn btn-primary', 'name' => 'login-button', 'style' => 'width: 30%']) ?>
     </div> 

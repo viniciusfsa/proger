@@ -279,16 +279,16 @@ class UsuarioController extends Controller
 
     }
 
-    public function actionRedefinirsenha($id)
+    public function actionRecoverpass($id)
     {
 
         if(\Yii::$app->user->can('gerenciar-usuario')){
 
             $model = $this->findModel($id);
-            $model->scenario = 'redefinirSenha';
+            $model->scenario = 'recoverpass';
 
             if($model->senha == null){
-                return $this->render('redefinirSenha', [
+                return $this->render('recoverpass', [
                     'model' => $model,
                 ]);
             }
@@ -296,7 +296,35 @@ class UsuarioController extends Controller
             else if ($model->load(Yii::$app->request->post()) && $model->save()) {
                 return $this->redirect(['index']);
             } else {
-                return $this->render('redefinirSenha', [
+                return $this->render('recoverpass', [
+                    'model' => $model,
+                ]);
+            }
+
+        }
+        else{
+
+            throw new \yii\web\ForbiddenHttpException('Você não está autorizado a realizar essa ação.');
+        }
+
+    public function actionResetpass($id)
+    {
+
+        if(\Yii::$app->user->can('gerenciar-usuario')){
+
+            $model = $this->findModel($id);
+            $model->scenario = 'resetpass';
+
+            if($model->senha == null){
+                return $this->render('resetpass', [
+                    'model' => $model,
+                ]);
+            }
+
+            else if ($model->load(Yii::$app->request->post()) && $model->save()) {
+                return $this->redirect(['index']);
+            } else {
+                return $this->render('resetpass', [
                     'model' => $model,
                 ]);
             }
