@@ -19,11 +19,11 @@ use yii\widgets\ActiveForm;
 </div>
  
 <div class="form-group">
- <?= $form->field($model, "password")->input("password") ?>  
+ <?= $form->field($model, "password")->passwordInput(['maxlength' => 10])->label('Senha: ')->hint('Máximo: 10 caracteres')?>  
 </div>
  
 <div class="form-group">
- <?= $form->field($model, "password_repeat")->input("password") ?>  
+ <?= $form->field($model, "password_repeat")->passwordInput(['maxlength' => 10])->label('Senha: ')->hint('Máximo: 10 caracteres') ?>  
 </div>
 
 <div class="form-group">

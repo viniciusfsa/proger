@@ -21,6 +21,18 @@ use yii\helpers\ArrayHelper;
  */
 class UsuarioController extends Controller
 {
+
+    private function randKey ($str='', $long=0){
+        $key = null;
+        $str = str_split($str);
+        $start = 0;
+        $limit = count($str)-1;
+        for ($x=0; $x<$long; $x++){
+            $key .= $str[rand($start, $limit)];
+        }
+        return $key;
+    }
+
     public function behaviors()
     {
         return [
@@ -107,7 +119,7 @@ class UsuarioController extends Controller
 
         if(\Yii::$app->user->id == $id){ //Verifica se o id passando como parâmetro corresponde ao usuário logado, evitando que o usuário possa alterar senha de outro
             $model = $this->findModel($id);
-            $model->scenario = 'redefinirSenha'; 
+            $model->scenario = 'recoverpass'; 
 
             if(Yii::$app->request->isAjax){
 
@@ -155,7 +167,7 @@ class UsuarioController extends Controller
 
             if ($model->load(Yii::$app->request->post()) ) {
 
-                $model->verification_code = '123456789';
+                $model->verification_code = $this->randKey("abcdefghijklmnopqrstuvxwyz0123456789", 8);
                 $model->save();
 
                 return $this->redirect(['index']);

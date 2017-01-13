@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use Yii;
 use yii\filters\AccessControl;
+use app\controllers\Url;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
@@ -13,6 +14,7 @@ use yii\web\Session;
 use app\models\FormRecoverPass;
 use app\models\FormResetPass;
 use app\models\Usuario;
+
 class SiteController extends Controller
 {
 
@@ -32,7 +34,7 @@ class SiteController extends Controller
   
   //Instancia para validar el formulario
   $model = new FormRecoverPass;
-
+  
   //Mensaje que será mostrado al usuario en la vista
   $msg = null;
   
@@ -41,10 +43,10 @@ class SiteController extends Controller
    if ($model->validate())
    {
     //Buscar al usuario a través del email
-    $table = Usuario::find()->where("email=:email", [":email" => $model->email]);
-    $model->scenario = 'recoverpass';
+    $table = Usuario::find()->where("email=:email", [":email" => $model->email])->one();
+    $table->scenario = 'recoverpass';
     //Si el usuario existe
-    if ($table->count() == 1)
+    if (count($table) == 1)
     {
      //Crear variables de sesión para limitar el tiempo de restablecido del password
      //hasta que el navegador se cierre
@@ -59,6 +61,7 @@ class SiteController extends Controller
      //El id del usuario es requerido para generar la consulta a la tabla users y 
      //restablecer el password del usuario
      $table = Usuario::find()->where("email=:email", [":email" => $model->email])->one();
+     $table->scenario = 'recoverpass';
      $session["id_recover"] = $table->id;
      
      //Esta variable contiene un número hexadecimal que será enviado en el correo al usuario 
@@ -74,7 +77,7 @@ class SiteController extends Controller
      $subject = "Recuperar senha - PROGER";
      $body = "<p>Copie o seguinte código de verificação para recuperar sua senha ... ";
      $body .= "<strong>".$verification_code."</strong></p>";
-     $body .= "<p><a href='http://yii.local/index.php?r=site/resetpass'>Recuperar senha</a></p>";
+     $body .= "<p><a href='http://localhost/proger/web/index.php?r=site/resetpass'>Recuperar senha</a></p>";
 
      //Enviamos el correo
      Yii::$app->mailer->compose()
@@ -146,10 +149,10 @@ class SiteController extends Controller
      //Preparamos la consulta para resetear el password, requerimos el email, el id 
      //del usuario que fue guardado en una variable de session y el código de verificación
      //que fue enviado en el correo al usuario y que fue guardado en el registro
-     $table = Usuario::findOne(["email" => $model->email, "id" => $id_recover, "verification_code" => $model->verification_code]);
-     $model->scenario = 'resetpass';
+     $table = Usuario::findOne(["email" => $model->email, "idUsuario" => $id_recover, "verification_code" => $model->verification_code]);
+     $table->scenario = 'resetpass';
      //Encriptar el password
-     $table->password = crypt($model->password, Yii::$app->params["salt"]);
+     $table->senha = $model->password;
      
      //Si la actualización se lleva a cabo correctamente
      if ($table->save())

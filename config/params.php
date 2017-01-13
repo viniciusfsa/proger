@@ -1,5 +1,6 @@
 <?php
 
 return [
-    'adminEmail' => 'admin@example.com',
+    'adminEmail' => 'proger@gmail.com', //necessita de um email
+    'title' => 'PROGER',
 ];
