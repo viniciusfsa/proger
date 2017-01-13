@@ -122,7 +122,8 @@ AppAsset::register($this);
                 ) : 
                      [
                      //'label' => Yii::$app->user->identity->nome.' ('.$auth->getRole(Yii::$app->user->identity->nameGrupo)->description.')',
-                     'label' => Yii::$app->user->identity->login,//.' ('.$auth->getRole(Yii::$app->user->identity->login)->description.')',
+                     //'label' => Yii::$app->user->identity->login,//.' ('.$auth->getRole(Yii::$app->user->identity->login)->description.')',
+                     'label' => 'Acesso (Sair)',
                             'items' => [
                                 [
                                     'label' => 'Minha Conta',

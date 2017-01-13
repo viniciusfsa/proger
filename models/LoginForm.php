@@ -74,6 +74,11 @@ class LoginForm extends Model
     {
         if ($this->_user === false) {
             $this->_user = Usuario::findByUsername($this->username);
+            if($this->_user){ //Se o usuário estiver inativo, ele não faz login no sistema
+                if($this->_user->situacao == 0){
+                    return null;
+                }
+            }
         }
 
         return $this->_user;

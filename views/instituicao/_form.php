@@ -22,7 +22,6 @@ use app\models\pais;
     $form->field($model, 'idPais')->dropDownList(ArrayHelper::map(pais::find()->orderBy('nome')->all(),'id','nome'),['style' =>'width: 30%'],['prompt'=>'']); 
 
     ?>
-
      <?php $model->isNewRecord ? $model->ativo = 1: $model->ativo = $model->ativo ;  ?>
     <?=
     // $form->field($model, 'ativo')->textInput()
