@@ -154,7 +154,7 @@ class Usuario extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 
     public function beforeSave($insert) {
 
-        if($this->scenario == 'redefinirSenha' || $this->scenario == 'cadastro'){
+        if($this->scenario == 'redefinirSenha' || $this->scenario == 'cadastro' || $this->scenario == 'recoverpass' || $this->scenario == 'resetpass'){
             if(isset($this->senha)){
                 $this->senha = md5($this->senha);
             }

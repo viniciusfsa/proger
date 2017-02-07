@@ -1,6 +1,6 @@
 <?php
 
 return [
-    'adminEmail' => 'proger@gmail.com', //necessita de um email
+    'adminEmail' => 'jhonedarts@uefs.br', //necessita de um email
     'title' => 'PROGER',
 ];

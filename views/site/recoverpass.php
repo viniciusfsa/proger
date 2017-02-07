@@ -15,7 +15,7 @@ use yii\widgets\ActiveForm;
 ?>
  
 <div class="form-group">
- <?= $form->field($model, "email")->input("email") ?>  
+ <?= $form->field($model, "email")->textInput(['maxlength' =>100,'style' =>'width: 50%' ]) ?>  
 </div>
  
 <?= Html::submitButton("Recuperar Senha", ["class" => "btn btn-primary"]) ?>

@@ -15,19 +15,19 @@ use yii\widgets\ActiveForm;
 ?>
 
 <div class="form-group">
- <?= $form->field($model, "email")->input("email") ?>  
+ <?= $form->field($model, "email")->textInput(['maxlength' =>100,'style' =>'width: 50%' ]) ?>  
 </div>
  
 <div class="form-group">
- <?= $form->field($model, "password")->passwordInput(['maxlength' => 10])->label('Senha: ')->hint('Máximo: 10 caracteres')?>  
+ <?= $form->field($model, "password")->passwordInput(['maxlength' =>32,'style' =>'width: 50%' ])->label('Senha: ')->hint('Máximo: 32 caracteres')?>  
 </div>
  
 <div class="form-group">
- <?= $form->field($model, "password_repeat")->passwordInput(['maxlength' => 10])->label('Senha: ')->hint('Máximo: 10 caracteres') ?>  
+ <?= $form->field($model, "password_repeat")->passwordInput(['maxlength' =>32,'style' =>'width: 50%' ])->label('Senha: ')->hint('Máximo: 32 caracteres') ?>  
 </div>
 
 <div class="form-group">
- <?= $form->field($model, "verification_code")->input("text") ?>  
+ <?= $form->field($model, "verification_code")->textInput(['maxlength' =>32,'style' =>'width: 50%' ]) ?>  
 </div>
 
 <div class="form-group">

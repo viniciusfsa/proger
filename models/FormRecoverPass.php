@@ -12,8 +12,8 @@ class FormRecoverPass extends model{
     {
         return [
             ['email', 'required', 'message' => 'Campo requerido'],
-            ['email', 'match', 'pattern' => "/^.{5,80}$/", 'message' => 'Mínimo 5 y máximo 80 caracteres'],
-            ['email', 'email', 'message' => 'Formato no válido'],
+            ['email', 'match', 'pattern' => "/^.{5,100}$/", 'message' => 'Mínimo 5 e máximo 100 caracteres'],
+            ['email', 'email', 'message' => 'Formato inválido'],
         ];
     }
 }

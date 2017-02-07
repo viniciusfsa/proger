@@ -119,7 +119,7 @@ class UsuarioController extends Controller
 
         if(\Yii::$app->user->id == $id){ //Verifica se o id passando como parâmetro corresponde ao usuário logado, evitando que o usuário possa alterar senha de outro
             $model = $this->findModel($id);
-            $model->scenario = 'recoverpass'; 
+            $model->scenario = 'resetpass'; 
 
             if(Yii::$app->request->isAjax){
 
@@ -326,7 +326,7 @@ class UsuarioController extends Controller
 
             $model = $this->findModel($id);
             $model->scenario = 'resetpass';
-
+            
             if($model->senha == null){
                 return $this->render('resetpass', [
                     'model' => $model,
@@ -334,6 +334,7 @@ class UsuarioController extends Controller
             }
 
             else if ($model->load(Yii::$app->request->post()) && $model->save()) {
+                
                 return $this->redirect(['index']);
             } else {
                 return $this->render('resetpass', [

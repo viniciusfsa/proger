@@ -16,10 +16,10 @@ class FormResetPass extends model{
     {
         return [
             [['email', 'password', 'password_repeat', 'verification_code', 'recover'], 'required', 'message' => 'Campo requerido'],
-            ['email', 'match', 'pattern' => "/^.{5,80}$/", 'message' => 'Mínimo 5 y máximo 80 caracteres'],
-            ['email', 'email', 'message' => 'Formato no válido'],
-            ['password', 'match', 'pattern' => "/^.{8,16}$/", 'message' => 'Mínimo 6 y máximo 16 caracteres'],
-            ['password_repeat', 'compare', 'compareAttribute' => 'password', 'message' => 'Los passwords no coinciden'],
+            ['email', 'match', 'pattern' => "/^.{5,100}$/", 'message' => 'Mínimo 5 e máximo 100 caracteres'],
+            ['email', 'email', 'message' => 'Formato inválido'],
+            ['password', 'match', 'pattern' => "/^.{6,32}$/", 'message' => 'Mínimo 6 e máximo 32 caracteres'],
+            ['password_repeat', 'compare', 'compareAttribute' => 'password', 'message' => 'As senhas não coincidem'],
         ];
     }
 }

@@ -41,8 +41,8 @@ $config = [
             'transport' => [
                 'class' => 'Swift_SmtpTransport',
                 'host' => 'smtp.gmail.com',
-                'username' => '', //necessita de um email e senha
-                'password' => '',
+                'username' => 'jhonedarts@uefs.br', //necessita de um email e senha
+                'password' => 'omnitrix1@',
                 'port' => '587',
                 'encryption' => 'tls',
             ],
