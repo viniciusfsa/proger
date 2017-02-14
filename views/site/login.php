@@ -42,12 +42,13 @@ $this->title = 'Login';
     <?= $form->field($model, 'username')->label('Usuário:'); ?>
     <?= $form->field($model, 'password')->passwordInput()->label('Senha:') ?>
     <a href="index.php?r=site%2Frecoverpass">
-        Esqueci minha Senha        
+        <div class="form-group"> 
+         <?= Html::button('Esqueci minha senha', ['class' => 'btn btn-secondary', 'name' => 'resetPassword-button', 'style' => 'width: 40%']) ?>
+    </div>         
     </a>
     <div class="form-group"> 
-         <?= Html::submitButton('Entrar', ['class' => 'btn btn-primary', 'name' => 'login-button', 'style' => 'width: 30%']) ?>
+         <?= Html::submitButton('Entrar', ['class' => 'btn btn-primary', 'name' => 'login-button', 'style' => 'width: 40%']) ?>
     </div> 
-
     <?php ActiveForm::end(); ?>
     
  </div>
