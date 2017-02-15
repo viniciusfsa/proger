@@ -43,26 +43,15 @@ class SiteController extends Controller
    if ($model->validate())
    {
     //Buscar al usuario a través del email
-    $table = Usuario::find()->where("email=:email", [":email" => $model->email])->one();
-    $table->scenario = 'recoverpass';
+    $table = Usuario::find()->where("email=:email", [":email" => $model->email]);
     //Si el usuario existe
     if (count($table) == 1)
     {
-     //Crear variables de sesión para limitar el tiempo de restablecido del password
-     //hasta que el navegador se cierre
-     $session = new Session;
-     $session->open();
-     
-     //Esta clave aleatoria se cargará en un campo oculto del formulario de reseteado
-     $session["recover"] = $this->randKey("abcdefghijklmnopqrstuvxwyz123456789", 200);
-     $recover = $session["recover"];
-     
-     //También almacenaremos el id del usuario en una variable de sesión
+      //También almacenaremos el id del usuario en una variable de sesión
      //El id del usuario es requerido para generar la consulta a la tabla users y 
      //restablecer el password del usuario
-     $table = Usuario::find()->where("email=:email", [":email" => $model->email])->one();
+      $table = Usuario::find()->where("email=:email", [":email" => $model->email])->one();
      $table->scenario = 'recoverpass';
-     $session["id_recover"] = $table->id;
      
      //Esta variable contiene un número hexadecimal que será enviado en el correo al usuario 
      //para que lo introduzca en un campo del formulario de reseteado
@@ -70,14 +59,17 @@ class SiteController extends Controller
      $verification_code = $this->randKey("abcdefghijklmnopqrstuvxwyz0123456789", 8);
      //Columna verification_code
      $table->verification_code = $verification_code;
+     $table->trocar_senha = 1;
      //Guardamos los cambios en la tabla users
      $table->save();
      
-     //Creamos el mensaje que será enviado a la cuenta de correo del usuario
-     $subject = "Recuperar senha - PROGER";
-     $body = "<p>Copie o seguinte código de verificação para recuperar sua senha ... ";
-     $body .= "<strong>".$verification_code."</strong></p>";
-     $body .= "<p><a href='http://localhost/proger/web/index.php?r=site/resetpass'>Recuperar senha</a></p>";
+     //Criação de texto para email
+      $subject = "Recuperar Senha - Proger UEFS";
+      $body = "<p>Redefinir sua senha?</p>";
+      $body.= "<p>Se você solicitou uma redefinição de senha, clique no link abaixo.</p>"; 
+      $body.=  "<p>Se você não fez essa solicitação, ignore este e-mail...</p>";
+      $body.=  "<p><strong> Não compartilhe esse link com nínguem!!</strong></p> ";           
+      $body .= "<p><a href='".Yii::$app->params["enderecoSistema"]."index.php?r=site/resetpass&cod=".$verification_code."&email=".$model->email."'>Recuperar Senha</a></p>";
 
      //Enviamos el correo
      Yii::$app->mailer->compose()
@@ -95,7 +87,7 @@ class SiteController extends Controller
     }
     else //El usuario no existe
     {
-     $msg = "Ocorreu um erro!";
+     $msg = "Email não consta no banco de dados!";
     }
    }
    else
@@ -112,76 +104,53 @@ class SiteController extends Controller
     
   //Instancia para validar el formulario
   $model = new FormResetPass;
-  
+
+  $request = Yii::$app->request;
+  $get = $request->get();
+  $cod = $request->get('cod');
+  $email = $request->get('email');     
+
   //Mensaje que será mostrado al usuario
   $msg = null;
-  
-  //Abrimos la sesión
-  $session = new Session;
-  $session->open();
-  
-  //Si no existen las variables de sesión requeridas lo expulsamos a la página de inicio
-  if (empty($session["recover"]) || empty($session["id_recover"]))
-  {
-   return $this->redirect(["site/index"]);
-  }
-  else
-  {
-   
-   $recover = $session["recover"];
-   //El valor de esta variable de sesión la cargamos en el campo recover del formulario
-   $model->recover = $recover;
-   
-   //Esta variable contiene el id del usuario que solicitó restablecer el password
-   //La utilizaremos para realizar la consulta a la tabla users
-   $id_recover = $session["id_recover"];
-   
-  }
-  
+
   //Si el formulario es enviado para resetear el password
-  if ($model->load(Yii::$app->request->post()))
-  {
-   if ($model->validate())
-   {
-    //Si el valor de la variable de sesión recover es correcta
-    if ($recover == $model->recover)
-    {
-     //Preparamos la consulta para resetear el password, requerimos el email, el id 
-     //del usuario que fue guardado en una variable de session y el código de verificación
-     //que fue enviado en el correo al usuario y que fue guardado en el registro
-     $table = Usuario::findOne(["email" => $model->email, "idUsuario" => $id_recover, "verification_code" => $model->verification_code]);
-     $table->scenario = 'resetpass';
-     //Encriptar el password
-     $table->senha = $model->password;
-     
-     //Si la actualización se lleva a cabo correctamente
-     if ($table->save())
-     {
-      
-      //Destruir las variables de sesión
-      $session->destroy();
-      
-      //Vaciar los campos del formulario
-      $model->email = null;
-      $model->password = null;
-      $model->password_repeat = null;
-      $model->recover = null;
-      $model->verification_code = null;
-      
-      $msg = "Parabéns, senha resetada corretamente, redirecionando a página de login ...";
-      $msg .= "<meta http-equiv='refresh' content='5; ".Url::toRoute("site/login")."'>";
-     }
-     else
-     {
-      $msg = "Ocorreu um erro!";
-     }
+  if ($model->load(Yii::$app->request->post()))  {
+    if ($model->validate())   {
+      //Pesquisa se existe o usuário passado como parametro no link enviado para o email do usuário
+      $table = Usuario::findOne(["email" => $email]);
+
+      if(!$table || $table['verification_code']!=$cod || $table['email']!=$email || $table['trocar_senha']==0)
+              throw new \yii\web\ForbiddenHttpException('Você não está autorizado a realizar essa ação.');
+
+       //Encriptar el password
+       $table->senha = $model->password;
+       $table->trocar_senha = 0; 
+       
+       $table->scenario = 'resetpass';
+       //Si la actualización se lleva a cabo correctamente
+       if ($table->save())
+       {
+        
+        //Vaciar los campos del formulario
+        $model->password = null;
+        $model->password_repeat = null;
+        $model->recover = null;
+        $model->verification_code = null;
+        
+        $msg = "Parabéns, senha resetada corretamente, redirecionando a página de login ...";
+        $msg .= "<meta http-equiv='refresh' content='5; ".Url::toRoute("site/login")."'>";
+       }
+       else
+       {
+        $msg = "Ocorreu um erro!";
+       }
      
     }
     else
     {
      $model->getErrors();
     }
-   }
+   
   }
   
   return $this->render("resetpass", ["model" => $model, "msg" => $msg]);

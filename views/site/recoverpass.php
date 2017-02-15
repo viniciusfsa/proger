@@ -3,6 +3,8 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+
+$this->title = 'Recuperar Senha';
 ?>
  
 <h3><?= $msg ?></h3>
