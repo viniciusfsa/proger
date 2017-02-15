@@ -42,7 +42,8 @@ class Pessoa extends \yii\db\ActiveRecord
     {
         return [
             [['nome', 'cpf', 'rg', 'email', 'cep', 'rua', 'numero', 'bairro', 'idCidade', 'idEstado'], 'required'],
-            [['nome', 'cpf', 'rg', 'email', 'telefone', 'celular', 'cep', 'rua', 'numero', 'bairro'], 'string'],
+            [['nome',  'email', 'rua','bairro'], 'string'],
+            [['cpf','rg','telefone','celular','cep','numero'], 'integer'],
             [['idCidade', 'idEstado'], 'integer'],
             [['idCidade'], 'exist', 'skipOnError' => true, 'targetClass' => Cidade::className(), 'targetAttribute' => ['idCidade' => 'id']],
             [['idEstado'], 'exist', 'skipOnError' => true, 'targetClass' => Estado::className(), 'targetAttribute' => ['idEstado' => 'id']],
@@ -64,7 +65,7 @@ class Pessoa extends \yii\db\ActiveRecord
             'celular' => 'Celular',
             'cep' => 'CEP',
             'rua' => 'Rua',
-            'numero' => 'Numero',
+            'numero' => 'Número',
             'bairro' => 'Bairro',
             'idCidade' => 'Cidade',
             'idEstado' => 'Estado',

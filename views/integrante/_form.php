@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use \yii\helpers\ArrayHelper;
+use kartik\widgets\DatePicker;
 use app\models\TipoVinculo;
 use app\models\TipoFuncao;
 use app\models\Instituicao;
@@ -34,41 +35,56 @@ use app\models\Estado;
 
     <?php $modelPessoa = new app\models\Pessoa; ?>
 
-    <?= $form->field($modelPessoa, 'cpf')->textInput() ?>
+    <?= $form->field($modelPessoa, 'cpf')->textInput(['maxlength' =>15,'style' =>'width: 50%', 'placeholder'=>'Apenas números']) ?>
 
-    <?= $form->field($modelPessoa, 'rg')->textInput() ?>
+    <?= $form->field($modelPessoa, 'rg')->textInput(['maxlength' =>20,'style' =>'width: 50%', 'placeholder'=>'Apenas números']) ?>
 
-    <?= $form->field($modelPessoa, 'email')->textInput() ?>
+    <?= $form->field($modelPessoa, 'email')->textInput(['maxlength' =>45,'style' =>'width: 50%']) ?>
 
-    <?= $form->field($modelPessoa, 'telefone')->textInput() ?>
+    <?= $form->field($modelPessoa, 'telefone')->textInput(['maxlength' =>11, 'minlength' =>10, 'style' =>'width: 50%', 'placeholder'=>'Apenas números incluindo o DDD']) ?>
 
-    <?= $form->field($modelPessoa, 'celular')->textInput() ?>
+    <?= $form->field($modelPessoa, 'celular')->textInput(['maxlength' =>11, 'minlength' =>10, 'style' =>'width: 50%', 'placeholder'=>'Apenas números incluindo o DDD']) ?>
 
-    <?= $form->field($modelPessoa, 'rua')->textInput() ?>
+    <?= $form->field($modelPessoa, 'rua')->textInput(['maxlength' =>100,'style' =>'width: 50%']) ?>
 
-    <?= $form->field($modelPessoa, 'numero')->textInput() ?>
+    <?= $form->field($modelPessoa, 'numero')->textInput(['maxlength' =>10,'style' =>'width: 50%', 'placeholder'=>'Apenas números']) ?>
 
-    <?= $form->field($modelPessoa, 'bairro')->textInput() ?>
+    <?= $form->field($modelPessoa, 'bairro')->textInput(['maxlength' =>45,'style' =>'width: 50%']) ?>
 
-    <?= $form->field($modelPessoa, 'cep')->textInput() ?>
+    <?= $form->field($modelPessoa, 'cep')->textInput(['maxlength' =>8,'style' =>'width: 50%', 'placeholder'=>'Apenas números']) ?>
 
     <?= $form->field($modelPessoa, 'idEstado')->dropDownList(ArrayHelper::map(Estado::find()->orderBy('nome')->all(),'id', 'nome'),['prompt'=>'Selecione um estado', 'style' =>'width: 50%']) ?> 
 
     <?= $form->field($modelPessoa, 'idCidade')->dropDownList(ArrayHelper::map(Cidade::find()->where(['idEstado' => $modelPessoa->idEstado])->orderBy('nome')->all(),'id', 'nome'),['prompt'=>'Selecione uma cidade', 'style' =>'width: 50%']) ?> 
 
-    
+    <div class="form-group", style ="width: 50%">
+            <label>Duração: </label>
+            <?php
+                echo DatePicker::widget([
+                    'model' => $model,
+                    'attribute' => 'dataInicio',
+                    'attribute2' => 'dataFim',
+                    'options' => ['placeholder' => 'Data Inicial'],
+                    'options2' => ['placeholder' => 'Data Final'],
+                    'type' => DatePicker::TYPE_RANGE,
+                    'form' => $form,
+                    'separator' => ' até ',
+                    'pluginOptions' => [
+                        'format' => 'dd/mm/yyyy',
+                        'autoclose' => true,
+                    ],
+                ]);
+            ?>
+        </div>
 
+    <?php $model->ativo = 1; ?>
+    <?= //$form->field($model, 'ativo')->textInput()     
+    $form->field($model, 'ativo')->radioList(array('1'=>'Sim','0'=>'Não'));
+    ?>
 
+    <?= $form->field($model, 'matricula')->textInput(['maxlength' =>15,'style' =>'width: 50%', 'placeholder'=>'Apenas números']) ?>
 
-    <?= $form->field($model, 'dataInicio')->textInput() ?>
-
-    <?= $form->field($model, 'dataFim')->textInput() ?>
-
-    <?= $form->field($model, 'ativo')->textInput() ?>
-
-    <?= $form->field($model, 'matricula')->textInput() ?>
-
-    <?= $form->field($model, 'cargaHoraria')->textInput() ?>
+    <?= $form->field($model, 'cargaHoraria')->textInput(['maxlength' =>4,'style' =>'width: 50%', 'placeholder'=>'Apenas números']) ?>
 
     <?= $form->field($model, 'idTipoProger')->textInput() ?>
 
