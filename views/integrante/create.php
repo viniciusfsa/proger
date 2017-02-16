@@ -6,7 +6,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Integrante */
 
-$this->title = 'Create Integrante';
+$this->title = 'Novo Integrante';
 $this->params['breadcrumbs'][] = ['label' => 'Integrantes', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

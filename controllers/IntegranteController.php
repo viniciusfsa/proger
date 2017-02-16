@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use Yii;
 use app\models\Integrante;
+use app\models\Pessoa;
 use app\models\search\Integrante as IntegranteSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -64,12 +65,22 @@ class IntegranteController extends Controller
     public function actionCreate()
     {
         $model = new Integrante();
+        $modelPessoa = new Pessoa();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
+        if ($modelPessoa->load(Yii::$app->request->post()){
+            $model->idPessoa = $modelPessoa->id;
+            if ($model->load(Yii::$app->request->post()) && $model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            } else {
+                return $this->render('create', [
+                    'model' => $model,
+                    'modelPessoa' => $modelPessoa,
+                ]);
+            }
+        }else{
             return $this->render('create', [
                 'model' => $model,
+                'modelPessoa' => $modelPessoa,
             ]);
         }
     }
@@ -80,15 +91,17 @@ class IntegranteController extends Controller
      * @param integer $id
      * @return mixed
      */
-    public function actionUpdate($id)
+    public function actionUpdate($id,$idPessoa)
     {
         $model = $this->findModel($id);
+        $modelPessoa = $this->findModelPessoa($idPessoa);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if (($modelPessoa->load(Yii::$app->request->post()) && $modelPessoa->save()) && ($model->load(Yii::$app->request->post()) && $model->save())) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [
                 'model' => $model,
+                'modelPessoa' => $modelPessoa;,
             ]);
         }
     }
@@ -99,9 +112,10 @@ class IntegranteController extends Controller
      * @param integer $id
      * @return mixed
      */
-    public function actionDelete($id)
+    public function actionDelete($id,$idPessoa)
     {
         $this->findModel($id)->delete();
+        $this->findModelPessoa($idPessoa)->delete;
 
         return $this->redirect(['index']);
     }
@@ -116,6 +130,15 @@ class IntegranteController extends Controller
     protected function findModel($id)
     {
         if (($model = Integrante::findOne($id)) !== null) {
+            return $model;
+        } else {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
+    }
+
+    protected function findModelPessoa($id)
+    {
+        if (($model = Pessoa::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

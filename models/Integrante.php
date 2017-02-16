@@ -72,7 +72,7 @@ class Integrante extends \yii\db\ActiveRecord
             'idInstituicao' => 'Instituição',
             'idSetor' => 'Setor',
             'idCurso' => 'Curso',
-            'idPessoa' => 'Pessoa',
+            'idPessoa' => 'idPessoa',
             'dataInicio' => 'Data Início',
             'dataFim' => 'Data Fim',
             'ativo' => 'Ativo',

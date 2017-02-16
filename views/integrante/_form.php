@@ -35,6 +35,8 @@ use app\models\Estado;
 
     <?php $modelPessoa = new app\models\Pessoa; ?>
 
+    <!-- PESSOA    -->
+
     <?= $form->field($modelPessoa, 'cpf')->textInput(['maxlength' =>15,'style' =>'width: 50%', 'placeholder'=>'Apenas números']) ?>
 
     <?= $form->field($modelPessoa, 'rg')->textInput(['maxlength' =>20,'style' =>'width: 50%', 'placeholder'=>'Apenas números']) ?>
@@ -77,6 +79,8 @@ use app\models\Estado;
             ?>
         </div>
 
+    <!-- /PESSOA    -->
+
     <?php $model->ativo = 1; ?>
     <?= //$form->field($model, 'ativo')->textInput()     
     $form->field($model, 'ativo')->radioList(array('1'=>'Sim','0'=>'Não'));
@@ -91,7 +95,7 @@ use app\models\Estado;
     <?= $form->field($model, 'idProger')->textInput() ?>
 
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::submitButton($model->isNewRecord ? 'Salvar' : 'Atualizar', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
