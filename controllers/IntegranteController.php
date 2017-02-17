@@ -67,7 +67,7 @@ class IntegranteController extends Controller
         $model = new Integrante();
         $modelPessoa = new Pessoa();
 
-        if ($modelPessoa->load(Yii::$app->request->post()){
+        if ($modelPessoa->load(Yii::$app->request->post())){
             $model->idPessoa = $modelPessoa->id;
             if ($model->load(Yii::$app->request->post()) && $model->save()) {
                 return $this->redirect(['view', 'id' => $model->id]);
@@ -101,7 +101,7 @@ class IntegranteController extends Controller
         } else {
             return $this->render('update', [
                 'model' => $model,
-                'modelPessoa' => $modelPessoa;,
+                'modelPessoa' => $modelPessoa,
             ]);
         }
     }

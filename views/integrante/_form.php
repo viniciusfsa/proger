@@ -31,13 +31,13 @@ use app\models\Estado;
 
     <?= $form->field($model, 'idCurso')->dropDownList(ArrayHelper::map(Curso::find()->orderBy('nome')->all(),'id', 'nome'),['prompt'=>'Selecione um curso', 'style' =>'width: 50%']) ?>
 
-    <?= $form->field($model, 'idPessoa')->textInput() ?>
-
     <?php $modelPessoa = new app\models\Pessoa; ?>
 
     <!-- PESSOA    -->
 
     <?= $form->field($modelPessoa, 'cpf')->textInput(['maxlength' =>15,'style' =>'width: 50%', 'placeholder'=>'Apenas números']) ?>
+
+    <?= $form->field($modelPessoa, 'nome')->textInput(['maxlength' =>100,'style' =>'width: 50%']) ?>
 
     <?= $form->field($modelPessoa, 'rg')->textInput(['maxlength' =>20,'style' =>'width: 50%', 'placeholder'=>'Apenas números']) ?>
 
@@ -56,8 +56,8 @@ use app\models\Estado;
     <?= $form->field($modelPessoa, 'cep')->textInput(['maxlength' =>8,'style' =>'width: 50%', 'placeholder'=>'Apenas números']) ?>
 
     <?= $form->field($modelPessoa, 'idEstado')->dropDownList(ArrayHelper::map(Estado::find()->orderBy('nome')->all(),'id', 'nome'),['prompt'=>'Selecione um estado', 'style' =>'width: 50%']) ?> 
-
-    <?= $form->field($modelPessoa, 'idCidade')->dropDownList(ArrayHelper::map(Cidade::find()->where(['idEstado' => $modelPessoa->idEstado])->orderBy('nome')->all(),'id', 'nome'),['prompt'=>'Selecione uma cidade', 'style' =>'width: 50%']) ?> 
+    
+    <?= $form->field($modelPessoa, 'idCidade')->dropDownList(ArrayHelper::map(Cidade::find()->orderBy('nome')->all(),'id', 'nome'),['prompt'=>'Selecione uma cidade', 'style' =>'width: 50%']) ?> 
 
     <div class="form-group", style ="width: 50%">
             <label>Duração: </label>
