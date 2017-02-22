@@ -82,6 +82,7 @@ AppAsset::register($this);
                          ['label' => 'Tipo Proger', 'url' => ['tipo-proger/index'], 'visible' => Yii::$app->user->can('gerenciamento-cadastros-basicos')], 
                          ['label' => 'Vínculo', 'url' => ['tipo-vinculo/index'], 'visible' => Yii::$app->user->can('gerenciamento-cadastros-basicos')],
                          ['label' => 'Integrante (temp)', 'url' => ['integrante/index'], 'visible' => Yii::$app->user->can('gerenciamento-cadastros-basicos')],
+                         ['label' => 'Pessoa (temp)', 'url' => ['pessoa/index'], 'visible' => Yii::$app->user->can('gerenciamento-cadastros-basicos')],
 
                     ], 
                     'visible' => Yii::$app->user->can('gerenciamento-cadastros-basicos')

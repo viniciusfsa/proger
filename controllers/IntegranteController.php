@@ -30,6 +30,21 @@ class IntegranteController extends Controller
         ];
     }
 
+    public function actionCidade($id){
+        $rows = \app\models\Cidade::find()->where(['idEstado' => $id])->all();
+ 
+        echo "<option>Selecione uma cidade</option>";
+ 
+        if(count($rows)>0){
+            foreach($rows as $row){
+                echo "<option value='$row->id'>$row->nome</option>";
+            }
+        }
+        else{
+            echo "<option>Nenhuma cidade cadastrado</option>";
+        }
+ 
+    }
     /**
      * Lists all Integrante models.
      * @return mixed

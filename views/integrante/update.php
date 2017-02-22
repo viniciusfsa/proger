@@ -5,10 +5,10 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Integrante */
 
-$this->title = 'Update Integrante: ' . $model->id;
+$this->title = 'Update Integrante: ' . $model->matricula;
 $this->params['breadcrumbs'][] = ['label' => 'Integrantes', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->params['breadcrumbs'][] = ['label' => $model->matricula, 'url' => ['view', 'id' => $model->id]];
+$this->params['breadcrumbs'][] = 'Atualizar';
 ?>
 <div class="integrante-update">
 

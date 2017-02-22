@@ -30,7 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
             //'id',
             [
                 'attribute' =>'id', 
-                'headerOptions' => ['style'=>'text-align:center;']
+                'headerOptions' => ['style'=>'text-align:center; width: 60px']
             ],
             //'nome',
             [
@@ -46,7 +46,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     $dropdown = Situacao::dropdown();
                     return $dropdown[$model->idSituacao];
                 },
-                'headerOptions' => ['style'=>'text-align:center; width: 260px']
+                'headerOptions' => ['style'=>'text-align:center; width: 130px']
             ],
             //'idAreaAtuacao',
             [
@@ -56,7 +56,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     $dropdown = AreaAtuacao::dropdown();
                     return $dropdown[$model->idAreaAtuacao];
                 },
-                'headerOptions' => ['style'=>'text-align:center; width: 260px']
+                'headerOptions' => ['style'=>'text-align:center; width: 160px']
             ],
             //'idSetor',
             [
@@ -66,7 +66,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     $dropdown = Setor::dropdown();
                     return $dropdown[$model->idSetor];
                 },
-                'headerOptions' => ['style'=>'text-align:center; width: 260px']
+                'headerOptions' => ['style'=>'text-align:center; width: 180px']
             ],
             // 'idPrograma',
             //'interdepartamental',

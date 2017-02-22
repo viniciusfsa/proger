@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use \yii\helpers\ArrayHelper;
 use kartik\widgets\DatePicker;
+use yii\helpers\Url;
 use app\models\Situacao;
 use app\models\AreaAtuacao;
 use app\models\Setor;
@@ -64,10 +65,13 @@ use app\models\Gestor;
 
     <?= $form->field($model, 'idGestor')->dropDownList(ArrayHelper::map(Gestor::find()->orderBy('nome')->all(),'id', 'nome'),['prompt'=>'Selecione um gestor', 'style' =>'width: 50%']) ?>
     
+<?= Html::a('Link Text', ['pessoa/create'], [
+    'data'=>[
+        'method' => 'post',
+        'params'=>['MyParam1'=>'100', 'MyParam2'=>true],
+    ]
+]) ?>
 
-    <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Salvar' : 'Atualizar', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
-    </div>
 
     <?php ActiveForm::end(); ?>
 
