@@ -65,12 +65,11 @@ use app\models\Gestor;
 
     <?= $form->field($model, 'idGestor')->dropDownList(ArrayHelper::map(Gestor::find()->orderBy('nome')->all(),'id', 'nome'),['prompt'=>'Selecione um gestor', 'style' =>'width: 50%']) ?>
     
-<?= Html::a('Link Text', ['pessoa/create'], [
-    'data'=>[
-        'method' => 'post',
-        'params'=>['MyParam1'=>'100', 'MyParam2'=>true],
-    ]
-]) ?>
+<div class="form-group">
+        <?= Html::submitButton('Atualizar', ['class' => 'btn btn-primary']) ?>
+</div>
+
+
 
 
     <?php ActiveForm::end(); ?>

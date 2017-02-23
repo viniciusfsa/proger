@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use Yii;
 use app\models\ProjetoProger;
+use app\models\Pessoa;
 use app\models\search\ProjetoProgerSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -95,7 +96,9 @@ class ProjetoProgerController extends Controller
             $model = new ProjetoProger();
 
             if ($model->load(Yii::$app->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
+                //return $this->redirect(['view', 'id' => $model->id]);
+                $pessoaController = new PessoaController($this->$config);
+                return $pessoaController->render(['create', 'model' => new Pessoa()]);
             } else {
                 return $this->render('create', [
                     'model' => $model,
