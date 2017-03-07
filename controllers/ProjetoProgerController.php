@@ -10,6 +10,7 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
+use yii\helpers\Url;
 
 /**
  * ProjetoProgerController implements the CRUD actions for ProjetoProger model.
@@ -85,6 +86,7 @@ class ProjetoProgerController extends Controller
         }
     }
 
+
     /**
      * Creates a new ProjetoProger model.
      * If creation is successful, the browser will be redirected to the 'view' page.
@@ -97,8 +99,8 @@ class ProjetoProgerController extends Controller
 
             if ($model->load(Yii::$app->request->post()) && $model->save()) {
                 //return $this->redirect(['view', 'id' => $model->id]);
-                $pessoaController = new PessoaController($this->$config);
-                return $pessoaController->render(['create', 'model' => new Pessoa()]);
+                //return Yii::$app->getResponse()->redirect(Url::to('index.php?r=pessoa%2Fcreate'));
+                return Yii::$app->getResponse()->redirect(Url::toRoute("pessoa/create"));
             } else {
                 return $this->render('create', [
                     'model' => $model,

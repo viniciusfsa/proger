@@ -66,7 +66,7 @@ use app\models\Gestor;
     <?= $form->field($model, 'idGestor')->dropDownList(ArrayHelper::map(Gestor::find()->orderBy('nome')->all(),'id', 'nome'),['prompt'=>'Selecione um gestor', 'style' =>'width: 50%']) ?>
     
 <div class="form-group">
-        <?= Html::submitButton('Atualizar', ['class' => 'btn btn-primary']) ?>
+        <?= Html::submitButton('Avançar', ['class' => 'btn btn-primary']) ?>
 </div>
 
 
