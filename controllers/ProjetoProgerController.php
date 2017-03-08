@@ -36,7 +36,7 @@ class ProjetoProgerController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['index', 'view', 'update', 'create','delete'],
+                        'actions' => ['index', 'view', 'update', 'create', 'integrante', 'delete'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -97,12 +97,81 @@ class ProjetoProgerController extends Controller
         if(\Yii::$app->user->can('gerenciamento-cadastros-basicos')){
             $model = new ProjetoProger();
 
-            if ($model->load(Yii::$app->request->post()) && $model->save()) {
-                //return $this->redirect(['view', 'id' => $model->id]);
+            if ($model->load(Yii::$app->request->post()) && $model->save()) 
+                $modelAux = new IntegrantePessoa();
+                $modelAux->idProger = $model->id;
+                $modelAux->idTipoProger = 4; //projeto == 4
+                
+                return $this->redirect(['integrante', 'model' => $modelAux]);
                 //return Yii::$app->getResponse()->redirect(Url::to('index.php?r=pessoa%2Fcreate'));
-                return Yii::$app->getResponse()->redirect(Url::toRoute("pessoa/create"));
+                //return Yii::$app->getResponse()->redirect(Url::toRoute("pessoa/create"));
             } else {
                 return $this->render('create', [
+                    'model' => $model,
+                ]);
+            }
+        } else {
+            throw new \yii\web\ForbiddenHttpException('Você não está autorizado a realizar essa ação.');
+        }
+    }
+
+    /**
+     * Creates a new ProjetoProger model.
+     * If creation is successful, the browser will be redirected to the 'view' page.
+     * @return mixed
+     */
+    public function actionIntegrante()
+    {
+        if(\Yii::$app->user->can('gerenciamento-cadastros-basicos')){
+            $model = new IntegrantePessoa();
+            $pessoa = new Pessoa();
+            $integrante = new Integrante();
+            $post = Yii::$app->request->post();
+
+
+
+            if (($cadastroModel->load($post) && $cadastroModel->validate()) {
+
+                $pessoa->nome = $model->nome;
+                $pessoa->cpf = $model->cpf;
+                $pessoa->rg = $model->rg;
+                $pessoa->email = $model->email;
+                $pessoa->telefone = $model->telefone;
+                $pessoa->celular = $model->celular;
+                $pessoa->cep = $model->cep;
+                $pessoa->rua = $model->rua;
+                $pessoa->numero = $model->numero;
+                $pessoa->bairro = $model->bairro;
+                $pessoa->idCidade = $model->idCidade;
+                $pessoa->idEstado = $model->idEstado;
+
+                $integrante->idTipoVinculo = $model->idTipoVinculo;
+                $integrante->idTipoFuncao = $model->idTipoFuncao;
+                $integrante->idInstituicao = $model->idInstituicao;
+                $integrante->idSetor = $model->idSetor;
+                $integrante->idCurso = $model->idCurso;
+                //$integrante->idPessoa
+                $integrante->dataInicio = $model->dataInicio;
+                $integrante->dataFim = $model->dataFim;
+                $integrante->ativo = $model->ativo;
+                $integrante->matricula = $model->matricula;
+                $integrante->cargaHoraira =$model->cargaHoraira;
+                $integrante->idTipoProger = $model->idTipoProger;
+                $integrante->idProger = $model->idProger;
+
+                if($pessoa->save()){
+                    $pessoaAux = Pessoa::find()->where("cpf=:cpf", [":cpf" => $pessoa->cpf])->one();
+                    $integrante->idPessoa = $pessoaAux->id;
+                    $integrante->save();
+                    return $this->render('view', ['id' => $model->idProger]);
+                } else {
+                    return $this->render('integrante', ['model' => $model]);
+                }
+
+
+                return Yii::$app->getResponse()->redirect(Url::toRoute("pessoa/create"));
+            } else {
+                return $this->render('integrante', [
                     'model' => $model,
                 ]);
             }
