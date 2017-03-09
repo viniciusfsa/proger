@@ -102,16 +102,21 @@ use app\models\Estado;
     <?= $form->field($model, 'rg')->textInput(['maxlength' =>20,'style' =>'width: 50%', 'placeholder'=>'Apenas números']) ?>
 
     <?= $form->field($model, 'email')->textInput(['maxlength' =>45,'style' =>'width: 50%']) ?>
+    <div class="pessoa-form" style="width: 50%">
+        <?= $form->field($model, 'telefone')->widget(
+                    MaskedInput::classname(), [                    
+                        //'model' =>$model,
+                        //'attribute' => 'cecular',
+                        'name' => 'celular',
+                        'mask' => '(99) 9999-9999'
+                    ]); ?>
 
-    <?= $form->field($model, 'telefone')->textInput(['maxlength' =>11, 'minlength' =>10, 'style' =>'width: 50%', 'placeholder'=>'Apenas números incluindo o DDD']) ?>
-
-    <?= $form->field($model, 'celular')->widget(
-                MaskedInput::classname(), [                    
-                    //'model' =>$model,
-                    //'attribute' => 'cecular',
-                    'name' => 'celular',
-                    'mask' => '(99) 99999-9999'
-                ]); ?>
+        <?= $form->field($model, 'celular')->widget(
+                    MaskedInput::classname(), [      
+                        'name' => 'celular',
+                        'mask' => '(99) 99999-9999'
+                    ]); ?>
+    </div>
 
     <?= $form->field($model, 'rua')->textInput(['maxlength' =>100,'style' =>'width: 50%']) ?>
 
@@ -211,7 +216,7 @@ use app\models\Estado;
     <?= $form->field($model, 'idProger')->textInput() ?>
 
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Salvar' : 'Atualizar', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::submitButton( 'Cadastrar', ['class' => 'btn btn-success' ]) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

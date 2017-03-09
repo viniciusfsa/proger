@@ -44,8 +44,8 @@ class IntegrantePessoa extends Model {
         return [
         //pessoa
             [['nome', 'cpf', 'rg', 'email', 'cep', 'rua', 'numero', 'bairro', 'idCidade', 'idEstado'], 'required'],
-            [['nome',  'email', 'rua','bairro'], 'string'],
-            [['cpf','rg','telefone','celular','cep','numero'], 'integer'],
+            [['nome',  'email', 'rua','bairro', 'telefone','celular','cep'], 'string'],
+            [['cpf','rg','numero'], 'integer'],
             [['idCidade', 'idEstado'], 'integer'],
             [['idCidade'], 'exist', 'skipOnError' => true, 'targetClass' => Cidade::className(), 'targetAttribute' => ['idCidade' => 'id']],
             [['idEstado'], 'exist', 'skipOnError' => true, 'targetClass' => Estado::className(), 'targetAttribute' => ['idEstado' => 'id']],
