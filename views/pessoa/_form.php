@@ -5,6 +5,7 @@ use yii\widgets\ActiveForm;
 use \yii\helpers\ArrayHelper;
 use yii\widgets\MaskedInput;
 use yii\helpers\Url;
+use yii\bootstrap\Modal;
 use app\models\Cidade; 
 use app\models\Estado; 
 
@@ -87,6 +88,7 @@ use app\models\Estado;
 
 <div class="pessoa-form">
 
+    
     <?php $form = ActiveForm::begin(); ?>
 
     <?= $form->field($model, 'cpf')->textInput(['maxlength' =>15,'style' =>'width: 50%', 'placeholder'=>'Apenas números']) ?>
@@ -99,6 +101,7 @@ use app\models\Estado;
 
     <?= $form->field($model, 'telefone')->textInput(['maxlength' =>11, 'minlength' =>10, 'style' =>'width: 50%', 'placeholder'=>'Apenas números incluindo o DDD']) ?>
 
+    <div class="pessoa-form" style="width: 50%">
     <?= $form->field($model, 'celular')->widget(
                 MaskedInput::classname(), [                    
                     //'model' =>$model,
@@ -106,6 +109,7 @@ use app\models\Estado;
                     'name' => 'celular',
                     'mask' => '(99) 99999-9999'
                 ]); ?>
+    </div>
 
     <?= $form->field($model, 'rua')->textInput(['maxlength' =>100,'style' =>'width: 50%']) ?>
 
