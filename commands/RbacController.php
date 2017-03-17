@@ -15,10 +15,11 @@ class RbacController extends Controller
        
 
         // adciona a permissão "Gerenciar Usuario"
-       $gerenciaUsuario = $auth->createPermission('gerenciar-usuario');
-       $gerenciaUsuario->description = 'Gerenciar Usuario';
+       $gerenciaUsuario = $auth->createPermission('teste');
+       $gerenciaUsuario->description = 'Teste';
        $auth->add($gerenciaUsuario);
 
+       /*
         // adciona a permissão "Cadastros Básicos"
        $cadastrosBasicos = $auth->createPermission('gerenciamento-cadastros-basicos');
        $cadastrosBasicos->description = 'Gerenciar Cadastros Básicos';
@@ -53,7 +54,7 @@ class RbacController extends Controller
        // normalmente implementado no seu model User.
        
        $auth->assign($admin, 1);
-       $auth->assign($gerente, 2);     
+       $auth->assign($gerente, 2);     */
        
    }
 }

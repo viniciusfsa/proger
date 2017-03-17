@@ -38,7 +38,7 @@ class ProjetoProgerController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['index', 'view', 'update', 'create', 'integrante', 'delete'],
+                        'actions' => ['index', 'view', 'update', 'create', 'integrante', 'delete','cadastrar'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -234,5 +234,71 @@ class ProjetoProgerController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
 
+    }
+
+
+    public function actionCadastrar($fase=null,$idmodel=null)
+    {
+        $modelProjeto = new ProjetoProger();
+        $post = Yii::$app->request->post();  
+
+        $request = Yii::$app->request;
+        $get = $request->get();
+        $salto = 0;
+        $idmodel = 0;
+        $finalizado = 0;
+        if (isset($get['s']))
+            $salto = $get['s'];  
+        if (isset($get['idmodel']))
+            $idmodel = $get['idmodel'];
+        
+        if($finalizado==1)                           
+            return $this->redirect(['/projeto-proger/index']);
+        if($salto == 0)
+            return $this->render('index', [                
+        ]);
+      
+
+        else if($salto==1){            
+            if ($modelProjeto->load($post) && $modelProjeto->validate()) {                  
+                if($idmodel!=0){
+                    $model = $this->findModel($idmodel);                      
+                    $data = $modelProjeto->attributes;
+                    $model->setAttributes($data);
+                    $model->save(); 
+                }
+                else{
+                     $modelProjeto->save(); 
+                     $idmodel = $modelProjeto->id;
+                }                     
+
+                return $this->redirect(['cadastrar', 's' => 2, 'idmodel' => $idmodel]);
+            }            
+            else if($idmodel!=0){
+                $model = $this->findModel($idmodel);               
+                return $this->render('cadastrar-p1', ['model' => $model]);
+            }            
+          
+            return $this->render('cadastrar-p1', ['model' => $modelProjeto]);
+        }
+            
+       
+        else if($salto==2)
+            return $this->render('cadastrar-p2', [
+                'model' => $this->findModel($idmodel),
+            ]);
+        else if($salto==3)
+            return $this->render('cadastrar-p3', [
+                'model' => $this->findModel($idmodel),
+            ]);
+        else if($salto==4)
+            return $this->render('cadastrar-p4', [
+                'model' => $this->findModel($idmodel),
+            ]);
+        else
+            return $this->render('index', [
+                'model' => $this->findModel($idmodel),
+            ]);
+           
     }
 }
