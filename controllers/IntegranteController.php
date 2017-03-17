@@ -45,6 +45,19 @@ class IntegranteController extends Controller
         }
  
     }
+
+    public function actionCpf($id){
+        $rows = \app\models\Pessoa::find()->where(['cpf' => $id])->one();
+ 
+
+        if(count($rows)>0){            
+            echo "OK";            
+        }
+        else{
+            echo "Usuario não existe";
+        }
+ 
+    }
     /**
      * Lists all Integrante models.
      * @return mixed

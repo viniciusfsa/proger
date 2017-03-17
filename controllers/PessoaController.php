@@ -8,6 +8,7 @@ use app\models\search\PessoaSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
 
 /**
  * PessoaController implements the CRUD actions for Pessoa model.
@@ -20,10 +21,21 @@ class PessoaController extends Controller
     public function behaviors()
     {
         return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'actions' => ['index', 'view', 'update', 'create','delete','buscar-cpf'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['POST'],
+                    'buscar-cpf' => ['post'],
                 ],
             ],
         ];
@@ -68,7 +80,7 @@ class PessoaController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
-            return $this->render('create', [
+            return $this->renderAjax('create', [
                 'model' => $model,
             ]);
         }
@@ -123,20 +135,13 @@ class PessoaController extends Controller
     }
 
     public function actionBuscarCpf(){
-        $cpf = $_POST['login'];    
+        $cpf = $_POST['cpf'];    
+
+        $resultado = Pessoa::find()->where("cpf=:cpf", [":cpf" => $cpf])->one();
 
 
-        $connection = \Yii::$app->db;        
-
-        $sql = "SELECT u.login from Usuario u        
-        where login like '".$cpf."'";
-
-        $command = $connection->createCommand($sql);
-        $resultado = $command->queryAll();
-
-
-        if($resultado)//2 - Existe Cadastro
-            return 2;
+        if(iset($resultado))//idPessoa - Existe Cadastro
+            return $resultado->id;
         else if (strlen($cpf) != 11) {
             return 0;   //CPF invalido
         }
@@ -171,7 +176,7 @@ class PessoaController extends Controller
                     return 0;
                 }
             }     
-            return 1;        
+            return -1;        
        
         }
     }
